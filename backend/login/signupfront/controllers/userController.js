@@ -1,0 +1,64 @@
+const bcryptjs = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+var User = require("../models/userModel");
+
+
+/**
+ * user registers a new account
+ * (POST) http://localhost:4000/user/signup
+ */
+exports.userSignup = function(req,res){
+    const{username, email, password} = req.body;
+    User.findOne({email: email}). then((user) => {
+        if(user){
+            res.status(200).json({success:false,error: "Email has been registered!"})
+        }
+        if (!username || typeof username !== 'string') {
+            res.status(200).json({ status: 'error', error:  'Invalid username'})
+        }
+        if (password.length < 5) {
+            res.status(200).json({ status: 'error', error:  'Password length is too small. Should be at least 6 characters'})
+        }
+        else{
+            const newUser = new User({
+                username,
+                email,
+                password,
+                phoneNumber,
+                valueStream,
+                scrumTeam,
+                role,
+                technicalLead,
+                productOwner,
+            })
+            encryptPsswd(res,newUser)            
+        }
+    })
+}
+
+/**
+ * encrypt the password of a account and store information
+ * @param {*} res 
+ * @param {*} newUser 
+ */
+function encryptPsswd(res,newUser) {
+    bcryptjs.genSalt(16,(err,salt)=>{
+        bcryptjs.hash(newUser.password,salt, (err,hash) => {
+            if(err) throw err;
+            newUser.password = hash;
+            newUser.save().then((user) => {
+                res.json({success:true,
+                    user:{
+                        username:user.username,
+                        email:user.email,
+                        password:user.password
+                    }
+                })
+            })
+        })
+    })
+}
+
+
+
+User.create
