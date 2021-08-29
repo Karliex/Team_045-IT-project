@@ -1,0 +1,105 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap");
+
+.Home {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Kannada MN";
+  font-weight: bold;
+}
+
+.login {
+  width: 38em;
+  height: 35em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 800px;
+  position: absolute;
+  z-index: 99;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 12px 2px #5571ee63;
+  border-radius: 4px;
+  position: relative;
+  z-index: 99;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+  padding: 80px 50px;
+  transition: transform 200ms ease-in-out;
+}
+  
+.right-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 90%;
+  background-color: #a2b9d8;
+  width: 100%;
+  position: absolute;
+  right: -34%;
+  border-radius: 6px;
+  z-index: 1;
+  transition: all 400ms ease-in-out;
+  cursor: pointer;
+  box-shadow: 0px 0px 12px 2px #5571ee63;
+}
+
+.right-side.right{
+  right: -40%;
+  align-items: flex-end;
+}
+
+.right-side.right:hover {
+  right: -45%;
+}
+
+.right-side.left {
+  right: 40%;
+  align-items: flex-start;
+}
+
+.right-side.left:hover {
+  right: 45%;
+}
+
+.right-side .text {
+  font-size: 23px;
+  font-weight: 500;
+  color: #ffffff;
+  margin-right: 2.1em;
+  margin-left: 2.8em;
+  font-weight: bold;
+}
+
+.btn {
+  font-size: 20px;
+  padding: 5px 20px;
+  border: 0;
+  background-color: #f3eded;
+  font-family: "Kannada MN";
+  font-weight: bold;
+  color:#2b2828;
+  border-radius: 3px;
+  transition: all 250ms ease-in-out;
+  cursor: pointer;
+  opacity: 0.8;
+  border-radius: 30px;
+}
+
+.btn:hover {
+  background-color: #a2b9d8;
+  box-shadow: 0px 0px 14px 0.3px #5571ee63;
+}
+
+.btn:focus {
+  outline: none;
+  background-color: #a2b9d8;
+}
