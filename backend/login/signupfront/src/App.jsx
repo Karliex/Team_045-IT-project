@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css"
-
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import loginFront from './loginFront'
 import registerFront from './registerFront'
