@@ -5,6 +5,8 @@ var userController = require("../controllers/userController");
 
 // router routes to different functionalities from certain controller
 router.post('/signup',userController.userSignup);
+router.post('/login',userController.userLogin);
+
 
 //To DO functionalities
 // router.post('/login',userController.UserLogin);

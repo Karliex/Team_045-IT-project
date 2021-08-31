@@ -4,7 +4,7 @@ var User = require("../models/userModel");
 
 
 /**
- * user registers a new account
+ * user signup (only admin takes) 
  * (POST) http://localhost:4000/user/signup
  */
 exports.userSignup = function(req,res){
@@ -28,7 +28,7 @@ exports.userSignup = function(req,res){
 }
 
 /**
- * encrypt the password of a account and store information
+ * encrypt the password of a account and store information in hash format
  * @param {*} res 
  * @param {*} newUser 
  */
@@ -49,6 +49,34 @@ function encryptPsswd(res,newUser) {
     })
 }
 
-
+/**
+ * user login authentication (all users) 
+ * (POST) http://localhost:4000/user/login
+ */
+exports.userLogin = function(req,res){
+    const{email,password} = req.body;
+    User.findOne({
+        email:email,
+    }).then((user)=>{
+        if(!user){
+            res.status(200).json({success: false, error:"Email not registered"})
+        }else{
+            bcrypt.compare(password, user.password, (err,isMatch)=>{
+                if(isMatch){
+                    let token = jwt.sign({email:user.email},"jwt",{expiresIn: 60*60*6});
+                    res.status(200).json({
+                        success:true,
+                        user:{
+                            name:user.name,
+                            email:user.email,
+                        },token:token
+                    })
+                }else{
+                    res.status(200).json({success:false, error:"Password doesn't match"})
+                }
+            })
+        }
+    })
+}
 
 User.create
