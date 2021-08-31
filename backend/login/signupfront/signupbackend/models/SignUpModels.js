@@ -1,37 +1,14 @@
-// const mongoose = require('mongoose')
 
-// const signUpTemplate = new mongoose.Schema({
-//     username:{
-//         type:String,
-//         required:true,
-//         unique:true
-//     },
-//     email:{
-//         type:String,
-//         required:true
-//     },
-//     password:{
-//         type:String,
-//         required:true
-//     },
-//     date:{
-//         type:Date,
-//         default:Date.now
-//     }
-// })
-
-
-// module.exports = mongoose.model('mytable', signUpTemplate)
 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    username:{
-        type: String, require: true, unique: true
+    name:{
+        type: String, require: false
     },
     email: { 
-        type:String, required: true, unique: true
+        type: String, required: true, unique: true
     },
     password:{
         type:String,
@@ -62,4 +39,4 @@ const userSchema = new Schema({
     timestamps: false,
 });
 
-module.exports = mongoose.model('Users', userSchema);
+module.exports = mongoose.model('users', userSchema);

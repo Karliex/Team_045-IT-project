@@ -1,26 +1,21 @@
 import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css"
 import axios from 'axios'
+
 class registerFront extends Component {
     constructor(){
         super()
         this.state = {
-            username:'',
             email:'',
             password:''
         }
-        this.changeUsername = this.changeUsername.bind(this)
         this.changeEmail = this.changeEmail.bind(this)
         this.changePassword = this.changePassword.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
     }
 
 
-    changeUsername(event){
-        this.setState({
-            username:event.target.value
-        })
-    }
+
     changeEmail(event){
         this.setState({
             email:event.target.value
@@ -36,7 +31,6 @@ class registerFront extends Component {
         event.preventDefault()
 
         const registered = {
-            username: this.state.username,
             email: this.state.email,
             password: this.state.password
         }
@@ -45,7 +39,6 @@ class registerFront extends Component {
             .then(response => console.log(response.data))
         // window.location = '/'
         this.setState({
-            username:'',
             email:'',
             password:''
         })
@@ -57,12 +50,6 @@ class registerFront extends Component {
                 <div className='container'>
                     <div className='form-div'>
                         <form onSubmit={this.onSubmit}>
-                            <input type = 'text'
-                            placeholder='Username'
-                            onChange={this.changeUsername}
-                            value={this.state.username}
-                            className='form-control form-group'
-                            />
 
                             <input type='text'
                             placeholder='Email'
