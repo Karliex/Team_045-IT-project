@@ -2,6 +2,10 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 var User = require("../models/userModel");
+/**
+ * check input is email type
+ */
+var emailRegex = /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
 
 /**
  * user signup (only admin takes) 
@@ -9,6 +13,10 @@ var User = require("../models/userModel");
  */
 exports.userSignup = function(req,res){
     const{email, password} = req.body;
+    var valid = emailRegex.test(email);
+    if (!valid) {
+        res.status(200).json({ status: 'error', error:  'Should enter email type'})
+    }
     User.findOne({email: email}). then((user) => {
         if(user){
             res.status(200).json({success:false,error: "Email has been registered!"})
