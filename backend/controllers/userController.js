@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const session  = require('express-session');
 var User = require("../models/userModel");
-
 
 /**
  * user signup (only admin takes) 
@@ -22,7 +22,9 @@ exports.userSignup = function(req,res){
                 email,
                 password,
             })
-            encryptPsswd(res,newUser)            
+            encryptPsswd(res,newUser);
+            
+            req.session.email = email;
         }
     })
 }
