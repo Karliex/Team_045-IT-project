@@ -1,4 +1,3 @@
-
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -14,7 +13,7 @@ const userSchema = new Schema({
     },
     password:{
         type:String,
-        require:[true, 'Password is required']
+        require:true
     },
     phoneNumber: { 
         type:Number, required: false 

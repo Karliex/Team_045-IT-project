@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+
 var User = require("../models/userModel");
 /**
  * check input is email type
@@ -79,6 +80,7 @@ exports.userLogin = function(req,res){
                             email:user.email,
                         },token:token
                     })
+                    
                 }else{
                     res.status(200).json({success:false, error:"Password doesn't match"})
                 }

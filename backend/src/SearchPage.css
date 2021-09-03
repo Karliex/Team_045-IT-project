@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap");
+.SearchPage {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-family: Kannada MN;
+  background: url("3.jpg");
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+h1{
+    margin-top: 150px;
+    margin-bottom: -195px;
+    margin-right:750px;
+    font-size: 25px;
+    color:#ffffff;
+    pointer-events:none;
+    font-weight: bold;
+    transition:.9s;
+}

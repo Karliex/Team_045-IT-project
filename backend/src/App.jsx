@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css"
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import loginFront from './loginFront'
-import registerFront from './registerFront'
+import Home from './Home.js'
+import './Home.css'
+import Search from './SearchPage'
+import Navigation from './navigation'
 
 class App extends Component {
     
@@ -12,9 +14,12 @@ class App extends Component {
         return ( 
             <Router>
                 <div>
+                    <Route path="/search" component={Navigation} />
                     <Switch>
-                        <Route path="/login" component={loginFront} />
-                        <Route path="/signup" component={registerFront} />
+                        <Route path="/" exact component={Home} />
+                        <Route path="/search" exact component={Search} />
+                        {/* <Route path="/login" component={loginFront} />
+                        <Route path="/signup" component={registerFront} /> */}
                     </Switch>
                 </div>
             </Router>

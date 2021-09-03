@@ -1,0 +1,28 @@
+navigation{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 10vh;
+    background: rgb(219, 219, 219);
+    color: white;
+}
+
+.nav-links{
+    width: 30%;
+    font-family: Kannada MN;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none; 
+}
+
+li{
+    font-size: 20px;
+    color: rgb(164, 179, 219);
+    font-weight: bold;
+}
+
+li:hover{
+    color: orange;
+}
+
