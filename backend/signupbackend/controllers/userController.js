@@ -31,8 +31,7 @@ exports.userSignup = function(req,res){
                 email,
                 password,
             })
-            encryptPsswd(res,newUser);
-            req.session.email = email;            
+            encryptPsswd(res,newUser)            
         }
     })
 }
@@ -86,8 +85,6 @@ exports.userLogin = function(req,res){
                     res.status(200).json({success:false, error:"Password doesn't match"})
                 }
             })
-            req.session.email = email;
-            return 
         }
     })
 }
