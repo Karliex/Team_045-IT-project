@@ -5,9 +5,6 @@ import loginImg from "./closing-image.png";
 import './style.css'
 import { Link } from 'react-router-dom'
 
-
-
-
 export class Login extends Component {
     constructor(props){
         super(props)
@@ -37,7 +34,7 @@ export class Login extends Component {
             password: this.state.password
         }
 
-        axios.post('http://localhost:4000/user/login', loged)
+        axios.post('http://localhost:4000/login', loged)
             .then(response => console.log(response.data))
             
         // window.location = '/'
@@ -71,9 +68,9 @@ export class Login extends Component {
                     value={this.state.password}
                     />
                     <div className="footer">
-                      <Link to='/search'>
-                        <input type='submit' value='Login' />
-                      </Link>
+                      {/* <Link to='/search'> */}
+                        <input type='submit' value='Login'/>
+                      {/* </Link> */}
                     </div>
                   </form>
                 </div>

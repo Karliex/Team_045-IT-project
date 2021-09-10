@@ -16,8 +16,6 @@ export class Register extends Component {
         this.onSubmit = this.onSubmit.bind(this)
     }
 
-
-
     changeEmail(event){
         this.setState({
             email:event.target.value

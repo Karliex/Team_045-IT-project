@@ -31,7 +31,8 @@ exports.userSignup = function(req,res){
                 email,
                 password,
             })
-            encryptPsswd(res,newUser)            
+            encryptPsswd(res,newUser)
+            res.redirect('/search');            
         }
     })
 }
