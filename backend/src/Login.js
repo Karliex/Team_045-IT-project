@@ -5,9 +5,6 @@ import loginImg from "./closing-image.png";
 import './style.css'
 import { Link } from 'react-router-dom'
 
-
-
-
 export class Login extends Component {
     constructor(props){
         super(props)
@@ -37,9 +34,20 @@ export class Login extends Component {
             password: this.state.password
         }
 
+        // axios.post('http://localhost:4000/user/login', loged)
+        //     .then(response => console.log(response.data))
         axios.post('http://localhost:4000/user/login', loged)
-            .then(response => console.log(response.data))
-            
+        .then(function (response) {
+            if (response.data.redirect == '/search') {
+                window.location = "/search"
+            } else if (response.data.redirect == '/login'){
+                window.location = "/login"
+            }
+        })
+        .catch(function(error) {
+            window.location = "/login"
+        })
+
         // window.location = '/'
         this.setState({
             // email:'',
@@ -71,9 +79,9 @@ export class Login extends Component {
                     value={this.state.password}
                     />
                     <div className="footer">
-                      <Link to='/search'>
-                        <input type='submit' value='Login' />
-                      </Link>
+                      {/* <Link to='/search'> */}
+                        <input type='submit' value='Login'/>
+                      {/* </Link> */}
                     </div>
                   </form>
                 </div>
