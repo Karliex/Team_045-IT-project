@@ -1,0 +1,197 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap");
+.profile {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-family: Kannada MN;
+  background: url("3.jpg");
+  position: fixed;
+}
+
+.profileBlock {
+    background: rgb(255, 255, 255, 0.3);
+    width: 55em;
+    height: 38em;
+    border-radius: 5%;
+    margin: 0 auto;
+    margin-top: 100px;
+    position: relative;
+    text-align: center;
+    align-items: center;
+    box-shadow: 10px 10px 5px rgb(0, 0, 0, 0.1);
+}
+
+.circle {
+    background: rgb(255, 255, 255);
+    width: 135px;
+    height: 135px;
+    border-radius: 50%;
+    border: 3px solid #ffffff;
+    margin: 0 auto;
+    position: absolute;
+    margin-top: -55px;
+    margin-left: 368px;
+    align-items: center;
+    z-index: 99;
+    
+}
+
+.profileBlock input[id="name"]{
+    font-weight: bold;
+    font-size: 26px;
+    margin: 0 auto;
+    margin-top: 90px;
+    text-align: center;
+    align-items: center;
+    color: #ffffff;
+    width: 80%;
+    background: transparent;
+    border: none;
+    pointer-events:none;
+}
+
+.streamBlock{
+    background: rgb(255, 140, 46, 0.7);
+    width: 22em;
+    height: 10em;
+    border-radius: 20px;
+    z-index: 99;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 30px;
+    margin-left: 52px;
+    position: absolute;
+    box-shadow: 5px 5px 5px rgb(0, 0, 0, 0.1);
+}
+
+.streamBlock label{
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: 106px;
+    margin-top: 13px;
+}
+
+.streamBlock textarea{
+    color: #ffffff;
+    font-size: 18px;
+    width: 100%;
+    margin-top: 2px;
+    background: transparent;
+    border: none;
+    pointer-events:none;
+    text-align: center;
+    resize:none;
+}
+
+textarea:focus{
+    outline: none;
+}
+
+.notesBlock{
+    background: rgba(144, 196, 255, 0.7);
+    width: 22em;
+    height: 10em;
+    border-radius: 20px;
+    z-index: 99;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 30px;
+    margin-left: 472px;
+    position: absolute;
+    box-shadow: 5px 5px 5px rgb(0, 0, 0, 0.1);
+}
+
+.notesBlock label{
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: 144px;
+    margin-top: 13px;
+}
+
+.notesBlock textarea{
+    color: #ffffff;
+    font-size: 18px;
+    width: 100%;
+    margin-top: 2px;
+    background: transparent;
+    border: none;
+    pointer-events:none;
+    text-align: center;
+    resize:none;
+}
+
+.phoneBlock{
+    background: rgba(255, 140, 46, 0.7);
+    width: 48.3em;
+    height: 5em;
+    border-radius: 20px;
+    z-index: 99;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 235px;
+    margin-left: 52px;
+    position: absolute;
+    box-shadow: 5px 5px 5px rgb(0, 0, 0, 0.1);
+}
+
+.phoneBlock label{
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: 308px;
+    margin-top: 8px;
+}
+
+.phoneBlock textarea{
+    color: #ffffff;
+    font-size: 18px;
+    width: 100%;
+    margin-top: 2px;
+    background: transparent;
+    border: none;
+    pointer-events:none;
+    text-align: center;
+    resize:none;
+}
+
+.emailBlock{
+    background: rgba(144, 196, 255, 0.7);
+    width: 48.3em;
+    height: 5em;
+    border-radius: 20px;
+    z-index: 99;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 355px;
+    margin-left: 52px;
+    position: absolute;
+    box-shadow: 5px 5px 5px rgb(0, 0, 0, 0.1);
+}
+
+.emailBlock label{
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: 354px;
+    margin-top: 8px;
+}
+
+.emailBlock textarea{
+    color: #ffffff;
+    font-size: 18px;
+    width: 100%;
+    margin-top: 2px;
+    background: transparent;
+    border: none;
+    pointer-events:none;
+    text-align: center;
+    resize:none;
+}

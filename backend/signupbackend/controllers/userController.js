@@ -1,6 +1,8 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+const ObjectID = require('mongodb').ObjectID;
+
 
 var User = require("../models/userModel");
 /**
@@ -31,8 +33,7 @@ exports.userSignup = function(req,res){
                 email,
                 password,
             })
-            encryptPsswd(res,newUser)
-            res.redirect('/search');            
+            encryptPsswd(res,newUser)           
         }
     })
 }
@@ -52,41 +53,92 @@ function encryptPsswd(res,newUser) {
                     user:{
                         email:user.email,
                         password:user.password
-                    }
+                    }, redirect: '/login'
                 })
+                // res.redirect('/login');
+            }).catch((err) => {
+                res.redirect('/signup')
+            }
+            )
+        })
+    })
+}
+
+
+
+//    const { name, github, twitter, facebook } = req.body;
+//    const _id = ObjectID(req.session.passport.user);
+ 
+//    users.updateOne({ _id }, { $set: { name, github, twitter, facebook } }, (err) => {
+//      if (err) {
+//        throw err;
+//      }
+     
+//      res.redirect('/users');
+
+//Edit user profile info (POST)
+//http://localhost:4000/updateInfo (可加具体人，待研究)
+exports.updatePersonal = function(req,res){
+
+
+    bcryptjs.genSalt(16,(err,salt) =>{
+        bcryptjs.hash(req.body.password, salt, (err, hash) => {
+            if (err) throw err;
+            User.findOneAndUpdate({email:req.body.email},{
+                givenName : req.body.givenName,
+                familyName : req.body.familyName,     //需要修改：会更新的参数
+                email:req.body.email,
+                password: hash   //可以用作修改密码的功能，这里不需要用到
+            },
+            {new: true},
+            function(err, updateUser){
+                if(err){
+                    res.status(200).json({success:false,message: "Email doesn't exist"})
+                }else{
+                    res.status(200).json({success:true,updateUser:updateUser})
+                }
             })
         })
     })
 }
 
-/**
- * user login authentication (all users) 
- * (POST) http://localhost:4000/user/login
- */
-exports.userLogin = function(req,res){
-    const{email,password} = req.body;
-    User.findOne({
-        email:email,
-    }).then((user)=>{
-        if(!user){
-            res.status(200).json({success: false, error:"Email not registered"})
+// router.get('/:username', (req, res, next) => {
+//     const users = req.app.locals.users;
+//     const username = req.params.username;
+  
+//     users.findOne({ username }, (err, results) => {..}
+
+
+//View one spefic user's public profile (GET)
+//http://localhost:4000/:id
+ exports.getUserProfile = function(req,res){
+    Snack.findById(req.params.id,function(err,snack){    //id不确定对不对
+        if(err){
+            res.status(400).json({success:false,err:err})
         }else{
-            bcrypt.compare(password, user.password, (err,isMatch)=>{
-                if(isMatch){
-                    let token = jwt.sign({email:user.email},"jwt",{expiresIn: 60*60*6});
-                    res.status(200).json({
-                        success:true,
-                        user:{
-                            name:user.name,
-                            email:user.email,
-                        },token:token
-                    })
-                    
+            res.status(200).json({success:true,snack:snack})
+        }
+    })
+}
+
+//Edit user profile info
+exports.updatePsswd = function(req,res){
+    bcryptjs.genSalt(16,(err,salt) =>{
+        bcryptjs.hash(req.body.password, salt, (err, hash) => {
+            if (err) throw err;
+            User.findOneAndUpdate({email:req.body.email},{       //修改密码时需要输入email和新的password
+                email:req.body.email,
+                password: hash   //可以用作修改密码的功能，这里不需要用到
+            },
+            {new: true},
+            function(err, updateUser){
+                if(err){
+                    res.status(200).json({success:false,message: "Email doesn't exist"})
                 }else{
-                    res.status(200).json({success:false, error:"Password doesn't match"})
+                    res.status(200).json({success:true,updateUser:updateUser})
                 }
             })
-        }
+        })
     })
 }
 

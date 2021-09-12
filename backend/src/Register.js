@@ -35,9 +35,16 @@ export class Register extends Component {
             password: this.state.password
         }
 
-        axios.post('http://localhost:4000/user/signup', registered)
-            .then(response => console.log(response.data))
-        // window.location = '/'
+        axios.post('http://localhost:4000/user/signup', registered).then(function (response) {
+          if (response.data.redirect == '/login') {
+              window.location = "/login"
+          } else if (response.data.redirect == '/signup'){
+              window.location = "/signup"
+          }
+      })
+      .catch(function(error) {
+          window.location = "/signup"
+      })
         this.setState({
             email:'',
             password:''
