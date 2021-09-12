@@ -79,15 +79,19 @@ function encryptPsswd(res,newUser) {
 //Edit user profile info (POST)
 //http://localhost:4000/updateInfo (可加具体人，待研究)
 exports.updatePersonal = function(req,res){
-
-
     bcryptjs.genSalt(16,(err,salt) =>{
         bcryptjs.hash(req.body.password, salt, (err, hash) => {
             if (err) throw err;
             User.findOneAndUpdate({email:req.body.email},{
-                givenName : req.body.givenName,
-                familyName : req.body.familyName,     //需要修改：会更新的参数
-                email:req.body.email,
+                givenname : req.body.givenname,
+                familyname : req.body.familyname,     //需要修改：会更新的参数
+                phoneNumber: req.body.phoneNumber,
+                valueStream: req.body.valueStream,
+                scrumTeam: req.body.scrumTeam,
+                role: req.body.role,
+                technicalLead: req.body.technicalLead,
+                productOwner: req.body.productOwner,
+                notes: req.body.productOwner,
                 password: hash   //可以用作修改密码的功能，这里不需要用到
             },
             {new: true},

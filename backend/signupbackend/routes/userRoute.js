@@ -26,6 +26,7 @@ router.post('/login', passport.authenticate('local-login'), (req, res, next) => 
 
 //TO DO:
 router.post('/updateInfo',userController.updatePersonal);
+
 router.post('/:id',userController.getUserProfile);
 
 

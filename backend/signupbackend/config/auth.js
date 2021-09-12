@@ -5,11 +5,11 @@ module.exports = {
       res.redirect('/login');
   }},
   
-  forwardAuthenticated: function (req, res, next) {
-    if (!req.isAuthenticated()) {
-      return next();            // continues to other handlers for this route
-    }
-    res.redirect('/search'); // redirects to serach page if logged in     
-  }
+  // forwardAuthenticated: function (req, res, next) {
+  //   if (!req.isAuthenticated()) {
+  //     return next();            // continues to other handlers for this route
+  //   }
+  //   res.redirect('/search'); // redirects to serach page if logged in     
+  // }
 };
   
