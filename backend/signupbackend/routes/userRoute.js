@@ -56,26 +56,34 @@ router.post('/login', async (req, res, next) => {
                   // const token = "Bearer " + signedToken;
 
                   //Send back the token to the client
-                  res.status(200).json({
-                        _id: user._id,
-                        name: user.name,
-                        email: user.email,
-                        isAdmin: user.isAdmin,
-                        pic: user.pic,
-                        token: token,
-                      });
+                //   res.status(200).json({
+                //         _id: user._id,
+                //         name: user.name,
+                //         email: user.email,
+                //         isAdmin: user.isAdmin,
+                //         pic: user.pic,
+                //         token: token,
+                //       });
+
                   // send the token 
                   res.cookie('jwt',token, { httpOnly: false, sameSite: false, secure: true, domain:"http://localhost:4000"});
-                  return res.json(token);
+                  return res.json({'token':token, redirect: '/search'});
               });
           } catch (error) {
-              return next(error);
+              return res.redirect('/login')
+            //   return next(error);
           }
       })(req, res, next);
       
   });
 
-
+router.post('/logout', function(req, res) {
+    // save the favourites
+    foodController.saveFavourites(req,res,req.body.favs)
+    req.logout();
+    req.flash('');
+    res.redirect('/user/');
+});
 
 
 //TO DO:

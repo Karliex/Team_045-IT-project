@@ -135,8 +135,8 @@ exports.updatePersonal = function(req,res){
 // @route   GET /api/users/profile
 // @access  Private
 exports.updateInfo = asyncHandler(async (req, res) => {
-    console.log(req);
-    const user = await User.findById(req.params.user._id);
+    // console.log(req.user);
+    const user = await User.findById(req.user._id);
 
     if (user) {
         user.givenname = req.body.givenname || user.givenname,
