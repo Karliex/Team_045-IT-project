@@ -3,12 +3,12 @@ const app = express()
 const mongoose = require('mongoose')
 //store some info in the environment variables
 const dotenv = require('dotenv')
-
 const userRoute = require('./routes/userRoute')
 const cors = require('cors');
 
 //modules for authentication
 const passport = require('passport');
+
 const session = require('express-session');
 const flash = require('connect-flash');
 const jwt = require('jsonwebtoken');
@@ -25,7 +25,7 @@ app.use(cors())
 // setup session store signing the contents using the secret key
 app.use(
     session({
-    secret: 'secret',
+    secret: process.env.PASSPORT_KEY,
     resave: true,
     saveUninitialized: true
 }));

@@ -1,15 +1,33 @@
-module.exports = {
-  ensureAuthenticated: function (req, res, next) {
-    if (!req.isAuthenticated()) {
-      req.flash('error_msg', 'Please log in to view that resource');
-      res.redirect('/login');
-  }},
-  
-  // forwardAuthenticated: function (req, res, next) {
-  //   if (!req.isAuthenticated()) {
-  //     return next();            // continues to other handlers for this route
-  //   }
-  //   res.redirect('/search'); // redirects to serach page if logged in     
-  // }
-};
-  
+const jwt = require("jsonwebtoken") ;
+const User = require("../models/userModel.js") ;
+const asyncHandler = require("express-async-handler") ;
+
+const protect = asyncHandler(async (req, res, next) => {
+  let token;
+
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith("Bearer")
+  ) {
+    try {
+      token = req.headers.authorization.split(" ")[1];
+
+      //decodes token id
+      const decoded = jwt.verify(token, process.env.PASSPORT_KEY);
+
+      req.user = await User.findById(decoded.id).select("-password");
+
+      next();
+    } catch (error) {
+      res.status(401);
+      throw new Error("Not authorized, token failed");
+    }
+  }
+
+  if (!token) {
+    res.status(401);
+    throw new Error("Not authorized, no token");
+  }
+});
+
+module.exports = protect; 

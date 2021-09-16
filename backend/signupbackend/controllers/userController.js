@@ -1,10 +1,11 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-
-const ObjectID = require('mongodb').ObjectID;
+const asyncHandler = require("express-async-handler") ;
 
 
 var User = require("../models/userModel");
+
+
 /**
  * check input is email type
  */
@@ -38,6 +39,7 @@ exports.userSignup = function(req,res){
     })
 }
 
+
 /**
  * encrypt the password of a account and store information in hash format
  * @param {*} res 
@@ -51,11 +53,14 @@ function encryptPsswd(res,newUser) {
             newUser.save().then((user) => {
                 res.json({success:true,
                     user:{
+                        _id: user._id,
                         email:user.email,
-                        password:user.password
+                        password:user.password,
+                        isAdmin: user.isAdmin,
+                        pic: user.pic,
                     }, redirect: '/login'
                 })
-                // res.redirect('/login');
+               req.session.email = email;
             }).catch((err) => {
                 res.redirect('/signup')
             }
@@ -77,10 +82,10 @@ function encryptPsswd(res,newUser) {
 //      res.redirect('/users');
 
 //Edit user profile info (POST)
-//http://localhost:4000/updateInfo (可加具体人，待研究)
+//http://localhost:4000/user/updateInfo (可加具体人，待研究)
 exports.updatePersonal = function(req,res){
-    bcryptjs.genSalt(16,(err,salt) =>{
-        bcryptjs.hash(req.body.password, salt, (err, hash) => {
+    bcrypt.genSalt(16,(err,salt) =>{
+        bcrypt.hash(req.body.password, salt, (err, hash) => {
             if (err) throw err;
             User.findOneAndUpdate({email:req.body.email},{
                 givenname : req.body.givenname,
@@ -125,6 +130,49 @@ exports.updatePersonal = function(req,res){
     })
 }
 
+
+// @desc    GET user profile
+// @route   GET /api/users/profile
+// @access  Private
+exports.updateInfo = asyncHandler(async (req, res) => {
+    console.log(req);
+    const user = await User.findById(req.params.user._id);
+
+    if (user) {
+        user.givenname = req.body.givenname || user.givenname,
+        user.familyname = req.body.familyname || user.familyname,     //需要修改：会更新的参数
+        user.phoneNumber = req.body.phoneNumber || user.phoneNumber,
+        user.valueStream = req.body.valueStream || user.valueStream,
+        user.scrumTeam = req.body.scrumTeam || user.scrumTeam,
+        user.role = req.body.role || user.role,
+        user.technicalLead = req.body.technicalLead || user.technicalLead,
+        user.productOwner = req.body.productOwner || user.productOwner,
+        user.notes = req.body.productOwner || user.notes
+        // if (req.body.password) {
+        //     user.password = req.body.password;
+        // }
+  
+        const updatedUser = await user.save();
+  
+        res.json({
+            _id: updatedUser._id,
+            givenname : updatedUser.givenname,
+            familyname : updatedUser.familyname,     //需要修改：会更新的参数
+            phoneNumber: updatedUser.phoneNumber,
+            valueStream: updatedUser.valueStream,
+            scrumTeam: updatedUser.scrumTeam,
+            role: updatedUser.role,
+            technicalLead: updatedUser.technicalLead,
+            productOwner: updatedUser.productOwner,
+            notes: updatedUser.productOwner,
+            // token: generateToken(updatedUser._id),
+        });
+    } else {
+        res.status(404);
+        throw new Error("User Not Found");
+    }
+});
+
 //Edit user profile info
 exports.updatePsswd = function(req,res){
     bcryptjs.genSalt(16,(err,salt) =>{
@@ -145,5 +193,6 @@ exports.updatePsswd = function(req,res){
         })
     })
 }
+
 
 User.create
