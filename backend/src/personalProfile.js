@@ -91,7 +91,7 @@ export class Profile extends Component {
             notes: this.state.notes
         }
 
-        axios.post('http://localhost:4000/user/updateInfo', profiled)
+        axios.post('http://localhost:4000/user/updateInfo', profiled, { headers: { Authorization:localStorage.getItem('SavedToken') }})
             .then(response => console.log(response.data))
             
         // window.location = '/'

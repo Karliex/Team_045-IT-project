@@ -66,8 +66,9 @@ router.post('/login', async (req, res, next) => {
                 //       });
 
                   // send the token 
-                  res.cookie('jwt',token, { httpOnly: false, sameSite: false, secure: true, domain:"http://localhost:4000"});
-                  return res.json({'token':token, redirect: '/search'});
+                //   res.cookie('token',token, { httpOnly: true, sameSite: false, secure: true, domain:"http://localhost:4000"});
+                // localStorage.setItem('token',token)  
+                return res.json({'token':token, redirect: '/search'});
               });
           } catch (error) {
               return res.redirect('/login')
@@ -94,7 +95,7 @@ router.get('/test', protect, (req, res) => {res.status(200).json({
                   error: "Email has been registered!"
             })})
 
-router.post("/updateProfile", protect, userController.updateInfo);
+router.post("/updateInfo", protect, userController.updateInfo);
 
 
 

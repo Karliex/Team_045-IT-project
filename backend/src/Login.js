@@ -38,11 +38,17 @@ export class Login extends Component {
         //     .then(response => console.log(response.data))
         axios.post('http://localhost:4000/user/login', loged)
         .then(function (response) {
-            if (response.data.redirect == '/search') {
-                window.location = "/search"
-            } else if (response.data.redirect == '/login'){
-                window.location = "/login"
-            }
+            let token = response.data.token;
+            console.log(token);
+
+            localStorage.setItem("SavedToken", 'Bearer ' + token);
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+
+            // if (response.data.redirect == '/search') {
+            //     window.location = "/search"
+            // } else if (response.data.redirect == '/login'){
+            //     window.location = "/login"
+            // }
         })
         .catch(function(error) {
             window.location = "/login"
