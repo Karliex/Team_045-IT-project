@@ -52,7 +52,7 @@ router.post('/login', async (req, res, next) => {
                   const body = { _id : user._id};
   
                   //Sign the JWT token and populate the payload with the user email 
-                  const token = jwt.sign({ body },process.env.PASSPORT_KEY);
+                  const token = jwt.sign({ body }, process.env.PASSPORT_KEY, { expiresIn: "1h" });
                   // const token = "Bearer " + signedToken;
 
                   //Send back the token to the client
@@ -68,7 +68,11 @@ router.post('/login', async (req, res, next) => {
                   // send the token 
                 //   res.cookie('token',token, { httpOnly: true, sameSite: false, secure: true, domain:"http://localhost:4000"});
                 // localStorage.setItem('token',token)  
+                res.cookie("token", token, {
+                  httpOnly: true,
+                })
                 return res.json({'token':token, redirect: '/search'});
+                
               });
           } catch (error) {
               return res.redirect('/login')

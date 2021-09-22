@@ -44,11 +44,11 @@ export class Login extends Component {
             localStorage.setItem("SavedToken", 'Bearer ' + token);
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
 
-            // if (response.data.redirect == '/search') {
-            //     window.location = "/search"
-            // } else if (response.data.redirect == '/login'){
-            //     window.location = "/login"
-            // }
+            if (response.data.redirect == '/search') {
+                window.location = "/search"
+            } else if (response.data.redirect == '/login'){
+                window.location = "/login"
+            }
         })
         .catch(function(error) {
             window.location = "/login"
