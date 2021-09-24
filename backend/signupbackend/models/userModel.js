@@ -22,7 +22,7 @@ const userSchema = new Schema({
         type: Boolean,
         required: true,
         default: false,
-      },
+    },
     token:{
         type:String
     },
@@ -31,7 +31,7 @@ const userSchema = new Schema({
         required: true,
         default:
           "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
-      },
+    },
     phoneNumber: { 
         type:Number, required: false 
     },

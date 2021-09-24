@@ -7,7 +7,8 @@ import Search from './SearchPage'
 import Login from './Login'
 import Signup from './Register'
 import Navigation from './navigation'
-import UpdateInfo from './personalProfile'
+import UpdateInfo from './changeProfile'
+import Profile from './profile'
 
 
 class App extends Component {
@@ -17,11 +18,13 @@ class App extends Component {
             <Router>
                 <div>
                     <Route path="/search" component={Navigation} />
+                    <Route path="/updateInfo" component={Navigation} />
+                    <Route path="/profile" component={Navigation} />
                     <Switch>
-                        {/* <Route path="/" exact component={Home} /> */}
                         <Route path="/login" exact component={Login} />
                         <Route path="/signup" exact component={Signup} />
                         <Route path="/search" exact component={Search} />
+                        <Route path="/profile" exact component={Profile} />
                         <Route path="/updateInfo" exact component={UpdateInfo} />
                     </Switch>
                 </div>

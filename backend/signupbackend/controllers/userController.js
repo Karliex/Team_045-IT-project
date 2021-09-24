@@ -147,7 +147,7 @@ exports.updateInfo = asyncHandler(async (req, res) => {
         user.role = req.body.role || user.role,
         user.technicalLead = req.body.technicalLead || user.technicalLead,
         user.productOwner = req.body.productOwner || user.productOwner,
-        user.notes = req.body.productOwner || user.notes
+        user.notes = req.body.notes || user.notes
         // if (req.body.password) {
         //     user.password = req.body.password;
         // }
@@ -164,7 +164,7 @@ exports.updateInfo = asyncHandler(async (req, res) => {
             role: updatedUser.role,
             technicalLead: updatedUser.technicalLead,
             productOwner: updatedUser.productOwner,
-            notes: updatedUser.productOwner,
+            notes: updatedUser.notes,
             // token: generateToken(updatedUser._id),
         });
     } else {

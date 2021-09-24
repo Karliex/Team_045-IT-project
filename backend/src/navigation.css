@@ -1,28 +1,26 @@
-navigation{
+nav{
     display: flex;
-    justify-content: space-around;
     align-items: center;
-    min-height: 10vh;
-    background: rgb(219, 219, 219);
-    color: white;
+    background: rgb(255, 255, 255);
 }
 
 .nav-links{
-    width: 30%;
+    width: 45%;
     font-family: Kannada MN;
     display: flex;
     justify-content: space-around;
     align-items: center;
     list-style: none; 
-}
-
-li{
+    margin-top: 8px;
     font-size: 20px;
-    color: rgb(164, 179, 219);
     font-weight: bold;
+    color: rgb(164, 179, 219);
 }
 
-li:hover{
-    color: orange;
-}
 
+.nav ul {
+    list-style-type: none;
+    padding-top: 0px;
+    float: left;
+    position: relative;
+}
