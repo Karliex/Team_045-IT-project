@@ -131,6 +131,7 @@ exports.updateInfo = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
 
     if (user) {
+        user.image = req.body.pic || user.image,
         user.givenname = req.body.givenname || user.givenname,
         user.familyname = req.body.familyname || user.familyname,     //需要修改：会更新的参数
         user.phoneNumber = req.body.phoneNumber || user.phoneNumber,
@@ -148,6 +149,7 @@ exports.updateInfo = asyncHandler(async (req, res) => {
   
         res.json({
             _id: updatedUser._id,
+            pic: user.image,
             givenname : updatedUser.givenname,
             familyname : updatedUser.familyname,     //需要修改：会更新的参数
             phoneNumber: updatedUser.phoneNumber,

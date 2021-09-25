@@ -89,8 +89,6 @@ export class profile extends Component {
                         <label for="phoneNumber">Phone Number</label>
                         <textarea rows="1" id="phoneNumber" name="phoneNumber" value={this.state.phoneNumber}></textarea>
                     </div>
-                    
-                    {/* <div className="user-"> {this.displayProfile(this.state.userInfo)} </div> */}
                 </div>
             </div>
             

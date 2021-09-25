@@ -11,6 +11,7 @@ export class Profile extends Component {
     constructor(props){
         super(props)
         this.state = {
+            image: 'https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg',
             givenname:'',
             familyname:'',
             phoneNumber:'',
@@ -21,6 +22,7 @@ export class Profile extends Component {
             productOwner:'',
             notes:''
         }
+        this.changeImage = this.changeImage.bind(this)
         this.changeGivenname = this.changeGivenname.bind(this)
         this.changeFamilyname = this.changeFamilyname.bind(this)
         this.changePhoneNumber = this.changePhoneNumber.bind(this)
@@ -32,6 +34,12 @@ export class Profile extends Component {
         this.changeNotes = this.changeNotes.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
         this.callback = this.callback.bind(this);
+    }
+
+    changeImage(event){
+        this.setState({
+            image:event.target.value
+        })
     }
     changeGivenname(event){
         this.setState({
@@ -79,9 +87,44 @@ export class Profile extends Component {
         })
     }
 
+    componentDidMount = () => {
+        this.getProfile();
+      };
+    
+    
+      getProfile = () => {
+        axios.get('http://localhost:4000/user/profile', { headers: { Authorization:localStorage.getItem('SavedToken') }})
+          .then((response) => {
+            console.log(response)
+            const user = response.data;
+
+            this.setState({
+              email: user.email,
+              givenname: user.givenname,
+              familyname: user.familyname,
+              phoneNumber:user.phoneNumber,
+              valueStream:user.valueStream,
+              scrumTeam:user.scrumTeam,
+              role: user.role,
+              technicalLead:user.technicalLead,
+              productOwner: user.productOwner,
+              notes:user.notes,
+              isLoaded: true
+            });
+            console.log('Data has been received!!');
+          })
+          .catch(() => {
+            this.setState({
+              isLoaded: false
+            });
+            alert('Error retrieving data!!!');
+          });
+      }
+
     onSubmit(event){
         event.preventDefault()
         const profiled = {
+            image: this.state.image,
             givenname: this.state.givenname,
             familyname: this.state.familyname,
             phoneNumber: this.state.phoneNumber,
@@ -94,12 +137,13 @@ export class Profile extends Component {
         }
 
         axios.post('http://localhost:4000/user/updateInfo', profiled, { headers: { Authorization:localStorage.getItem('SavedToken') }})
-            .then(response => console.log(response.data))
+            .then(response => console.log(response.data), this.getProfile())
             
         // window.location = '/'
         this.setState({
             givenname:'',
             familyname:'',
+            pic: '',
             phoneNumber:'',
             valueStream:'',
             scrumTeam:'',
@@ -122,7 +166,9 @@ export class Profile extends Component {
                         <div className="changeProfile">
                         </div>
                         <textarea type="name" value="name"></textarea>
-                        <input type='img' value='Upload New Profile Photo' />
+                        <input type='img' 
+                               value='Upload New Profile Photo'
+                        />
                     </div>
                     <form onSubmit={this.onSubmit}>
                         <div className="tab">
@@ -130,7 +176,7 @@ export class Profile extends Component {
                             <Tab eventKey="password" title="Reset Password">
                                 <div className="tab-item-wrapper">
                                 <label type="pass">Current Password</label>
-                                <input type="prepass" value="Current Password"/>
+                                <input type="prepass" value={this.state.givenname}/>
                                 <label type="pass">New Password</label>
                                 <input type='pass' placeholder="Enter Your New Password" />
                                 <div className="button-wrapper">
@@ -156,7 +202,7 @@ export class Profile extends Component {
                             <Tab eventKey="contact" title="Reset Phone Number">
                                 <div className="tab-item-wrapper">
                                     <label type="pass">Current Phone Number</label>
-                                    <input type="prepass" value="Current Phone Number"/>
+                                    <input type="prepass" value={this.state.phoneNumber}/>
                                     <label type="pass">New Phone Number</label>
                                     <input type='pass' 
                                     onChange={this.changePhoneNumber} 
@@ -173,7 +219,7 @@ export class Profile extends Component {
                             <Tab eventKey="notes" title="Change Notes">
                                 <div className="tab-item-wrapper">
                                     <label type="pass">Current Notes</label>
-                                    <input type="prepass" value="Current Notes"/>
+                                    <input type="prepass" value={this.state.notes}/>
                                     <label type="pass">New Notes</label>
                                     <input type='pass' 
                                     placeholder="Enter Your New Notes"
