@@ -101,6 +101,7 @@ router.get('/test', protect, (req, res) => {res.status(200).json({
 
 router.post("/updateInfo", protect, userController.updateInfo);
 
+router.get('/profile', protect, userController.getUserProfile);
 
 
 // router.post('/:id',userController.getUserProfile);

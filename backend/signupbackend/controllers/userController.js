@@ -70,17 +70,6 @@ function encryptPsswd(res,newUser) {
 }
 
 
-
-//    const { name, github, twitter, facebook } = req.body;
-//    const _id = ObjectID(req.session.passport.user);
- 
-//    users.updateOne({ _id }, { $set: { name, github, twitter, facebook } }, (err) => {
-//      if (err) {
-//        throw err;
-//      }
-     
-//      res.redirect('/users');
-
 //Edit user profile info (POST)
 //http://localhost:4000/user/updateInfo (可加具体人，待研究)
 exports.updatePersonal = function(req,res){
@@ -121,14 +110,16 @@ exports.updatePersonal = function(req,res){
 //View one spefic user's public profile (GET)
 //http://localhost:4000/:id
  exports.getUserProfile = function(req,res){
-    Snack.findById(req.params.id,function(err,snack){    //id不确定对不对
+     console.log(req.user)
+    User.findById(req.user.id,function(err,user){    //id不确定对不对
         if(err){
             res.status(400).json({success:false,err:err})
         }else{
-            res.status(200).json({success:true,snack:snack})
+            res.status(200).json({success:true,user:user})   //json
         }
     })
 }
+
 
 
 // @desc    GET user profile
