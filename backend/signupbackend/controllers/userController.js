@@ -111,11 +111,12 @@ exports.updatePersonal = function(req,res){
 //http://localhost:4000/:id
  exports.getUserProfile = function(req,res){
      console.log(req.user)
-    User.findById(req.user.id,function(err,user){    //id不确定对不对
+    User.findById(req.user.id,function(err,user){
         if(err){
             res.status(400).json({success:false,err:err})
         }else{
-            res.status(200).json({success:true,user:user})   //json
+            // res.status(200).json({success:true,user:user})   //json
+            res.json(user)
         }
     })
 }

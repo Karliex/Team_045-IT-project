@@ -14,7 +14,8 @@ export class profile extends Component {
         technicalLead:'',
         productOwner:'',
         notes:'',
-        userInfo: {}
+        // userInfo: {},
+        isLoaded: false
       };
     
       componentDidMount = () => {
@@ -23,42 +24,39 @@ export class profile extends Component {
     
     
       getProfile = () => {
-        axios.get('/profile')
+        axios.get('http://localhost:4000/user/profile', { headers: { Authorization:localStorage.getItem('SavedToken') }})
           .then((response) => {
-            console.log("hello");
-            const user = response.data.user;
-            this.setState({ userInfo: user });
+            console.log(response)
+            const user = response.data;
+
+            this.setState({
+              email: user.email,
+              givenname: user.givenname,
+              familyname: user.familyname,
+              phoneNumber:user.phoneNumber,
+              valueStream:user.valueStream,
+              scrumTeam:user.scrumTeam,
+              role: user.role,
+              technicalLead:user.technicalLead,
+              productOwner: user.productOwner,
+              notes:user.notes,
+              isLoaded: true
+            });
             console.log('Data has been received!!');
           })
           .catch(() => {
+            this.setState({
+              isLoaded: false
+            });
             alert('Error retrieving data!!!');
           });
       }
     
-      displayProfile = (userInfo) => {
-        this.getProfile();
-        console.log(userInfo)
-    
-        if (!userInfo.length) return null;
-    
-        return userInfo.map((user, index) => (
-          <div key={index} className="user-info__display">
-            <h3>{user.notes}</h3>
-            <p>{user.email}</p>
-
-          </div>
-        ));
-      };
-
-
-
-
-
-
-
-
 
     render() {
+      if(!this.state.isLoaded){
+        return <div>Loading</div>
+      }else{
         return (
             <div className="profile">
                 <div className="profileBlock">
@@ -68,30 +66,37 @@ export class profile extends Component {
                     <input id="name" name="name" value={this.state.givenname}></input>
                     <div className="streamBlock">
                         <label for="valueStream">Value Stream</label>
-                        <textarea rows="4" id="valueStream" name="valueStream" value="<?=$valueStream?>"></textarea>
+                        <textarea rows="4" id="valueStream" name="valueStream" value={
+                          this.state.productOwner,
+                          this.state.role,
+                          this.state.scrumTeam,
+                          this.state.technicalLead,
+                          this.state.valueStream
+                        }></textarea>
                     </div>
                     
                     <div className="notesBlock">
                         <label for="notes">Notes</label>
-                        <textarea rows="4" id="notes" name="notes" value="<?=$notes?>"></textarea>
+                        <textarea rows="4" id="notes" name="notes" value={this.state.notes}></textarea>
                     </div>  
                     
                     <div className="emailBlock">
                         <label for="email">Email</label>
-                        <textarea rows="1" id="email" name="email" value="<?=$email?>"></textarea>
+                        <textarea rows="1" id="email" name="email" value={this.state.email}></textarea>
                     </div>
                     
                     <div className="phoneBlock">
                         <label for="phoneNumber">Phone Number</label>
-                        <textarea rows="1" id="phoneNumber" name="phoneNumber" value="<?=$phoneNumber?>"></textarea>
+                        <textarea rows="1" id="phoneNumber" name="phoneNumber" value={this.state.phoneNumber}></textarea>
                     </div>
                     
-                    <div className="user-"> {this.displayProfile(this.state.userInfo)} </div>
+                    {/* <div className="user-"> {this.displayProfile(this.state.userInfo)} </div> */}
                 </div>
             </div>
             
         )
     }
+  }
 }
 
 export default profile
