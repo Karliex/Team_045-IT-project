@@ -5,6 +5,7 @@ import Home from './Home.js'
 import './Home.css'
 import Search from './SearchPage'
 import Login from './Login'
+import adminLogin from './adminLogin'
 import Signup from './Register'
 import Navigation from './navigation'
 import UpdateInfo from './changeProfile'
@@ -22,6 +23,7 @@ class App extends Component {
                     <Route path="/profile" component={Navigation} />
                     <Switch>
                         <Route path="/login" exact component={Login} />
+                        <Route path="/adminlogin" exact component={adminLogin} />
                         <Route path="/signup" exact component={Signup} />
                         <Route path="/search" exact component={Search} />
                         <Route path="/profile" exact component={Profile} />

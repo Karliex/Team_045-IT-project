@@ -4,8 +4,8 @@ const bcrypt = require("bcrypt");
 require('dotenv').config()    // for JWT password key
 
 // Load User model
-const User = require('../models/userModel');
 
+const Admin = require('../models/adminModel')
 // the following is required if you wanted to use passport-jwt
 // JSON Web Tokens
 const passportJWT = require("passport-jwt");
@@ -13,7 +13,7 @@ const JwtStrategy = passportJWT.Strategy;
 const ExtractJwt = passportJWT.ExtractJwt;
 
 module.exports = function (passport) {
-  passport.use('login', new LocalStrategy({
+  passport.use('adminlogin', new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
     passReqToCallback: true
@@ -22,7 +22,7 @@ module.exports = function (passport) {
     console.log("login strategy works!")
       process.nextTick(function(){
          // Match user
-         User.findOne({email: email}).then(user => {
+         Admin.findOne({email: email}).then(user => {
          if (!user) {
              // res.status(200).json({success: false, error:"Email not registered"})
              return done(null, false, { message: 'That email is not registered' });
@@ -52,8 +52,8 @@ module.exports = function (passport) {
 
   passport.deserializeUser(function (id, done) {    // invoked on every request by passport.session()
     console.log("deserializing [send request]")
-    
-    User.findById(id, function (err, user) {
+     
+    Admin.findById(id, function (err, user) {
       done(err, user);                              // find detailed user info by id
     });
   });
@@ -72,7 +72,7 @@ module.exports = function (passport) {
       // body that was signed earlier in the userRouter.js file
       // when logging in the user
       console.log(jwt_payload._id)
-      User.findOne({'_id':jwt_payload.body._id}, (err, user) => {
+      Admin.findOne({'_id':jwt_payload.body._id}, (err, user) => {
           if(err){
               return done(err, false);
           }

@@ -4,6 +4,7 @@ const asyncHandler = require("express-async-handler") ;
 
 
 var User = require("../models/userModel");
+var Admin = require("../models/adminModel")
 
 
 /**
@@ -39,6 +40,32 @@ exports.userSignup = function(req,res){
     })
 }
 
+// Register for admin account
+exports.adminSignup = function(req,res){
+    const{email, password} = req.body;
+    var valid = emailRegex.test(email);
+    if (!valid) {
+        res.status(200).json({ status: 'error', error:  'Should enter email type'})
+    }
+    Admin.findOne({email: email}). then((user) => {
+        if(user){
+            res.status(200).json({success:false,error: "Email has been registered!"})
+        }
+        
+        if (password.length < 5) {
+            res.status(200).json({ status: 'error', error:  'Password length is too small. Should be at least 6 characters'})
+        }
+        else{
+            const newUser = new User({
+                email,
+                password,
+            })
+            encryptPsswd(res,newUser)           
+        }
+    })
+}
+
+
 
 /**
  * encrypt the password of a account and store information in hash format
@@ -63,8 +90,7 @@ function encryptPsswd(res,newUser) {
                req.session.email = email;
             }).catch((err) => {
                 res.redirect('/signup')
-            }
-            )
+            })
         })
     })
 }
