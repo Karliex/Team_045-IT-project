@@ -56,7 +56,7 @@ exports.adminSignup = function(req,res){
             res.status(200).json({ status: 'error', error:  'Password length is too small. Should be at least 6 characters'})
         }
         else{
-            const newUser = new User({
+            const newUser = new Admin({
                 email,
                 password,
             })
