@@ -49,6 +49,7 @@ export class profile extends Component {
               isLoaded: false
             });
             alert('Error retrieving data!!!');
+            window.location = "/login"
           });
       }
     
@@ -61,7 +62,10 @@ export class profile extends Component {
             <div className="profile">
                 <div className="profileBlock">
                     <div className="circle">
-                    
+                    <img
+                        alt={''}
+                        src={this.state.pic}
+                      />
                     </div>
                     <input id="name" name="name" value={this.state.givenname}></input>
                     <div className="streamBlock">

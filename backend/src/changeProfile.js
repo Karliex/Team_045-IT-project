@@ -122,6 +122,7 @@ export class Profile extends Component {
               isLoaded: false
             });
             alert('Error retrieving data!!!');
+            window.location = "/login"
           });
       }
 
@@ -144,10 +145,10 @@ export class Profile extends Component {
             .then(response => console.log(response.data), 
             this.getProfile(), 
             window.location = "/updateInfo")
-
-              this.setState({
+            this.setState({
                 phoneNumber:''
             })
+            
     }
 
 
@@ -190,7 +191,7 @@ export class Profile extends Component {
                                     <label type="pass">New Phone Number</label>
                                     <input type='pass' 
                                     onChange={this.changePhoneNumber} 
-                                    value={this.state.phoneNumber} 
+                                    // value={this.state.phoneNumber} 
                                     placeholder="Enter Your New Phone Number"
                                     />
                                     <div className="button-wrapper">
@@ -207,7 +208,7 @@ export class Profile extends Component {
                                     <input type='pass' 
                                     placeholder="Enter Your New Notes"
                                     onChange={this.changeNotes}
-                                    value={this.state.notes}
+                                    // value={this.state.notes}
                                     />
                                     <div className="button-wrapper">                         
                                         <input type="submit" value="Update"/>
