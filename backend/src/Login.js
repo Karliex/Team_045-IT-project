@@ -66,8 +66,8 @@ export class Login extends Component {
     render() {
         return (
           <div className="base-container" ref={this.props.containerRef}>
-            <div className="header">Login</div>
             <div className="content">
+            <div className="header">Employee Login</div>
               <div className="image">
                 < img src={loginImg} />
               </div>

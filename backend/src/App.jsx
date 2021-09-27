@@ -5,11 +5,12 @@ import Home from './Home.js'
 import './Home.css'
 import Search from './SearchPage'
 import Login from './Login'
-import adminLogin from './adminLogin'
 import Signup from './Register'
 import Navigation from './navigation'
 import UpdateInfo from './changeProfile'
 import Profile from './profile'
+import Identify from './identify'
+import Admin from './adminLogin'
 
 
 class App extends Component {
@@ -22,12 +23,13 @@ class App extends Component {
                     <Route path="/updateInfo" component={Navigation} />
                     <Route path="/profile" component={Navigation} />
                     <Switch>
+                        <Route exact path="/" exact component={Identify}/>
                         <Route path="/login" exact component={Login} />
-                        <Route path="/adminlogin" exact component={adminLogin} />
                         <Route path="/signup" exact component={Signup} />
                         <Route path="/search" exact component={Search} />
                         <Route path="/profile" exact component={Profile} />
                         <Route path="/updateInfo" exact component={UpdateInfo} />
+                        <Route path="/adminLogin" exact component={Admin}/>
                     </Switch>
                 </div>
             </Router>

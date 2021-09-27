@@ -195,3 +195,7 @@ textarea:focus{
     text-align: center;
     resize:none;
 }
+
+textarea{
+    font-family:inherit;
+}

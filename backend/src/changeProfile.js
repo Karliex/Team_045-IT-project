@@ -15,12 +15,14 @@ export class Profile extends Component {
             givenname:'',
             familyname:'',
             phoneNumber:'',
+            oldphone:'',
             valueStream:'',
             scrumTeam:'',
             role:'',
             technicalLead:'',
             productOwner:'',
-            notes:''
+            notes:'',
+            oldnotes:''
         }
         this.changeImage = this.changeImage.bind(this)
         this.changeGivenname = this.changeGivenname.bind(this)
@@ -103,12 +105,14 @@ export class Profile extends Component {
               givenname: user.givenname,
               familyname: user.familyname,
               phoneNumber:user.phoneNumber,
+              oldphone:user.phoneNumber,
               valueStream:user.valueStream,
               scrumTeam:user.scrumTeam,
               role: user.role,
               technicalLead:user.technicalLead,
               productOwner: user.productOwner,
               notes:user.notes,
+              oldnotes: user.notes,
               isLoaded: true
             });
             console.log('Data has been received!!');
@@ -137,22 +141,15 @@ export class Profile extends Component {
         }
 
         axios.post('http://localhost:4000/user/updateInfo', profiled, { headers: { Authorization:localStorage.getItem('SavedToken') }})
-            .then(response => console.log(response.data), this.getProfile())
-            
-        // window.location = '/'
-        this.setState({
-            givenname:'',
-            familyname:'',
-            pic: '',
-            phoneNumber:'',
-            valueStream:'',
-            scrumTeam:'',
-            role:'',
-            technicalLead:'',
-            productOwner:'',
-            notes:''
-        })
+            .then(response => console.log(response.data), 
+            this.getProfile(), 
+            window.location = "/updateInfo")
+
+              this.setState({
+                phoneNumber:''
+            })
     }
+
 
     callback(e) {
         console.log(e);
@@ -186,23 +183,10 @@ export class Profile extends Component {
                                 </div>
                             </Tab>
 
-                            <Tab eventKey="email" title="Reset Email">
-                            <div className="tab-item-wrapper">
-                                <label type="pass">Current Email</label>
-                                <input type="prepass" value="Current Email Address"/>
-                                <label type="pass">New Email</label>
-                                <input type='pass' placeholder="Enter Your New Address" />
-                                <div className="button-wrapper">
-                                    
-                                    <input type="submit" value="Update"/>
-                                </div>
-                                </div>
-                            </Tab>
-
                             <Tab eventKey="contact" title="Reset Phone Number">
                                 <div className="tab-item-wrapper">
                                     <label type="pass">Current Phone Number</label>
-                                    <input type="prepass" value={this.state.phoneNumber}/>
+                                    <input type="prepass" value={this.state.oldphone}/>
                                     <label type="pass">New Phone Number</label>
                                     <input type='pass' 
                                     onChange={this.changePhoneNumber} 
@@ -210,7 +194,6 @@ export class Profile extends Component {
                                     placeholder="Enter Your New Phone Number"
                                     />
                                     <div className="button-wrapper">
-                                        
                                         <input type="submit" value="Update"/>
                                     </div>
                                 </div>
@@ -219,15 +202,14 @@ export class Profile extends Component {
                             <Tab eventKey="notes" title="Change Notes">
                                 <div className="tab-item-wrapper">
                                     <label type="pass">Current Notes</label>
-                                    <input type="prepass" value={this.state.notes}/>
+                                    <input type="prepass" value={this.state.oldnotes}/>
                                     <label type="pass">New Notes</label>
                                     <input type='pass' 
                                     placeholder="Enter Your New Notes"
                                     onChange={this.changeNotes}
                                     value={this.state.notes}
                                     />
-                                    <div className="button-wrapper">
-                                        
+                                    <div className="button-wrapper">                         
                                         <input type="submit" value="Update"/>
                                     </div>
                                 </div>

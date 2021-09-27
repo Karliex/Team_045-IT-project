@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css"
 import axios from 'axios'
-import loginImg from "./closing-image.png";
+import loginImg from "./team.png";
 import './style.css'
 import { Link } from 'react-router-dom'
 
@@ -66,8 +66,8 @@ export class adminLogin extends Component {
     render() {
         return (
           <div className="base-container" ref={this.props.containerRef}>
-            <div className="header">Administrator Login</div>
             <div className="content">
+            <div className="header">Administrator Login</div>
               <div className="image">
                 < img src={loginImg} />
               </div>
