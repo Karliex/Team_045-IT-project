@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import axios from 'axios'
 import loginImg from "./team.png";
 import './style.css'
+import Cookies from 'js-cookie'
 
 export class adminLogin extends Component {
     constructor(props){
@@ -40,7 +41,7 @@ export class adminLogin extends Component {
             let token = response.data.token;
             console.log(token);
 
-            localStorage.setItem("SavedToken", 'Bearer ' + token);
+            Cookies.set("SavedToken", 'Bearer ' + token);
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
 
             if (response.data.redirect === '/signup') {

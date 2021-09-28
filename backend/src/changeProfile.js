@@ -3,6 +3,8 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import axios from 'axios';
 import { Tabs, Tab } from 'react-bootstrap';
 import './change.css'
+import { setRawCookie } from 'react-cookies';
+import Cookies from 'js-cookie';
 
 
 export class Profile extends Component {
@@ -93,7 +95,7 @@ export class Profile extends Component {
     
     
       getProfile = () => {
-        axios.get('http://localhost:4000/user/profile', { headers: { Authorization:localStorage.getItem('SavedToken') }})
+        axios.get('http://localhost:4000/user/profile', { headers: { Authorization:Cookies.get('SavedToken') }})
           .then((response) => {
             console.log(response)
             const user = response.data;
@@ -139,7 +141,7 @@ export class Profile extends Component {
             notes: this.state.notes
         }
 
-        axios.post('http://localhost:4000/user/updateInfo', profiled, { headers: { Authorization:localStorage.getItem('SavedToken') }})
+        axios.post('http://localhost:4000/user/updateInfo', profiled, { headers: { Authorization:Cookies.get('SavedToken') }})
             .then(response => console.log(response.data), 
             this.getProfile(), 
             window.location = "/updateInfo")

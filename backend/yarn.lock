@@ -3702,6 +3702,11 @@
   "resolved" "https://registry.npmjs.org/cookie-signature/-/cookie-signature-1.0.6.tgz"
   "version" "1.0.6"
 
+"cookie@^0.3.1":
+  "integrity" "sha1-5+Ch+e9DtMi6klxcWpboBtFoc7s="
+  "resolved" "https://registry.npmjs.org/cookie/-/cookie-0.3.1.tgz"
+  "version" "0.3.1"
+
 "cookie@0.4.0":
   "integrity" "sha512-+Hp8fLp57wnUSt0tY0tHEXh4voZRDnoIrZPqlo3DPiI4y9lwg/jqx+1Om94/W6ZaPDOUbnjOt/99w66zk+l1Xg=="
   "resolved" "https://registry.npmjs.org/cookie/-/cookie-0.4.0.tgz"
@@ -7009,6 +7014,11 @@
     "import-local" "^3.0.2"
     "jest-cli" "^26.6.0"
 
+"js-cookie@^3.0.1":
+  "integrity" "sha512-+0rgsUXZu4ncpPxRL+lNEptWMOWl9etvPHc/koSRp6MPwpRYAhmk0dUG00J4bxVV3r9uUzfo24wW0knS07SKSw=="
+  "resolved" "https://registry.npmjs.org/js-cookie/-/js-cookie-3.0.1.tgz"
+  "version" "3.0.1"
+
 "js-tokens@^3.0.0 || ^4.0.0", "js-tokens@^4.0.0":
   "integrity" "sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ=="
   "resolved" "https://registry.npmjs.org/js-tokens/-/js-tokens-4.0.0.tgz"
@@ -9577,6 +9587,14 @@
     "react-transition-group" "^4.4.1"
     "uncontrollable" "^7.2.1"
     "warning" "^4.0.3"
+
+"react-cookies@^0.1.1":
+  "integrity" "sha512-PP75kJ4vtoHuuTdq0TAD3RmlAv7vuDQh9fkC4oDlhntgs9vX1DmREomO0Y1mcQKR9nMZ6/zxoflaMJ3MAmF5KQ=="
+  "resolved" "https://registry.npmjs.org/react-cookies/-/react-cookies-0.1.1.tgz"
+  "version" "0.1.1"
+  dependencies:
+    "cookie" "^0.3.1"
+    "object-assign" "^4.1.1"
 
 "react-dev-utils@^11.0.3":
   "integrity" "sha512-dx0LvIGHcOPtKbeiSUM4jqpBl3TcY7CDjZdfOIcKeznE7BWr9dg0iPG90G5yfVQ+p/rGNMXdbfStvzQZEVEi4A=="

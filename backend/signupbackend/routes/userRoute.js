@@ -52,29 +52,14 @@ router.post('/login', async (req, res, next) => {
               // asking the client to give us the token with each request
               req.login(user, { session : false }, async (error) => {
                   
-                  if( error ) return next(error)
-  
-                  // We don't want to store sensitive information such as the
-                  // user password in the token so we pick only the user's email 
-                  const body = { _id : user._id};
-  
-                  //Sign the JWT token and populate the payload with the user email 
-                  const token = jwt.sign({ body }, process.env.PASSPORT_KEY, { expiresIn: "1h" });
-                  // const token = "Bearer " + signedToken;
+                if( error ) return next(error)
 
-                  //Send back the token to the client
-                //   res.status(200).json({
-                //         _id: user._id,
-                //         name: user.name,
-                //         email: user.email,
-                //         isAdmin: user.isAdmin,
-                //         pic: user.pic,
-                //         token: token,
-                //       });
+                // We don't want to store sensitive information such as the
+                // user password in the token so we pick only the user's email 
+                const body = { _id : user._id};
 
-                  // send the token 
-                //   res.cookie('token',token, { httpOnly: true, sameSite: false, secure: true, domain:"http://localhost:4000"});
-                // localStorage.setItem('token',token)  
+                //Sign the JWT token and populate the payload with the user email 
+                const token = jwt.sign({ body }, process.env.PASSPORT_KEY, { expiresIn: "1h" });
                 res.cookie("token", token, {
                   httpOnly: true,
                 })
@@ -115,14 +100,14 @@ router.post('/login', async (req, res, next) => {
             // asking the client to give us the token with each request
             req.login(user, { session : false }, async (error) => {
                 
-                if( error ) return next(error)
+              if( error ) return next(error)
 
-                // We don't want to store sensitive information such as the
-                // user password in the token so we pick only the user's email 
-                const body = { _id : user._id};
+              // We don't want to store sensitive information such as the
+              // user password in the token so we pick only the user's email 
+              const body = { _id : user._id};
 
-                //Sign the JWT token and populate the payload with the user email 
-                const token = jwt.sign({ body }, process.env.PASSPORT_KEY, { expiresIn: "1h" });
+              //Sign the JWT token and populate the payload with the user email 
+              const token = jwt.sign({ body }, process.env.PASSPORT_KEY, { expiresIn: "1h" });
               res.cookie("token", token, {
                 httpOnly: true,
               })

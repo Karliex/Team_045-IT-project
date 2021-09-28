@@ -3,6 +3,8 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import axios from 'axios'
 import loginImg from "./closing-image.png";
 import './style.css'
+import { CollectionsBookmarkOutlined } from '@material-ui/icons';
+import Cookies from 'js-cookie'
 
 export class Login extends Component {
     constructor(props){
@@ -26,6 +28,16 @@ export class Login extends Component {
         })
     }
 
+    // componentWillMount() {
+    //     this.state =  { token: cookie.load('token') }
+    // }
+
+    // onLogin(token) {
+    //     this.setState({token})
+    //     cookie.save('token', token)
+    // }
+
+
     onSubmit(event){
         event.preventDefault()
         const loged = {
@@ -40,7 +52,9 @@ export class Login extends Component {
             let token = response.data.token;
             console.log(token);
 
-            localStorage.setItem("SavedToken", 'Bearer ' + token);
+            //this.onLogin(token)
+            // cookie.setItem("SavedToken", 'Bearer ' + token);
+            Cookies.set("SavedToken", 'Bearer ' + token);
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
 
             if (response.data.redirect === '/search') {
