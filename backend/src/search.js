@@ -36,7 +36,10 @@ class Search extends React.Component  {
             this.setState({
                 results: res.data.results,
             })
-            console.log(res);
+            console.log("Search complete");
+            
+            // console.log(res);
+            console.log(this.state.results)
         }).catch(res => {
             console.log("Search did not go through!")
             console.log(res);
@@ -44,9 +47,6 @@ class Search extends React.Component  {
 
 
 
-        
-        console.log("Search complete");
-        console.log(this.state.results);
     }
 
     // Update's user input in search bar

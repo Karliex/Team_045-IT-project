@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const asyncHandler = require("express-async-handler") ;
 
 
+
 var User = require("../models/userModel");
 var Admin = require("../models/adminModel")
 
@@ -96,46 +97,10 @@ function encryptPsswd(res,newUser) {
 }
 
 
-//Edit user profile info (POST)
-//http://localhost:4000/user/updateInfo (可加具体人，待研究)
-exports.updatePersonal = function(req,res){
-    bcrypt.genSalt(16,(err,salt) =>{
-        bcrypt.hash(req.body.password, salt, (err, hash) => {
-            if (err) throw err;
-            User.findOneAndUpdate({email:req.body.email},{
-                givenname : req.body.givenname,
-                familyname : req.body.familyname,     //需要修改：会更新的参数
-                phoneNumber: req.body.phoneNumber,
-                valueStream: req.body.valueStream,
-                scrumTeam: req.body.scrumTeam,
-                role: req.body.role,
-                technicalLead: req.body.technicalLead,
-                productOwner: req.body.productOwner,
-                notes: req.body.productOwner,
-                password: hash   //可以用作修改密码的功能，这里不需要用到
-            },
-            {new: true},
-            function(err, updateUser){
-                if(err){
-                    res.status(200).json({success:false,message: "Email doesn't exist"})
-                }else{
-                    res.status(200).json({success:true,updateUser:updateUser})
-                }
-            })
-        })
-    })
-}
-
-// router.get('/:username', (req, res, next) => {
-//     const users = req.app.locals.users;
-//     const username = req.params.username;
-  
-//     users.findOne({ username }, (err, results) => {..}
-
 
 //View one spefic user's public profile (GET)
 //http://localhost:4000/:id
- exports.getUserProfile = function(req,res){
+exports.getUserProfile = function(req,res){
      console.log(req.user)
     User.findById(req.user.id,function(err,user){
         if(err){
@@ -149,9 +114,7 @@ exports.updatePersonal = function(req,res){
 
 
 
-// @desc    GET user profile
-// @route   GET /api/users/profile
-// @access  Private
+// Update personal profile functionality
 exports.updateInfo = asyncHandler(async (req, res) => {
     // console.log(req.user);
     const user = await User.findById(req.user._id);
@@ -213,8 +176,6 @@ exports.updatePsswd = function(req,res){
         })
     })
 }
-
-
 
 
 

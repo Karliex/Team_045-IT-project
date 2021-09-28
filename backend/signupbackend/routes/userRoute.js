@@ -78,71 +78,59 @@ router.post('/login', async (req, res, next) => {
 
 
 
-  router.post('/adminlogin', async (req, res, next) => {
-    // passport.authenticate is provided by passport to authenticate
-    // users
-    // 'login' is the name of strategy that we have defined in the
-    // passport.js file in the config folder
-    // user and info should be passed by the 'login' strategy
-    // to passport.authenticate -- see the code for the strategy
-    passport.authenticate('adminlogin', async (err, user, info) => {
-        try {
-            // if there were errors during executing the strategy
-            // or the user was not found, we display and error
-            if(err ||!user){
-                const error = new Error('An Error occurred')
-                return next(error);
-            }
-            
-            
-            // otherwise, we use the req.login to store the user details
-            // in the session. By setting session to false, we are essentially
-            // asking the client to give us the token with each request
-            req.login(user, { session : false }, async (error) => {
-                
-              if( error ) return next(error)
-
-              // We don't want to store sensitive information such as the
-              // user password in the token so we pick only the user's email 
-              const body = { _id : user._id};
-
-              //Sign the JWT token and populate the payload with the user email 
-              const token = jwt.sign({ body }, process.env.PASSPORT_KEY, { expiresIn: "1h" });
-              res.cookie("token", token, {
-                httpOnly: true,
-              })
-              return res.json({'token':token, redirect: '/signup'});
+router.post('/adminlogin', async (req, res, next) => {
+  // passport.authenticate is provided by passport to authenticate
+  // users
+  // 'login' is the name of strategy that we have defined in the
+  // passport.js file in the config folder
+  // user and info should be passed by the 'login' strategy
+  // to passport.authenticate -- see the code for the strategy
+  passport.authenticate('adminlogin', async (err, user, info) => {
+      try {
+          // if there were errors during executing the strategy
+          // or the user was not found, we display and error
+          if(err ||!user){
+              const error = new Error('An Error occurred')
+              return next(error);
+          }
+          
+          
+          // otherwise, we use the req.login to store the user details
+          // in the session. By setting session to false, we are essentially
+          // asking the client to give us the token with each request
+          req.login(user, { session : false }, async (error) => {
               
-            });
-        } catch (error) {
-            return res.redirect('/adminlogin')
-          //   return next(error);
-        }
-    })(req, res, next);
-    
+            if( error ) return next(error)
+
+            // We don't want to store sensitive information such as the
+            // user password in the token so we pick only the user's email 
+            const body = { _id : user._id};
+
+            //Sign the JWT token and populate the payload with the user email 
+            const token = jwt.sign({ body }, process.env.PASSPORT_KEY, { expiresIn: "1h" });
+            res.cookie("SavedToken", token, {
+              httpOnly: true,
+            })
+            return res.json({'SavedToken':token, redirect: '/signup'});
+            
+          });
+      } catch (error) {
+          return res.redirect('/adminlogin')
+        //   return next(error);
+      }
+  })(req, res, next);
+  
 });
 
-
-
-
-
-
-router.post('/logout', function(req, res) {
-    // save the favourites
-    foodController.saveFavourites(req,res,req.body.favs)
-    req.logout();
-    req.flash('');
-    res.redirect('/user/');
-});
-
+// const maxAge = 3 * 24 * 60 * 60;
+router.get('/logout', async (req, res) => {
+  res.cookie('SavedToken', '', { maxAge: 1 })
+  res.redirect('/')
+})
 
 //TO DO:
 
 
-router.get('/test', protect, (req, res) => {res.status(200).json({
-                  success: true,
-                  error: "Email has been registered!"
-            })})
 
 router.post("/updateInfo", protect, userController.updateInfo);
 

@@ -10,6 +10,7 @@ import UpdateInfo from './changeProfile'
 import Profile from './profile'
 import Identify from './identify'
 import Admin from './adminLogin'
+import Logout from './logout'
 
 
 class App extends Component {
@@ -21,6 +22,11 @@ class App extends Component {
                     <Route path="/search" component={Navigation} />
                     <Route path="/updateInfo" component={Navigation} />
                     <Route path="/profile" component={Navigation} />
+
+                    <Route path="/search" component={Logout} />
+                    <Route path="/updateInfo" component={Logout} />
+                    <Route path="/profile" component={Logout} />
+
                     <Switch>
                         <Route exact path="/" component={Identify}/>
                         <Route path="/login" exact component={Login} />
