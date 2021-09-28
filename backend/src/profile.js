@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import "./profile.css"
-import { Link } from 'react-router-dom'
 import axios from 'axios';
 
 export class profile extends Component {
@@ -77,13 +76,13 @@ export class profile extends Component {
                     <input id="name" name="name" value={this.state.givenname}></input>
                     <div className="streamBlock">
                         <label for="valueStream">Value Stream</label>
-                        <textarea rows="4" id="valueStream" name="valueStream" value={
-                          this.state.productOwner,
-                          this.state.role,
-                          this.state.scrumTeam,
-                          this.state.technicalLead,
-                          this.state.valueStream
-                        }></textarea>
+                        <textarea rows="4" id="valueStream" name="valueStream" value={(
+                           this.state.productOwner,
+                           this.state.role,
+                           this.state.scrumTeam,
+                           this.state.technicalLead,
+                           this.state.valueStream
+                        )}></textarea>
                     </div>
                     
                     <div className="notesBlock">

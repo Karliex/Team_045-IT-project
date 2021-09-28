@@ -36,9 +36,9 @@ export class Register extends Component {
         }
 
         axios.post('http://localhost:4000/user/signup', registered).then(function (response) {
-          if (response.data.redirect == '/login') {
+          if (response.data.redirect === '/login') {
               window.location = "/login"
-          } else if (response.data.redirect == '/signup'){
+          } else if (response.data.redirect === '/signup'){
               window.location = "/signup"
           }
       })
@@ -57,7 +57,7 @@ export class Register extends Component {
             <div className="content">
             <div className="header">Register</div>
               <div className="image">
-                < img src={loginImg} />
+                < img src={loginImg}  alt="register"/>
               </div>
               <div className="form">
                 <div className="form-group">

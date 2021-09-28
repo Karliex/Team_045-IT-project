@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css"
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import Home from './Home.js'
 import './Home.css'
 import Search from './SearchPage'
 import Login from './Login'
@@ -23,7 +22,7 @@ class App extends Component {
                     <Route path="/updateInfo" component={Navigation} />
                     <Route path="/profile" component={Navigation} />
                     <Switch>
-                        <Route exact path="/" exact component={Identify}/>
+                        <Route exact path="/" component={Identify}/>
                         <Route path="/login" exact component={Login} />
                         <Route path="/signup" exact component={Signup} />
                         <Route path="/search" exact component={Search} />

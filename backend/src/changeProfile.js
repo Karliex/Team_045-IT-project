@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css"
-import axios from 'axios'
-import loginImg from "./closing-image.png";
-import { Link } from 'react-router-dom'
-import { Tabs, Tab, Row, Col, Nav, NavDropdown } from 'react-bootstrap';
+import axios from 'axios';
+import { Tabs, Tab } from 'react-bootstrap';
 import './change.css'
 
 

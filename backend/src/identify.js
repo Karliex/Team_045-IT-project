@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import './identify.css'
 import User from "./4.png";
 import Administrator from "./3.png"
-import { Link, NavLink } from 'react-router-dom'
-import { borderRadius } from '@material-ui/system';
+import { Link } from 'react-router-dom'
 
 export class identify extends Component {
     
@@ -16,7 +15,7 @@ export class identify extends Component {
                         <div className="employee-wrapper">
                             <h1 type="role">I Am an Employee</h1>
                             <div className="userimage">
-                                <img src={User} />
+                                <img src={User}  alt="user"/>
                             </div>
                         </div>
                     </Link>
@@ -24,7 +23,7 @@ export class identify extends Component {
                         <div className="administrator-wrapper">
                             <h1 type="role">I Am an Administrator</h1>
                             <div className="adminimage">
-                                <img src={Administrator} />
+                                <img src={Administrator}  alt="admin"/>
                             </div>
                         </div>
                     </Link>

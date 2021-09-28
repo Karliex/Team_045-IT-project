@@ -3,7 +3,6 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import axios from 'axios'
 import loginImg from "./closing-image.png";
 import './style.css'
-import { Link } from 'react-router-dom'
 
 export class Login extends Component {
     constructor(props){
@@ -44,9 +43,9 @@ export class Login extends Component {
             localStorage.setItem("SavedToken", 'Bearer ' + token);
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
 
-            if (response.data.redirect == '/search') {
+            if (response.data.redirect === '/search') {
                 window.location = "/search"
-            } else if (response.data.redirect == '/login'){
+            } else if (response.data.redirect === '/login'){
                 window.location = "/login"
             }
         })
@@ -69,7 +68,7 @@ export class Login extends Component {
             <div className="content">
             <div className="header">Employee Login</div>
               <div className="image">
-                < img src={loginImg} />
+                < img src={loginImg} alt="employee login"/>
               </div>
               <div className="form">
                 <div className="form-group">
@@ -85,9 +84,7 @@ export class Login extends Component {
                     value={this.state.password}
                     />
                     <div className="footer">
-                      {/* <Link to='/search'> */}
                         <input type='submit' value='Login'/>
-                      {/* </Link> */}
                     </div>
                   </form>
                 </div>
