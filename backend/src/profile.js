@@ -21,7 +21,6 @@ export class profile extends Component {
         this.getProfile();
       };
     
-    
       getProfile = () => {
         axios.get('http://localhost:4000/user/profile', { headers: { Authorization:localStorage.getItem('SavedToken') }})
           .then((response) => {

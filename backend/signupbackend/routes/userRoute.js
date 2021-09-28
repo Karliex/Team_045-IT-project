@@ -3,6 +3,8 @@ const router = express.Router();
 const passport = require('passport');
 require('../config/passport')(passport);
 const jwt = require('jsonwebtoken');
+const usermodel = require("../models/userModel");
+
 var userController = require("../controllers/userController");
 
 const protect = require('../config/auth');
@@ -162,7 +164,40 @@ router.post("/updateInfo", protect, userController.updateInfo);
 router.get('/profile', protect, userController.getUserProfile);
 
 
-// router.post('/:id',userController.getUserProfile);
 
-// export the routes
+
+
+
+router.post('/search', async (req, res) => {
+  const query = req.body.query;
+
+  // Use regex to search for results
+  const regex = new RegExp(query, "i");
+  var results = await usermodel.find(
+      {$and: [{$or: [
+          {givenname: regex},
+          {familyname: regex},
+          {email: regex}
+      ]}]}
+  ).exec();    
+
+  // Limit results to 10
+  results = results.slice(0, 10);
+
+  console.log("_______________________________");
+  console.log(query);
+  console.log("------>");
+  console.log(results);
+  console.log("_______________________________");
+  
+  // Sends results if results are found
+  
+  if (results != null) {
+    res.status(200);
+    res.json(results);
+  } else {
+      res.end();
+  }
+});
+
 module.exports = router;
