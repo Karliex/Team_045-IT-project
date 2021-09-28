@@ -122,7 +122,7 @@ export class Profile extends Component {
               isLoaded: false
             });
             alert('Error retrieving data!!!');
-            window.location = "/login"
+            window.location = "/"
           });
       }
 

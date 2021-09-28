@@ -89,11 +89,11 @@ img {
     margin-bottom: 31px;
 }
 
-input:hover {
+.form input:hover {
     background-color: #a2b9d8;
     box-shadow: 0px 0px 14px 0.3px #5571ee63;
 }
-input:focus {
+.form input:focus {
     outline: none;
     background-color: #a2b9d8;
 }
@@ -102,7 +102,7 @@ input:focus {
     margin-top: 1em;
 }
 
-input[type = 'submit'] {
+.form input[type = 'submit'] {
     min-width: 3em;
     color: #2b2828;
 }

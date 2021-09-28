@@ -2,6 +2,11 @@
     margin-top: 105px;
     display: flex;
   }
+
+.newsearchInputs{
+  margin-top: 45px;
+  display: flex;
+}
   
 .search input {
   background-color: white;
