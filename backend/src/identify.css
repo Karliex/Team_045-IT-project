@@ -20,16 +20,14 @@
 .userimage{
     width: 200px;
     margin-left: 180px;
-    margin-bottom: 100px;
+    margin-top: -20px;
 }
 
 .adminimage{
-    width: 190px;
-    height: 190px;
+    width: 200px;
     margin-left: 180px;
-    margin-bottom: 100px;
+    margin-top: -20px;
 }
-
 
 .selection{
     display:flex;

@@ -49,23 +49,30 @@ export class profile extends Component {
               isLoaded: false
             });
             alert('Error retrieving data!!!');
-            window.location = "/login"
+            window.location = "./login"
           });
       }
     
 
     render() {
       if(!this.state.isLoaded){
-        return <div>Loading</div>
+        return (
+          <div className="profile">
+            <div class="loading-wrapper">
+            <div class="loading la-ball-scale-ripple-multiple la-3x">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+        </div>
+        )
       }else{
         return (
             <div className="profile">
                 <div className="profileBlock">
                     <div className="circle">
-                    <img
-                        alt={''}
-                        src={this.state.pic}
-                      />
+                    
                     </div>
                     <input id="name" name="name" value={this.state.givenname}></input>
                     <div className="streamBlock">

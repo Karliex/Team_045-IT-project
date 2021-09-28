@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './identify.css'
-import User from "./2.png";
-import Administrator from "./4.png"
+import User from "./4.png";
+import Administrator from "./3.png"
 import { Link, NavLink } from 'react-router-dom'
 import { borderRadius } from '@material-ui/system';
 
