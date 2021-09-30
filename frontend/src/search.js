@@ -1,5 +1,5 @@
 import React from 'react';
-import Axios from 'axios';
+import axios from './common/axios';
 import "./search.css";
 import SearchIcon from "@material-ui/icons/Search";
 import CloseIcon from "@material-ui/icons/Close";
@@ -25,10 +25,10 @@ class Search extends React.Component  {
     // Get search results
     fetchResults(event){
         event.preventDefault()
-        const searchURL = "http://localhost:4000/user/search"
+        const searchURL = "/user/search"
         const queryData = {query: this.state.query}
     
-        Axios.post(searchURL, queryData)
+        axios.post(searchURL, queryData)
         .then(res => {
             this.setState({
                 results:res.data,

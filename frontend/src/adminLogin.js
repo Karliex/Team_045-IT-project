@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css"
-import axios from 'axios'
+import axios from './common/axios'
 import loginImg from "./team.png";
 import './style.css'
 import Cookies from 'js-cookie'
@@ -36,7 +36,7 @@ export class adminLogin extends Component {
 
         // axios.post('http://localhost:4000/user/login', loged)
         //     .then(response => console.log(response.data))
-        axios.post('http://localhost:4000/user/adminlogin', loged)
+        axios.post('/user/adminlogin', loged)
         .then(function (response) {
             let token = response.data.token;
             console.log(token);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import "./profile.css"
-import axios from 'axios';
+import axios from './common/axios';
 import Cookies from 'js-cookie';
 
 export class profile extends Component {
@@ -23,7 +23,7 @@ export class profile extends Component {
       };
     
       getProfile = () => {
-        axios.get('http://localhost:4000/user/profile', { headers: { Authorization:Cookies.get('SavedToken') }})
+        axios.get('/user/profile', { headers: { Authorization:Cookies.get('SavedToken') }})
           .then((response) => {
             console.log(response)
             const user = response.data;

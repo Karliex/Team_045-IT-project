@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import "bootstrap/dist/css/bootstrap.min.css"
-import axios from 'axios';
+import axios from './common/axios';
 import Cookies from 'js-cookie';
 
 
@@ -86,7 +86,7 @@ export class editUser extends Component {
         console.log(currentUserId)
         console.log('++++++++++++++++++++++++++++++++')
         //axios.post('http://localhost:4000/user/editUser/:id', profiled, { headers: { Authorization:Cookies.get('SavedToken') }})
-        axios.post(`http://localhost:4000/user/editUser/${currentUserId}`, profiled)
+        axios.post(`/user/editUser/${currentUserId}`, profiled)
             .then(function (response) {
                 if (response.data.redirect === '/adminHome') {
                     window.location = "/adminHome"

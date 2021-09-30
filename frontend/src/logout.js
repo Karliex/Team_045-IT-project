@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css"
-import axios from 'axios'
+import axios from './common/axios'
 import Cookies from 'js-cookie'
 import "./logout.css"
 
@@ -11,7 +11,7 @@ export class logout extends Component {
     }
     onSubmit(event){
         event.preventDefault()
-        axios.get('http://localhost:4000/user/logout')
+        axios.get('/user/logout')
         .then(function (response) {
             let token = response.data.token;
             console.log(token);

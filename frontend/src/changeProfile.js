@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css"
-import axios from 'axios';
+import axios from './common/axios';
 import { Tabs, Tab } from 'react-bootstrap';
 import './change.css'
 import { setRawCookie } from 'react-cookies';
@@ -120,7 +120,7 @@ export class Profile extends Component {
     
     
       getProfile = () => {
-        axios.get('http://localhost:4000/user/profile', { headers: { Authorization:Cookies.get('SavedToken') }})
+        axios.get('/user/profile', { headers: { Authorization:Cookies.get('SavedToken') }})
           .then((response) => {
             const user = response.data;
 
@@ -170,7 +170,7 @@ export class Profile extends Component {
             new_psswd: this.state.new_psswd
         }
 
-        axios.post('http://localhost:4000/user/updateInfo', profiled, { headers: { Authorization:Cookies.get('SavedToken') }})
+        axios.post('/user/updateInfo', profiled, { headers: { Authorization:Cookies.get('SavedToken') }})
             .then(
             this.getProfile(), 
             window.location = "/updateInfo"
@@ -180,7 +180,7 @@ export class Profile extends Component {
                 phoneNumber:''
         })
             
-        axios.post('http://localhost:4000/user/reset-password', passwordInfo, { headers: { Authorization:Cookies.get('SavedToken') }})
+        axios.post('/user/reset-password', passwordInfo, { headers: { Authorization:Cookies.get('SavedToken') }})
             .then(
             this.getProfile(),
             window.location = "/updateInfo"

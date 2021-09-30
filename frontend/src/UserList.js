@@ -9,14 +9,14 @@ import {
     ListGroupItem,
     Button
 } from 'reactstrap'
-import axios from 'axios'
+import axios from './common/axios'
 
 
 
 export const UserList = () => {
     //const { users, removeUser } = useContext(GlobalContext);
     const [users, getUsers] = useState([]);
-    const url = 'http://localhost:4000/user/adminHome'
+    const url = '/user/adminHome'
     const getAllUser = () => {
         axios.get(url)
         .then((response) => {

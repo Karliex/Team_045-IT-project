@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css"
-import axios from 'axios'
+import axios from './common/axios'
 import loginImg from "./team.png";
 import "./style.css";
 import { GlobalContext } from './GlobalState'
@@ -35,7 +35,7 @@ export class Register extends Component {
             password: this.state.password
         }
 
-        axios.post('http://localhost:4000/user/signup', registered).then(function (response) {
+        axios.post('/user/signup', registered).then(function (response) {
           if (response.data.redirect === '/adminHome') {
               window.location = "/adminHome"
           } else if (response.data.redirect === '/signup'){
