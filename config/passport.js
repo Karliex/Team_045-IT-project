@@ -1,5 +1,5 @@
 const LocalStrategy = require('passport-local').Strategy;
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 require('dotenv').config()    // for JWT password key
 
