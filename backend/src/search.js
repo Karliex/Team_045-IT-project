@@ -59,12 +59,13 @@ class Search extends React.Component  {
             return(
             <div className="search">
                 <div className="newsearchInputs">
+                <h4>Search Results</h4>
                     <form onSubmit={this.fetchResults}>
                         <input 
                         type="text" 
                         name="query" 
                         value={this.state.query}
-                        placeholder="Search..." 
+                        placeholder="e.g. Team name, name of employee, Team role"
                         onChange={this.handleChange}
                         />
                     </form>
@@ -82,7 +83,7 @@ class Search extends React.Component  {
                         type="text" 
                         name="query" 
                         value={this.state.query}
-                        placeholder="Search..." 
+                        placeholder="e.g. Team name, name of employee, Team role"
                         onChange={this.handleChange}
                         />
                     </form>

@@ -44,8 +44,8 @@ export class adminLogin extends Component {
             Cookies.set("SavedToken", 'Bearer ' + token);
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
 
-            if (response.data.redirect === '/signup') {
-                window.location = "/signup"
+            if (response.data.redirect === '/adminHome') {
+                window.location = "/adminHome"
             } else if (response.data.redirect === '/adminlogin'){
                 window.location = "/adminlogin"
             }

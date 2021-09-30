@@ -12,20 +12,26 @@ import Identify from './identify'
 import Admin from './adminLogin'
 import Logout from './logout'
 
+import AdminHome from './adminHome'
+import EditUser from './editUser'
+import AddUser from './addUser'
+import { GlobalProvider } from './GlobalState'
+import UserProfile from './userProfile'
+import ResultNav from './ResultNav'
+
 
 class App extends Component {
 
     render() {
         return ( 
-            <Router>
+            <GlobalProvider>
+                <Router>
                 <div>
                     <Route path="/search" component={Navigation} />
                     <Route path="/updateInfo" component={Navigation} />
                     <Route path="/profile" component={Navigation} />
 
-                    <Route path="/search" component={Logout} />
-                    <Route path="/updateInfo" component={Logout} />
-                    <Route path="/profile" component={Logout} />
+                    <Route path="/resultProfile" component={ResultNav} />
 
                     <Switch>
                         <Route exact path="/" component={Identify}/>
@@ -35,9 +41,15 @@ class App extends Component {
                         <Route path="/profile" exact component={Profile} />
                         <Route path="/updateInfo" exact component={UpdateInfo} />
                         <Route path="/adminLogin" exact component={Admin}/>
+
+                        <Route path="/adminHome" component={AdminHome} />
+                        
+                        <Route path="/editUser/:id" component={EditUser} />
+                        <Route path="/resultProfile" exact component={UserProfile}/>
                     </Switch>
                 </div>
-            </Router>
+                </Router>
+            </GlobalProvider>
         );
     }    
 }

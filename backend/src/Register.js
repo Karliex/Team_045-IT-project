@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import axios from 'axios'
 import loginImg from "./team.png";
 import "./style.css";
+import { GlobalContext } from './GlobalState'
 
 export class Register extends Component {
     constructor(){
@@ -29,15 +30,14 @@ export class Register extends Component {
 
     onSubmit(event){
         event.preventDefault()
-
         const registered = {
             email: this.state.email,
             password: this.state.password
         }
 
         axios.post('http://localhost:4000/user/signup', registered).then(function (response) {
-          if (response.data.redirect === '/login') {
-              window.location = "/login"
+          if (response.data.redirect === '/adminHome') {
+              window.location = "/adminHome"
           } else if (response.data.redirect === '/signup'){
               window.location = "/signup"
           }
@@ -52,6 +52,7 @@ export class Register extends Component {
     }
 
     render() {
+      
         return (
           <div className="base-container" ref={this.props.containerRef}>
             <div className="content">

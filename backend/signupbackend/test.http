@@ -1,6 +1,6 @@
-POST http://localhost:4000/user/search
+POST http://localhost:4000/editUser/613a1811f7e8047a5bb8eacd
 Content-Type: application/json
 
 {
-    "query":"hbw@qq.com"
+    "givenname":"hbw"
 }

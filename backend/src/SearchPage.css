@@ -3,6 +3,7 @@
   width: 100vw;
   height: 100vh;
   display: flex;
+  position:fixed;
   align-items: center;
   flex-direction: column;
   font-family: Kannada MN;
@@ -24,3 +25,4 @@ h1{
     font-weight: bold;
     transition:.9s;
 }
+

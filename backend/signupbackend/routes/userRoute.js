@@ -9,6 +9,7 @@ var userController = require("../controllers/userController");
 
 const protect = require('../config/auth');
 
+var User = require("../models/userModel");
 const adminpassport = require('passport');
 require('../config/adminpassport')(adminpassport);
 
@@ -111,7 +112,7 @@ router.post('/adminlogin', async (req, res, next) => {
             res.cookie("SavedToken", token, {
               httpOnly: true,
             })
-            return res.json({'SavedToken':token, redirect: '/signup'});
+            return res.json({'SavedToken':token, redirect: '/adminHome'});
             
           });
       } catch (error) {
@@ -136,10 +137,26 @@ router.post("/updateInfo", protect, userController.updateInfo);
 
 router.get('/profile', protect, userController.getUserProfile);
 
+router.get('/adminHome', userController.getAllUserProfile);
 
+router.route('/editUser/:id').post((req, res) => {
+  console.log('--------------------------------')
+  console.log(req.params.id)
+  User.findById(req.params.id)
+    .then(user => {
+      user.givenname = req.body.givenname;
+      user.familyname = req.body.familyname;    
+      user.valueStream = req.body.valueStream;
+      user.scrumTeam = req.body.scrumTeam;
+      user.role = req.body.role;
+      user.technicalLead = req.body.technicalLead;
+      user.productOwner = req.body.productOwner;
 
-
-
+      user.save()
+        .then(() => res.json('Users updated!'))
+        .catch(err =>res.status(400).json('Error: ' + err));
+    })
+})
 
 router.post('/search', async (req, res) => {
   const query = req.body.query;
@@ -172,5 +189,7 @@ router.post('/search', async (req, res) => {
       res.end();
   }
 });
+
+router.post('/reset-password', protect, userController.resetPsswd);
 
 module.exports = router;

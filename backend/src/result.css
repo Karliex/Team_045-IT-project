@@ -1,24 +1,85 @@
+.pagination {
+    margin-top:450px;
+    margin-left: 425px;
+    display: flex;
+    list-style: none;
+    outline: none;
+    justify-content: center;
+    color: white;
+    position: absolute;
+}
+
+.pagination > .active > a{
+    background-color: #47ccde;
+    border-color: #47ccde;
+    color: #fff;
+}
+
+h4{
+    font-size: 23px;
+    color: white;
+    font-weight: bold;
+    margin-top: 60px;
+    position: absolute;
+}
+  
+
+.pagination > li > a{
+    padding: 5px 10px;
+    outline: none;
+    cursor: pointer;
+}
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus{
+    background-color: #47ccde ;
+    border-color: #47ccde;
+    outline: none;
+}
+
+.pagination > li > a, .pagination > li > span{
+    color: #f5f5f5;
+    background-color:transparent;
+    font-weight: bold;
+}
+
+.pagination > li:first-child > a, .pagination > li:first-child > span{
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    background-color:rgb(164, 179, 219);
+    font-weight: bold;
+}
+
+.pagination > li:last-child > a, .pagination > li:last-child > span{
+    padding-right: 25px;
+    padding-left: 25px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color:rgb(164, 179, 219);
+    font-weight: bold;
+}
+
 .result{
     background-color: #ffffff;
     box-shadow: 0px 0px 12px 2px rgb(255, 255, 255);
     font-style: normal;
-    color: rgb(142, 172, 238);
+    color: rgb(164, 179, 219);
     font-weight: bolder;
     width: 15em;
     height: 8em;
     border-radius: 5%;
-    margin-right: 20px;
+    margin-right: 40px;
+    margin-top: 50px;
     padding-top: 50px;
-    justify-content: space-around;
     text-align: center;
-    align-content: center;
+    box-sizing: border-box;
 }
 .resultshowed{
-    margin-top: 100px;
+    margin-top: 40px;
     display: flex;
-    flex-direction: row;
-    padding-left: 100px;
+    margin-left: -40px;
     padding-right: 100px;
     align-items:unset;
     position:fixed;
+    flex-flow: row wrap;
+    align-content: flex-start;
 }

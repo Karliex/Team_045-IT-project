@@ -22,7 +22,11 @@ export class Profile extends Component {
             technicalLead:'',
             productOwner:'',
             notes:'',
-            oldnotes:''
+            oldnotes:'',
+
+            old_psswd: '',
+            new_psswd: '',
+            password:''
         }
         this.changeImage = this.changeImage.bind(this)
         this.changeGivenname = this.changeGivenname.bind(this)
@@ -34,6 +38,10 @@ export class Profile extends Component {
         this.changeTechnicalLead = this.changeTechnicalLead.bind(this)
         this.changeProductOwner = this.changeProductOwner.bind(this)
         this.changeNotes = this.changeNotes.bind(this)
+
+        this.enterOldPsswd = this.enterOldPsswd.bind(this)
+        this.enterNewPsswd = this.enterNewPsswd.bind(this)
+        // this.changePassword = this.changePassword.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
         this.callback = this.callback.bind(this);
     }
@@ -89,6 +97,23 @@ export class Profile extends Component {
         })
     }
 
+    //password reset
+    enterOldPsswd(event){
+        this.setState({
+            old_psswd:event.target.value
+        })
+    }
+    enterNewPsswd(event){
+        this.setState({
+            new_psswd:event.target.value
+        })
+    }
+    // changePassword(event){
+    //     this.setState({
+    //         password:event.target.value
+    //     })
+    // }
+
     componentDidMount = () => {
         this.getProfile();
       };
@@ -97,7 +122,6 @@ export class Profile extends Component {
       getProfile = () => {
         axios.get('http://localhost:4000/user/profile', { headers: { Authorization:Cookies.get('SavedToken') }})
           .then((response) => {
-            console.log(response)
             const user = response.data;
 
             this.setState({
@@ -141,14 +165,27 @@ export class Profile extends Component {
             notes: this.state.notes
         }
 
+        const passwordInfo = {
+            old_psswd: this.state.old_psswd,
+            new_psswd: this.state.new_psswd
+        }
+
         axios.post('http://localhost:4000/user/updateInfo', profiled, { headers: { Authorization:Cookies.get('SavedToken') }})
-            .then(response => console.log(response.data), 
+            .then(
             this.getProfile(), 
-            window.location = "/updateInfo")
+            window.location = "/updateInfo"
+            )
+            
             this.setState({
                 phoneNumber:''
-            })
+        })
             
+        axios.post('http://localhost:4000/user/reset-password', passwordInfo, { headers: { Authorization:Cookies.get('SavedToken') }})
+            .then(
+            this.getProfile(),
+            window.location = "/updateInfo"
+            )
+                        
     }
 
 
@@ -174,9 +211,9 @@ export class Profile extends Component {
                             <Tab eventKey="password" title="Reset Password">
                                 <div className="tab-item-wrapper">
                                 <label type="pass">Current Password</label>
-                                <input type="prepass" value={this.state.givenname}/>
+                                <input type='pass' placeholder="Enter Your current Password" onChange={this.enterOldPsswd}/>
                                 <label type="pass">New Password</label>
-                                <input type='pass' placeholder="Enter Your New Password" />
+                                <input type='pass' placeholder="Enter Your New Password" onChange={this.enterNewPsswd}/>
                                 <div className="button-wrapper">
                                     
                                     <input type="submit" value="Update"/>

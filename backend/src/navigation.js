@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import "./navigation.css"
 import { NavLink } from 'react-router-dom'
+import Logout from './logout'
 
 export class navigation extends Component {
     render() {
@@ -11,6 +12,7 @@ export class navigation extends Component {
                     <NavLink to='/profile' style={{color: 'rgb(164, 179, 219)', textDecoration: 'none'}} activeStyle={{color: 'orange', textDecoration: 'none'}}>My Profile</NavLink>
                     <NavLink to='/updateInfo' style={{color: 'rgb(164, 179, 219)', textDecoration: 'none'}} activeStyle={{color: 'orange', textDecoration: 'none'}}>Edit Profile</NavLink>
                 </ul>
+                <Logout/>
             </nav>
         )
     }
