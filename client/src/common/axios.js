@@ -3,7 +3,7 @@ import _axios from "axios";
 // get the back end url 
 const axios = baseURL =>{
     const instance = _axios.create({
-        baseURL: baseURL || 'http://localhost:4000'
+        baseURL: "https://it-project-team045.herokuapp.com/" || 'http://localhost:4000'
     })
     return instance
 }

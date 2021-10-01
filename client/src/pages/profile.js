@@ -57,8 +57,8 @@ export class profile extends Component {
       if(!this.state.isLoaded){
         return (
           <div className="profile">
-            <div class="loading-wrapper">
-            <div class="loading la-ball-scale-ripple-multiple la-3x">
+            <div className="loading-wrapper">
+            <div className="loading la-ball-scale-ripple-multiple la-3x">
                 <div></div>
                 <div></div>
                 <div></div>
