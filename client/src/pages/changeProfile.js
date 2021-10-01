@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css"
-import axios from './common/axios';
+import axios from '../common/axios';
 import { Tabs, Tab } from 'react-bootstrap';
 import './change.css'
 import { setRawCookie } from 'react-cookies';

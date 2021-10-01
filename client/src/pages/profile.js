@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import "./profile.css"
-import axios from './common/axios';
+import axios from '../common/axios';
 import Cookies from 'js-cookie';
 
 export class profile extends Component {

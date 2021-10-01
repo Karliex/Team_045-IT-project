@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from './common/axios';
+import axios from '../common/axios';
 import "./search.css";
 import SearchIcon from "@material-ui/icons/Search";
 import CloseIcon from "@material-ui/icons/Close";

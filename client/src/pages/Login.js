@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css"
-import axios from './common/axios'
+import axios from '../common/axios'
 import loginImg from "./closing-image.png";
 import './style.css'
-import { CollectionsBookmarkOutlined } from '@material-ui/icons';
 import Cookies from 'js-cookie'
 
 export class Login extends Component {

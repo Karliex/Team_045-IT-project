@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css"
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import './Home.css'
-import Search from './SearchPage'
-import Login from './Login'
-import Signup from './Register'
-import Navigation from './navigation'
-import UpdateInfo from './changeProfile'
-import Profile from './profile'
-import Identify from './identify'
-import Admin from './adminLogin'
-import Logout from './logout'
+import './pages/Home.css'
+import Search from './pages/SearchPage'
+import Login from './pages/Login'
+import Signup from './pages/Register'
+import Navigation from './pages/navigation'
+import UpdateInfo from './pages/changeProfile'
+import Profile from './pages/profile'
+import Identify from './pages/identify'
+import Admin from './pages/adminLogin'
+import Logout from './pages/logout'
 
-import AdminHome from './adminHome'
-import EditUser from './editUser'
-import AddUser from './addUser'
-import { GlobalProvider } from './GlobalState'
-import UserProfile from './userProfile'
-import ResultNav from './ResultNav'
+import AdminHome from './pages/adminHome'
+import EditUser from './pages/editUser'
+import AddUser from './pages/addUser'
+import { GlobalProvider } from './pages/GlobalState'
+import UserProfile from './pages/userProfile'
+import ResultNav from './pages/ResultNav'
 
 
 class App extends Component {
@@ -54,4 +54,4 @@ class App extends Component {
     }    
 }
 
-export default Router;
+export default App;
