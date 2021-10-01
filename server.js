@@ -1,10 +1,36 @@
+// Food Buddy server, with prototype HTML in the route handlers
 const express = require('express')
-const app = express()
-const mongoose = require('mongoose')
-//store some info in the environment variables
-const dotenv = require('dotenv')
-const userRoute = require('./routes/userRoute')
+const mongoose = require('mongoose');
 const cors = require('cors');
+
+const path = require('path');
+const port = process.env.PORT || 4000
+const app = express();
+const server = require('http').createServer(app);
+
+const dotenv = require('dotenv')
+
+const io = require('socket.io')(server);
+
+// important to receive data sent to API using POST, parses and makes available the 
+// request body
+app.use(express.json())
+app.use(express.urlencoded({ extended: false })) // replaces body-parser
+
+app.use(cors())
+
+
+io.of('/apt/socket').on("connection",(socket) =>{
+	console.log("socket.io: User connected: ",socket.id);
+	socket.on("disconnect",() =>{
+		console.log("socket.io: User disconnected: ",socket.id);
+	})
+});
+
+//MongoDB database configure
+dotenv.config()
+mongoose.connect(process.env.DATABASE_ACCESS, () =>console.log("Database connected"))
+
 
 //modules for authentication
 const passport = require('passport');
@@ -13,14 +39,8 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const jwt = require('jsonwebtoken');
 
-//MongoDB database configure
-dotenv.config()
-mongoose.connect(process.env.DATABASE_ACCESS, () =>console.log("Database connected"))
-
 // Passport Config
 require('./config/passport')(passport);
-
-app.use(cors())
 
 // setup session store signing the contents using the secret key
 app.use(
@@ -43,18 +63,23 @@ app.use(function (req, res, next) {
   next();
 });
 
-// important to receive data sent to API using POST, parses and makes available the 
-// request body
-app.use(express.json())
-app.use(express.urlencoded({ extended: false })) // replaces body-parser
+const userRoute = require('./routes/userRoute')
 
-//Configure routers with corresponding root path
-app.use('/user', userRoute)
-app.all('*', (req, res) => {  // 'default' route to catch user errors
-	//res.status(404).render('error', {errorCode: '404', message: 'That route is invalid.'})
-	res.send('error')
-})
+// Use the routers with path
+app.use('/user', userRoute);
 
-const PORT = process.env.PORT || 4000;
 
-app.listen(PORT, () => console.log("Server is running!"))
+
+if (process.env.NODE_ENV === 'production') {
+
+	app.use(express.static('client/build'));
+
+	app.get('*', (req, res) => {
+		res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+	});
+}
+
+server.listen(port, () =>
+	console.log('Server listening for requests ...'))
+
+module.exports = app;

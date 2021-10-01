@@ -1,0 +1,17 @@
+* text=auto
+
+# Git
+.git* text eol=lf
+
+# Web
+*.html text eol=lf diff=html
+*.css  text eol=lf diff=css
+*.js   text eol=lf
+*.json text eol=lf
+*.hbs  text eol=lf
+*.jsx  text eol=lf
+Dockerfile text eol=lf
+
+# Text
+*.md text eol=lf
+*.txt text eol=lf
