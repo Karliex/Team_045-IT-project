@@ -1,49 +1,42 @@
-import React, {useState, useEffect} from 'react'
-import { Link } from "react-router-dom";
-import { Button} from "react-bootstrap";
-import { Divider, Menu, Layout} from 'antd';
-import { MailOutlined, SettingOutlined} from '@ant-design/icons'
-import axios from '../common/axios'
-import LoginPart from "../components/LoginPart"
+import React, { Component } from 'react'
+import "./userProfile.css"
 
-export default function UserProfile(props) {
-    const [toggleCollapsed,setcollapsed]=useState(false)
+export class userProfile extends Component {
 
-    const { Header, Content, Footer, Sider } = Layout;
-    const { SubMenu } = Menu;
-    const changecollapsed=() =>{
-        setcollapsed(!toggleCollapsed)
-    }
-    return (
-        <div className="Profile">
-           <div>
-                <Link to="/">
-                    <Button variant="Link" style={{float:"Left",marginLeft:"5px",marginTop:"5px",fontWeight:"bold"}}>Back</Button>
-                </Link>
-                <LoginPart/>
-                <Divider/>
+    render() {
+        console.log(this.props.location.state);
+        return (
+            <div className="userProfile">
+                <div className="userBlock">
+                    <div className="usercircle">
+                        
+                    </div>
+                    <div className="nameBlock" style={{width:225, marginLeft:120, marginTop:50, height:120, color:"orange"}}>
+                        <label for="name">Name</label>
+                        <textarea rows="1" id="name" name="name" ></textarea>
+                    </div>
+                    
+                    <div className="emailBlock" style={{width:700, marginLeft:120, marginTop:190, height:70}}>
+                        <label for="email">Email</label>
+                        <textarea rows="1" id="email" name="email" value={this.props.location.state.email} ></textarea>
+                    </div>
+                    
+                    <div className="phoneBlock" style={{width:700, marginLeft:120,  marginTop:290, height:70}}>
+                        <label for="phone">Phone Number</label>
+                        <textarea rows="1" id="phoneNumber" name="phoneNumber" value={this.props.location.state.phoneNumber}></textarea>
+                    </div>
+                    <div className="notesBlock" style={{width:325, marginLeft:120,  marginTop:390}}>
+                        <label for="notes">Notes</label>
+                        <textarea rows="4" id="notes" name="notes" value={this.props.location.state.notes}></textarea>
+                    </div>  
+                    <div className="streamBlock" style={{width:325, marginLeft:490,  marginTop:390}}>
+                        <label for="valueStream">Value Stream</label>
+                        <textarea rows="4" id="valueStream" name="valueStream"></textarea>
+                    </div>
+                </div>
             </div>
-            <Layout style={{ minHeight: '100vh' }}>
-                <Sider collapsible collapsed={toggleCollapsed} onCollapse={changecollapsed} theme="light">
-                    <div className="logo" />
-                    <Menu defaultSelectedKeys={['1']} mode="inline">
-                        <Menu.Item key="1" icon={<MailOutlined />}>
-                            User profile
-                        </Menu.Item>
-                        <SubMenu key="sub1" icon={<SettingOutlined/>} title="Account setting">
-                            <Menu.Item key="3">Change Password</Menu.Item>
-                            <Menu.Item key="4">Change Profile details</Menu.Item>
-                        </SubMenu>
-                    </Menu>
-                </Sider>
-                <Layout className="site-layout">
-                    <Content style={{ margin: '0 16px' }}>
-                        <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
-                            Bill is a cat.
-                        </div>
-                    </Content>
-                </Layout>
-            </Layout>
-        </div>
-    )
+        )
+    }
 }
+
+export default userProfile

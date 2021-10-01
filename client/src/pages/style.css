@@ -1,0 +1,108 @@
+.base-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+
+.box {
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 12px 2px rgb(147, 198, 245);
+    position: relative;
+    width: 50%;
+    height: 100%;
+}
+
+.content {
+    margin-top: 80px;
+    box-sizing: border-box;
+    width: 42em;
+    height: 43em;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 0px 12px 2px rgb(147, 198, 245);
+    flex-direction: column;
+    align-items: center;
+    color: #2b2828;
+}
+
+.form {
+    display: flex;
+    margin-top: 2em;
+    flex-direction: column;
+    align-items: center;
+    color: #2b2828;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: fit-content;
+    font-family: "Kannada MN";
+    font-weight: bold;
+    color:#2b2828;
+}
+
+.form label {
+    display: flex;
+    font-size: 18px;
+    opacity: 1;
+    color: #2b2828;
+}
+
+.header {
+    font-size: 28px;
+    font-family: "Kannada MN";
+    font-weight: bolder;
+    color:#2b2828;
+    opacity: 0.8;
+    margin-top: 50px;
+}
+
+.image {
+    margin-top: 15px;
+    width: 40em;
+    display: inline-block;
+}
+
+img {
+    width: 90%;
+    height: 85%;
+}
+
+.form input {
+    margin-top: 6px;
+    min-width: 17em;
+    height: 37px;
+    padding: 0px 20px;
+    font-size: 16px;
+    font-family: "Kannada MN";
+    font-weight: bold;
+    color:#2b2828;
+    background-color: #f3eded;
+    border: 0;
+    letter-spacing: 0;
+    border-radius: 30px;
+    margin-bottom: 31px;
+}
+
+.form input:hover {
+    background-color: #a2b9d8;
+    box-shadow: 0px 0px 14px 0.3px #5571ee63;
+}
+.form input:focus {
+    outline: none;
+    background-color: #a2b9d8;
+}
+
+.footer {
+    margin-top: 1em;
+}
+
+.form input[type = 'submit'] {
+    min-width: 3em;
+    color: #2b2828;
+}

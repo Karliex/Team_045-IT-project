@@ -1,35 +1,57 @@
-import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
-import App from "./pages/App.js";
-import CustomerLogin from "./pages/CustomerLogin";
-import CustomerLocation from "./pages/CustomerLocation";
-import CustomerMenu from "./pages/CustomerMenu"
-import OrderDetails from "./pages/OrderDetails"
-import CustomerRegister from "./pages/CustomerRegister"
-import VendorLogin from "./pages/VendorLogin"
-import VendorLocation from "./pages/VendorLocaiton"
-import VendorMain from "./pages/VendorMain"
-import UserProfile from "./pages/UserProfile"
+import React, { Component } from 'react';
+import "bootstrap/dist/css/bootstrap.min.css"
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import './Home.css'
+import Search from './SearchPage'
+import Login from './Login'
+import Signup from './Register'
+import Navigation from './navigation'
+import UpdateInfo from './changeProfile'
+import Profile from './profile'
+import Identify from './identify'
+import Admin from './adminLogin'
+import Logout from './logout'
 
-class Router extends React.Component {
+import AdminHome from './adminHome'
+import EditUser from './editUser'
+import AddUser from './addUser'
+import { GlobalProvider } from './GlobalState'
+import UserProfile from './userProfile'
+import ResultNav from './ResultNav'
+
+
+class App extends Component {
+
     render() {
-        return (
-            <BrowserRouter>
-                <Switch>
-                    <Route path="/" exact component={App}></Route>
-                    <Route path="/Customer/Login" exact component={CustomerLogin}></Route>
-                    <Route path="/Customer/Location" exact component={CustomerLocation}></Route>
-                    <Route path="/Customer/Menu" exact component={CustomerMenu}></Route>
-                    <Route path="/Customer/OrderDetails" exact component={OrderDetails}></Route>
-                    <Route path="/Customer/Register" exact component={CustomerRegister}></Route>
-                    <Route path="/Customer/Profile" exact component={UserProfile}></Route>
-                    <Route path="/Vendor/Login" exact component ={VendorLogin}></Route>
-                    <Route path="/Vendor/Main" exact component={VendorMain}></Route>
-                    <Route path="/Vendor/Location" exact component={VendorLocation}></Route>
-                </Switch>
-            </BrowserRouter>
-        )
-    }
+        return ( 
+            <GlobalProvider>
+                <Router>
+                <div>
+                    <Route path="/search" component={Navigation} />
+                    <Route path="/updateInfo" component={Navigation} />
+                    <Route path="/profile" component={Navigation} />
+
+                    <Route path="/resultProfile" component={ResultNav} />
+
+                    <Switch>
+                        <Route exact path="/" component={Identify}/>
+                        <Route path="/login" exact component={Login} />
+                        <Route path="/signup" exact component={Signup} />
+                        <Route path="/search" exact component={Search} />
+                        <Route path="/profile" exact component={Profile} />
+                        <Route path="/updateInfo" exact component={UpdateInfo} />
+                        <Route path="/adminLogin" exact component={Admin}/>
+
+                        <Route path="/adminHome" component={AdminHome} />
+                        
+                        <Route path="/editUser/:id" component={EditUser} />
+                        <Route path="/resultProfile" exact component={UserProfile}/>
+                    </Switch>
+                </div>
+                </Router>
+            </GlobalProvider>
+        );
+    }    
 }
 
-export default Router
+export default Router;

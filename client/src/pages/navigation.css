@@ -1,0 +1,26 @@
+nav{
+    display: flex;
+    align-items: center;
+    background: rgb(255, 255, 255);
+}
+
+.nav-links{
+    width: 45%;
+    font-family: Kannada MN;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none; 
+    margin-top: 12px;
+    font-size: 20px;
+    font-weight: bold;
+    color: rgb(164, 179, 219);
+}
+
+
+.nav ul {
+    list-style-type: none;
+    padding-top: 0px;
+    float: left;
+    position: relative;
+}
