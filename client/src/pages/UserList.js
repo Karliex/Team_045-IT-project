@@ -1,19 +1,14 @@
-import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { GlobalContext } from './GlobalState'
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-
+import axios from '../common/axios';
 import {
     ListGroup,
     ListGroupItem,
     Button
-} from 'reactstrap'
-import axios from '../common/axios'
+} from 'reactstrap';
 
-
-
+// get the list of all users
 export const UserList = () => {
-    //const { users, removeUser } = useContext(GlobalContext);
     const [users, getUsers] = useState([]);
     const url = '/user/adminHome'
     const getAllUser = () => {
@@ -25,16 +20,16 @@ export const UserList = () => {
         })
         .catch(error => console.error(`Error: ${error}`))
     }
-
+    //get all the users
     useEffect(() => {
         getAllUser();
     }, []);
     console.log(users)
     const history = useHistory();
+    //show the user in list in the website
     return (
         <ListGroup>
             {users.map(user => (
-                
                 <ListGroupItem>
                 <strong>{user.email}</strong>
                 <div onClick={() =>{ 
@@ -54,10 +49,7 @@ export const UserList = () => {
                 </ListGroupItem>
             ))}
         </ListGroup>
-       
-        
     )
-    
 }
 
-export default UserList
+export default UserList;

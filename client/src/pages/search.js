@@ -1,12 +1,11 @@
 import React from 'react';
 import axios from '../common/axios';
-import "./search.css";
+import "./Search.css";
 import SearchIcon from "@material-ui/icons/Search";
 import CloseIcon from "@material-ui/icons/Close";
-import Result from "./result";
+import Result from "./Result";
 
 class Search extends React.Component  {
-
 
     // Constructor method
     constructor(props) {
@@ -43,7 +42,7 @@ class Search extends React.Component  {
 
     }
 
-    // Update's user input in search bar
+    // Update user's input in search bar
     handleChange(event){
         this.setState({query: event.target.value});
     }
@@ -96,8 +95,8 @@ class Search extends React.Component  {
                     </div>
                     </div>
                 </div>  
-                );
-            }       
+            );
+        }       
     }
 }
 

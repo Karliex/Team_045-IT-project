@@ -5,7 +5,7 @@ require('dotenv').config()    // for JWT password key
 
 // Load User model
 
-const Admin = require('../models/adminModel')
+const Admin = require('../models/AdminModel')
 // the following is required if you wanted to use passport-jwt
 // JSON Web Tokens
 const passportJWT = require("passport-jwt");

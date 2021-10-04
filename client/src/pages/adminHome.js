@@ -1,11 +1,10 @@
-import React, { Component } from 'react'
-import Heading from './Heading'
-import UserList from './UserList'
+import React, { Component } from 'react';
+import Heading from './Heading';
+import UserList from './UserList';
 
-
+// for the home page of administrator
 export class adminHome extends Component {
     
-
     render() {
         return (
             <div>
@@ -16,4 +15,4 @@ export class adminHome extends Component {
     }
 }
 
-export default adminHome
+export default adminHome;

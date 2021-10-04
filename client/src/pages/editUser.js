@@ -1,28 +1,23 @@
-import React, { Component } from 'react'
-import "bootstrap/dist/css/bootstrap.min.css"
+import React, { Component } from 'react';
+import "bootstrap/dist/css/bootstrap.min.css";
 import axios from '../common/axios';
-import Cookies from 'js-cookie';
 
-
+// edit the information of user
 export class editUser extends Component {
+    // Constructor method
     constructor(props){
         super(props)
         this.state = {
-            
-            //userId:this.props.state,
             givenname:'',
             familyname:'',
-            
             valueStream:'',
             scrumTeam:'',
             role:'',
             technicalLead:'',
             productOwner:''
-            
         }
         this.changeGivenname = this.changeGivenname.bind(this)
         this.changeFamilyname = this.changeFamilyname.bind(this)
-        
         this.changeValueStream = this.changeValueStream.bind(this)
         this.changeScrumTeam = this.changeScrumTeam.bind(this)
         this.changeRole = this.changeRole.bind(this)
@@ -31,7 +26,7 @@ export class editUser extends Component {
         this.onSubmit = this.onSubmit.bind(this)
     }
     
-    
+    //change the state of data
     changeGivenname(event){
         this.setState({
             givenname:event.target.value
@@ -73,19 +68,17 @@ export class editUser extends Component {
         const profiled = {
             givenname: this.state.givenname,
             familyname: this.state.familyname,
-            
             valueStream: this.state.valueStream,
             scrumTeam: this.state.scrumTeam,
             role: this.state.role,
             technicalLead: this.state.technicalLead,
             productOwner: this.state.productOwner,
-            
         }
         
         const currentUserId = this.props.location.state;
         console.log(currentUserId)
         console.log('++++++++++++++++++++++++++++++++')
-        //axios.post('http://localhost:4000/user/editUser/:id', profiled, { headers: { Authorization:Cookies.get('SavedToken') }})
+        //send 'post' request and jump interfact
         axios.post(`/user/editUser/${currentUserId}`, profiled)
             .then(function (response) {
                 if (response.data.redirect === '/adminHome') {
@@ -94,7 +87,6 @@ export class editUser extends Component {
                     window.location = "/signup"
                 }
             })
-            console.log('jin lai le')
             console.log(currentUserId)
             this.setState({
                 givenname:'',
@@ -108,60 +100,59 @@ export class editUser extends Component {
     }
     
     render() {
-        //console.log(this.props.location.state);
         return (
           <div className="base-container" ref={this.props.containerRef}>
-            <div className="header">Edit user profile</div>
-            <div className="content">
-              <div className="form">
-                <div className="form-group">
-                  <form onSubmit={this.onSubmit}>
-                    <label htmlFor="givenname">Givenname</label>
-                    <input type='text'
-                    onChange={this.changeGivenname}
-                    value={this.state.givenname}
-                    />
-                    <label htmlFor="familyname">Familyname</label>
-                    <input type='text'
-                    onChange={this.changeFamilyname}
-                    value={this.state.familyname}
-                    />
-                    
-                    <label htmlFor="valueStream">Value Stream</label>
-                    <input type='text'
-                    onChange={this.changeValueStream}
-                    value={this.state.valueStream}
-                    />
-                    <label htmlFor="scrumTeam">Scrum Team</label>
-                    <input type='text'
-                    onChange={this.changeScrumTeam}
-                    value={this.state.scrumTeam}
-                    />
-                    <label htmlFor="role">Role</label>
-                    <input type='text'
-                    onChange={this.changeRole}
-                    value={this.state.role}
-                    />
-                    <label htmlFor="technicalLead">Who is your Technical Lead</label>
-                    <input type='text'
-                    onChange={this.changeTechnicalLead}
-                    value={this.state.technicalLead}
-                    />
-                    <label htmlFor="productOwner">ProductOwner</label>
-                    <input type='text'
-                    onChange={this.changeProductOwner}
-                    value={this.state.productOwner}
-                    />
-                    <div className="footer">
-                        <input type='submit' value='Submit' />
+                <div className="header">Edit user profile</div>
+                <div className="content">
+                <div className="form">
+                    <div className="form-group">
+                    <form onSubmit={this.onSubmit}>
+                        <label htmlFor="givenname">Givenname</label>
+                        <input type='text'
+                        onChange={this.changeGivenname}
+                        value={this.state.givenname}
+                        />
+                        <label htmlFor="familyname">Familyname</label>
+                        <input type='text'
+                        onChange={this.changeFamilyname}
+                        value={this.state.familyname}
+                        />
+                        
+                        <label htmlFor="valueStream">Value Stream</label>
+                        <input type='text'
+                        onChange={this.changeValueStream}
+                        value={this.state.valueStream}
+                        />
+                        <label htmlFor="scrumTeam">Scrum Team</label>
+                        <input type='text'
+                        onChange={this.changeScrumTeam}
+                        value={this.state.scrumTeam}
+                        />
+                        <label htmlFor="role">Role</label>
+                        <input type='text'
+                        onChange={this.changeRole}
+                        value={this.state.role}
+                        />
+                        <label htmlFor="technicalLead">Who is your Technical Lead</label>
+                        <input type='text'
+                        onChange={this.changeTechnicalLead}
+                        value={this.state.technicalLead}
+                        />
+                        <label htmlFor="productOwner">ProductOwner</label>
+                        <input type='text'
+                        onChange={this.changeProductOwner}
+                        value={this.state.productOwner}
+                        />
+                        <div className="footer">
+                            <input type='submit' value='Submit' />
+                        </div>
+                    </form>
                     </div>
-                  </form>
                 </div>
-              </div>
-            </div>
+                </div>
           </div>
         );
     }
 }
 
-export default editUser
+export default editUser;

@@ -1,27 +1,23 @@
 import React, { Component } from 'react';
-import "bootstrap/dist/css/bootstrap.min.css"
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import './pages/Home.css'
-import Search from './pages/SearchPage'
-import Login from './pages/Login'
-import Signup from './pages/Register'
-import Navigation from './pages/navigation'
-import UpdateInfo from './pages/changeProfile'
-import Profile from './pages/profile'
-import Identify from './pages/identify'
-import Admin from './pages/adminLogin'
-import Logout from './pages/logout'
-import DeleteUser from './pages/deleteUser'
-import AdminHome from './pages/adminHome'
-import EditUser from './pages/editUser'
-import AddUser from './pages/addUser'
-import { GlobalProvider } from './pages/GlobalState'
-import UserProfile from './pages/userProfile'
-import ResultNav from './pages/ResultNav'
+import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Search from './pages/SearchPage';
+import Login from './pages/Login';
+import Signup from './pages/Register';
+import Navigation from './pages/Navigation';
+import UpdateInfo from './pages/ChangeProfile';
+import Profile from './pages/Profile';
+import Identify from './pages/Identify';
+import Admin from './pages/AdminLogin';
+import DeleteUser from './pages/DeleteUser';
+import AdminHome from './pages/AdminHome';
+import EditUser from './pages/EditUser';
+import { GlobalProvider } from './pages/GlobalState';
+import UserProfile from './pages/UserProfile';
+import ResultNav from './pages/ResultNav';
 
-
+//give the route of each page
 class App extends Component {
-
     render() {
         return ( 
             <GlobalProvider>
@@ -30,7 +26,6 @@ class App extends Component {
                     <Route path="/search" component={Navigation} />
                     <Route path="/updateInfo" component={Navigation} />
                     <Route path="/profile" component={Navigation} />
-
                     <Route path="/resultProfile" component={ResultNav} />
 
                     <Switch>
@@ -41,7 +36,6 @@ class App extends Component {
                         <Route path="/profile" exact component={Profile} />
                         <Route path="/updateInfo" exact component={UpdateInfo} />
                         <Route path="/adminLogin" exact component={Admin}/>
-
                         <Route path="/adminHome" component={AdminHome} />
                         <Route path="/delete/:id" component={DeleteUser} />
                         <Route path="/editUser/:id" component={EditUser} />
