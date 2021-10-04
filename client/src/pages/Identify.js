@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Identify.css';
+import './identify.css';
 import User from "./4.png";
 import Administrator from "./3.png";
 import { Link } from 'react-router-dom';

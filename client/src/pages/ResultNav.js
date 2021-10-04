@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import "./Navigation.css";
+import "./navigation.css";
 import { NavLink } from 'react-router-dom';
-import Logout from './Logout';
+import Logout from './logout';
 
 // show the navigation in result page
 export class ResultNav extends Component {

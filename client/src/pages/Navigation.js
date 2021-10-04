@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import "./Navigation.css";
+import "./navigation.css";
 import { NavLink } from 'react-router-dom';
-import Logout from './Logout';
+import Logout from './logout';
 
 //the navigation shown in the top of each page
 export class navigation extends Component {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from '../common/axios';
 import loginImg from "./closing-image.png";
-import './Style.css';
+import './style.css';
 import Cookies from 'js-cookie';
 
 // show the login page of stadard employee and administrator

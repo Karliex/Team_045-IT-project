@@ -1,6 +1,6 @@
 import React, { Component, useState, useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
-import "./Result.css";
+import "./result.css";
 import { useHistory } from 'react-router-dom';
 
 // get the result after search

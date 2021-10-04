@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Heading from './Heading';
-import UserList from './UserList';
+import Heading from './heading';
+import UserList from './userList';
 
 // for the home page of administrator
 export class adminHome extends Component {

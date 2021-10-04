@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import "./UserProfile.css";
+import "./userProfile.css";
 
 //the page for the information of user from search result
 export class userProfile extends Component {

@@ -1,5 +1,5 @@
 import React, { createContext, useReducer } from 'react';
-import AppReducer from './AppReducer';
+import AppReducer from './appReducer';
 
 // Initial State
 const initialState = {

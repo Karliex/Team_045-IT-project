@@ -3,13 +3,13 @@ const router = express.Router();
 const passport = require('passport');
 require('../config/passport')(passport);
 const jwt = require('jsonwebtoken');
-const usermodel = require("../models/UserModel");
+const usermodel = require("../models/userModel");
 
 var userController = require("../controllers/userController");
 
 const protect = require('../config/auth');
 
-var User = require("../models/UserModel");
+var User = require("../models/userModel");
 const adminpassport = require('passport');
 require('../config/adminpassport')(adminpassport);
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import "./Profile.css";
+import "./profile.css";
 import axios from '../common/axios';
 import Cookies from 'js-cookie';
 

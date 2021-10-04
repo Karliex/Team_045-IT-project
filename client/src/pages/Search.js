@@ -1,9 +1,9 @@
 import React from 'react';
 import axios from '../common/axios';
-import "./Search.css";
+import "./search.css";
 import SearchIcon from "@material-ui/icons/Search";
 import CloseIcon from "@material-ui/icons/Close";
-import Result from "./Result";
+import Result from "./result";
 
 class Search extends React.Component  {
 

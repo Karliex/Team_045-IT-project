@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { GlobalContext } from './GlobalState';
+import { GlobalContext } from './globalState';
 import { v4 as uuid } from "uuid";
 import { Link, useHistory } from "react-router-dom";
 import {

@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 require('dotenv').config()    // for JWT password key
 
 // Load User model
-const User = require('../models/UserModel');
+const User = require('../models/userModel');
 
 // the following is required if you wanted to use passport-jwt
 // JSON Web Tokens

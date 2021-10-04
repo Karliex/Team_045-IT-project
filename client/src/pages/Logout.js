@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from '../common/axios';
 import Cookies from 'js-cookie';
-import "./Logout.css";
+import "./logout.css";
 
 // Logout the account
 export class logout extends Component {
