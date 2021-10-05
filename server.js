@@ -44,13 +44,6 @@ const jwt = require('jsonwebtoken');
 // Passport Config
 require('./config/passport')(passport);
 
-
-module.exports = function(app) {
-    // add other server routes to path array
-    app.use(proxy(['/api' ], { target: 'http://localhost:4000' }));
-}
-
-
 // setup session store signing the contents using the secret key
 app.use(
     session({
