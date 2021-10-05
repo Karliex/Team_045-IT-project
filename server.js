@@ -19,6 +19,8 @@ app.use(express.urlencoded({ extended: false })) // replaces body-parser
 
 app.use(cors())
 
+const proxy = require('http-proxy-middleware')
+
 
 io.of('/apt/socket').on("connection",(socket) =>{
 	console.log("socket.io: User connected: ",socket.id);
@@ -41,6 +43,13 @@ const jwt = require('jsonwebtoken');
 
 // Passport Config
 require('./config/passport')(passport);
+
+
+module.exports = function(app) {
+    // add other server routes to path array
+    app.use(proxy(['/api' ], { target: 'http://localhost:5000' }));
+}
+
 
 // setup session store signing the contents using the secret key
 app.use(
