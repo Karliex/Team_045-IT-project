@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { GlobalContext } from './GlobalState'
 import { useHistory } from 'react-router-dom';
+import "./userList.css";
+import ReactPaginate from 'react-paginate';
+
 
 import {
     ListGroup,
@@ -31,31 +34,55 @@ export const UserList = () => {
     }, []);
     console.log(users)
     const history = useHistory();
+    const [currentPage, setCurrentPage] = useState(0);
+    const PER_PAGE = 5;
+    const offset = currentPage * PER_PAGE;
+    const pageCount = Math.ceil(users.length / PER_PAGE);
+
+    function handlePageClick({ selected: selectedPage }) {
+        setCurrentPage(selectedPage);
+    }
+
     return (
-        <ListGroup>
-            {users.map(user => (
-                
-                <ListGroupItem>
-                <strong>{user.email}</strong>
-                <div onClick={() =>{ 
-                    let path = `./editUser/${user._id}`; 
-                    history.push({
-                        pathname: path,
-                        state: user._id,
-                    })
-                }}>Edit</div>
-                <div onClick={() =>{ 
-                    let path = `./delete/${user._id}`; 
-                    history.push({
-                        pathname: path,
-                        state: user._id,
-                    })
-                }}>Delete</div>
-                </ListGroupItem>
-            ))}
-        </ListGroup>
-       
-        
+        <div className="userlist">
+            <div className="userblock">
+            <ul>
+                {users.slice(offset, offset + PER_PAGE).map(user => (
+                    
+                    <li className="admin">
+                        <strong>{user.email}</strong>
+                        <div className="edit" onClick={() =>{ 
+                            let path = `./editUser/${user._id}`; 
+                            history.push({
+                                pathname: path,
+                                state: user._id,
+                            })
+                        }}>Edit</div>
+                        <div className="delete" onClick={() =>{ 
+                            let path = `./delete/${user._id}`; 
+                            history.push({
+                                pathname: path,
+                                state: user._id,
+                            })
+                        }}>Delete</div>
+                    </li>
+                ))}
+            </ul>
+            <div className="page">
+                <ReactPaginate
+                        previousLabel={"Previous"}
+                        nextLabel={"Next"}
+                        pageCount={pageCount}
+                        onPageChange={handlePageClick}
+                        containerClassName={"pagination"}
+                        previousLinkClassName={"pagination__link"}
+                        nextLinkClassName={"pagination__link"}
+                        disabledClassName={"pagination__link--disabled"}
+                        activeClassName={"pagination__link--active"}
+                    /> 
+            </div>
+        </div>
+       </div> 
     )
     
 }

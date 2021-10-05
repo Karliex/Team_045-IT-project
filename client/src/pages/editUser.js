@@ -111,8 +111,8 @@ export class editUser extends Component {
         //console.log(this.props.location.state);
         return (
           <div className="base-container" ref={this.props.containerRef}>
+            <div>
             <div className="header">Edit user profile</div>
-            <div className="content">
               <div className="form">
                 <div className="form-group">
                   <form onSubmit={this.onSubmit}>

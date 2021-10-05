@@ -1,0 +1,64 @@
+.userlist{
+    background: rgb(243, 221, 174);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+}
+
+.userblock{
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    background: rgb(255, 255, 255);
+    width: 60em;
+    height: 39em;
+    border-radius: 10px;
+    z-index: 99;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top:50px;
+    margin-left: 220px;
+    position: absolute;
+    box-shadow: 5px 5px 5px rgb(0, 0, 0, 0.1);
+}
+
+.admin{
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: rgb(144, 176, 219);
+    color: white;
+    width: 52em;
+    border-radius: 10px;
+    margin-top: 12px;
+    list-style-type: none;
+    font-family: Kannada MN;
+
+}
+
+.edit{
+    color: rgb(120, 174, 236);
+    background: white;
+    border-radius: 10px;
+    width: 60px;
+    text-align: center;
+    font-weight: bold;
+    margin-left: 740px;
+}
+.delete{
+    color:rgb(245, 193, 97);
+    margin-top: 10px;
+    background: white;
+    border-radius: 10px;
+    width: 60px;
+    text-align: center;
+    font-weight: bold;
+    margin-left: 740px;
+}
+.page{
+    margin-top: 50px;
+    margin-left: 300px;
+}

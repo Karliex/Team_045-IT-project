@@ -39,7 +39,8 @@ function Result({results}){
 
     return (
         <div className="resultshowed">
-            {currentPageData}  
+            {currentPageData}
+            <div className="sresult">
                 <ReactPaginate
                     previousLabel={"Previous"}
                     nextLabel={"Next"}
@@ -51,6 +52,7 @@ function Result({results}){
                     disabledClassName={"pagination__link--disabled"}
                     activeClassName={"pagination__link--active"}
                 /> 
+                </div>
         </div>);
 }
 

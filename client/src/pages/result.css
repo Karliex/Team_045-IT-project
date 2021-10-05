@@ -1,6 +1,4 @@
 .pagination {
-    margin-top:450px;
-    margin-left: 425px;
     display: flex;
     list-style: none;
     outline: none;
@@ -45,7 +43,7 @@ h4{
 .pagination > li:first-child > a, .pagination > li:first-child > span{
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
-    background-color:rgb(164, 179, 219);
+    background-color: rgb(144, 176, 219);
     font-weight: bold;
 }
 
@@ -54,7 +52,7 @@ h4{
     padding-left: 25px;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
-    background-color:rgb(164, 179, 219);
+    background-color: rgb(144, 176, 219);
     font-weight: bold;
 }
 
@@ -62,7 +60,7 @@ h4{
     background-color: #ffffff;
     box-shadow: 0px 0px 12px 2px rgb(255, 255, 255);
     font-style: normal;
-    color: rgb(164, 179, 219);
+    color:  rgb(144, 176, 219);
     font-weight: bolder;
     width: 15em;
     height: 8em;
@@ -82,4 +80,10 @@ h4{
     position:fixed;
     flex-flow: row wrap;
     align-content: flex-start;
+}
+
+.sresult{
+    position: fixed;
+    left: 42%;
+    top:85%
 }

@@ -66,6 +66,7 @@
   margin-top: 2px;
   background: transparent;
   border: none;
+  display:inline-block;
   pointer-events:none;
   text-align: center;
   resize:none;

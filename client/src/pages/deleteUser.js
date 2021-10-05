@@ -26,8 +26,8 @@ export class deleteUser extends Component {
     render() {
         return (
             <div className="base-container" ref={this.props.containerRef}>
-              <div className="header">You really want to delete this user?</div>
-              <div className="content">
+              <div>
+                <div className="header">Do you really want to delete this user?</div>
                 <div className="form">
                   <div className="form-group">
                     <form onSubmit={this.onSubmit}>

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css"
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import './pages/Home.css'
 import Search from './pages/SearchPage'
 import Login from './pages/Login'
 import Signup from './pages/Register'
@@ -10,7 +9,8 @@ import UpdateInfo from './pages/changeProfile'
 import Profile from './pages/profile'
 import Identify from './pages/identify'
 import Admin from './pages/adminLogin'
-import Logout from './pages/logout'
+import AdminNav from './pages/adminNav'
+
 import DeleteUser from './pages/deleteUser'
 import AdminHome from './pages/adminHome'
 import EditUser from './pages/editUser'
@@ -32,6 +32,7 @@ class App extends Component {
                     <Route path="/profile" component={Navigation} />
 
                     <Route path="/resultProfile" component={ResultNav} />
+                    <Route path="/adminHome" component={AdminNav} />
 
                     <Switch>
                         <Route exact path="/" component={Identify}/>

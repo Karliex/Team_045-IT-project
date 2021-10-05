@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Heading from './Heading'
 import UserList from './UserList'
+import { Link } from 'react-router-dom'
 
 
 export class adminHome extends Component {
@@ -8,8 +9,7 @@ export class adminHome extends Component {
 
     render() {
         return (
-            <div>
-                <Heading />
+            <div className="adminHome">
                 <UserList />
             </div>
         )
