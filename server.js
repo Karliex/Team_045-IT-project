@@ -16,7 +16,9 @@ const io = require('socket.io')(server);
 // request body
 app.use(express.json())
 app.use(express.urlencoded({ extended: false })) // replaces body-parser
+
 app.use(cors())
+
 
 io.of('/apt/socket').on("connection",(socket) =>{
 	console.log("socket.io: User connected: ",socket.id);

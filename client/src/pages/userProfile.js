@@ -2,24 +2,26 @@ import React, { Component } from 'react'
 import "./userProfile.css"
 
 export class userProfile extends Component {
+
     render() {
         console.log(this.props.location.state);
         return (
             <div className="userProfile">
                 <div className="userBlock">
                     <div className="usercircle">
+                        
                     </div>
                     <div className="nameBlock" style={{width:225, marginLeft:120, marginTop:50, height:120, color:"orange"}}>
                         <label for="name">Name</label>
                         <textarea rows="1" id="name" name="name" ></textarea>
                     </div>
                     
-                    <div className="emailBlock" style={{width:700, marginLeft:120, marginTop:190}}>
+                    <div className="emailBlock" style={{width:700, marginLeft:120, marginTop:190, height:70}}>
                         <label for="email">Email</label>
                         <textarea rows="1" id="email" name="email" value={this.props.location.state.email} ></textarea>
                     </div>
                     
-                    <div className="phoneBlock" style={{width:700, marginLeft:120,  marginTop:290}}>
+                    <div className="phoneBlock" style={{width:700, marginLeft:120,  marginTop:290, height:70}}>
                         <label for="phone">Phone Number</label>
                         <textarea rows="1" id="phoneNumber" name="phoneNumber" value={this.props.location.state.phoneNumber}></textarea>
                     </div>
@@ -37,4 +39,4 @@ export class userProfile extends Component {
     }
 }
 
-export default userProfile;
+export default userProfile

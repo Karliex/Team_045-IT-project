@@ -11,7 +11,7 @@ import Profile from './pages/profile'
 import Identify from './pages/identify'
 import Admin from './pages/adminLogin'
 import Logout from './pages/logout'
-
+import DeleteUser from './pages/deleteUser'
 import AdminHome from './pages/adminHome'
 import EditUser from './pages/editUser'
 import AddUser from './pages/addUser'
@@ -43,7 +43,7 @@ class App extends Component {
                         <Route path="/adminLogin" exact component={Admin}/>
 
                         <Route path="/adminHome" component={AdminHome} />
-                        
+                        <Route path="/delete/:id" component={DeleteUser} />
                         <Route path="/editUser/:id" component={EditUser} />
                         <Route path="/resultProfile" exact component={UserProfile}/>
                     </Switch>

@@ -243,31 +243,32 @@ exports.updateInfo = asyncHandler(async (req, res) => {
 // Update personal profile functionality
 exports.resetPsswd = asyncHandler(async (req, res) => {
     // console.log(req.user);
+    // const{password} = req.body.new_psswd;
     const user = await User.findById(req.user._id);
-
-    if (user) {
-        if (user.isValidPassword(req.body.old_psswd)){
-            console.log("Im in!!!!!!!!!!!!")
-            bcrypt.genSalt(10,(err,salt) =>{
-                bcrypt.hash(req.body.new_psswd, salt, (err, hash) => {
-                    if (err) throw err;
-                    user.password = hash
-                    console.log('输入的password(plain text为）:' + req.body.new_psswd)
-                    user.save().then((user)=> {
-                        console.log('hash过后的password为：' + user.password)
-                        res.json({success:true,
-                            user:{
-                                password:user.password,
-                            }, redirect: '/login'
+    if (req.body.new_psswd.length > 5) {
+        if (user) {
+            if (user.isValidPassword(req.body.old_psswd)){
+                console.log("Im in!!!!!!!!!!!!")
+                bcrypt.genSalt(10,(err,salt) =>{
+                    bcrypt.hash(req.body.new_psswd, salt, (err, hash) => {
+                        if (err) throw err;
+                        user.password = hash
+                        console.log('输入的password(plain text为）:' + req.body.new_psswd)
+                        user.save().then((user)=> {
+                            console.log('hash过后的password为：' + user.password)
+                            res.json({success:true,
+                                user:{
+                                    password:user.password,
+                                }, redirect: '/login'
+                            })
                         })
                     })
                 })
-            })
-    
-        }
-        else{
-            res.status(404);
-            throw new Error("Current password is not correct");
+            }
+            else{
+                res.status(404);
+                throw new Error("Current password is not correct");
+            }
         }
     } else {
         res.status(404);
