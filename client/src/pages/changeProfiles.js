@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css"
 import axios from '../common/axios';
 import { Tabs, Tab } from 'react-bootstrap';
-import './change.css';
+import './change.css'
+import { setRawCookie } from 'react-cookies';
 import Cookies from 'js-cookie';
 
-// change personal profile
+
 export class Profile extends Component {
-    // Constructor method
     constructor(props){
         super(props)
         this.state = {
@@ -23,6 +23,7 @@ export class Profile extends Component {
             productOwner:'',
             notes:'',
             oldnotes:'',
+
             old_psswd: '',
             new_psswd: '',
             password:''
@@ -37,13 +38,14 @@ export class Profile extends Component {
         this.changeTechnicalLead = this.changeTechnicalLead.bind(this)
         this.changeProductOwner = this.changeProductOwner.bind(this)
         this.changeNotes = this.changeNotes.bind(this)
+
         this.enterOldPsswd = this.enterOldPsswd.bind(this)
         this.enterNewPsswd = this.enterNewPsswd.bind(this)
+        // this.changePassword = this.changePassword.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
         this.callback = this.callback.bind(this);
     }
 
-    //change state of the data
     changeImage(event){
         this.setState({
             image:event.target.value
@@ -106,45 +108,48 @@ export class Profile extends Component {
             new_psswd:event.target.value
         })
     }
+    // changePassword(event){
+    //     this.setState({
+    //         password:event.target.value
+    //     })
+    // }
 
     componentDidMount = () => {
         this.getProfile();
       };
     
-    getProfile = () => {
-    // send 'get' request
-    axios.get('/user/profile', { headers: { Authorization:Cookies.get('SavedToken') }})
-        .then((response) => {
-        const user = response.data;
+    
+      getProfile = () => {
+        axios.get('/user/profile', { headers: { Authorization:Cookies.get('SavedToken') }})
+          .then((response) => {
+            const user = response.data;
 
-        this.setState({
-            email: user.email,
-            givenname: user.givenname,
-            familyname: user.familyname,
-            phoneNumber:user.phoneNumber,
-            oldphone:user.phoneNumber,
-            valueStream:user.valueStream,
-            scrumTeam:user.scrumTeam,
-            role: user.role,
-            technicalLead:user.technicalLead,
-            productOwner: user.productOwner,
-            notes:user.notes,
-            oldnotes: user.notes,
-            isLoaded: true
-        });
-        //judge the data received or not
-        console.log('Data has been received!!');
-        })
-        .catch(() => {
-        this.setState({
-            isLoaded: false
-        });
-        alert('Error retrieving data!!!');
-        window.location = "/"
-        });
-    }
+            this.setState({
+              email: user.email,
+              givenname: user.givenname,
+              familyname: user.familyname,
+              phoneNumber:user.phoneNumber,
+              oldphone:user.phoneNumber,
+              valueStream:user.valueStream,
+              scrumTeam:user.scrumTeam,
+              role: user.role,
+              technicalLead:user.technicalLead,
+              productOwner: user.productOwner,
+              notes:user.notes,
+              oldnotes: user.notes,
+              isLoaded: true
+            });
+            console.log('Data has been received!!');
+          })
+          .catch(() => {
+            this.setState({
+              isLoaded: false
+            });
+            alert('Error retrieving data!!!');
+            window.location = "/"
+          });
+      }
 
-    //the action when the button is submitted
     onSubmit(event){
         event.preventDefault()
         const profiled = {
@@ -165,7 +170,6 @@ export class Profile extends Component {
             new_psswd: this.state.new_psswd
         }
 
-        //send 'post' request for personal profile
         axios.post('/user/updateInfo', profiled, { headers: { Authorization:Cookies.get('SavedToken') }})
             .then(
             this.getProfile(), 
@@ -175,8 +179,7 @@ export class Profile extends Component {
             this.setState({
                 phoneNumber:''
         })
-        
-        //send 'post' request for password
+            
         axios.post('/user/reset-password', passwordInfo, { headers: { Authorization:Cookies.get('SavedToken') }})
             .then(
             this.getProfile(),
@@ -184,6 +187,7 @@ export class Profile extends Component {
             )
                         
     }
+
 
     callback(e) {
         console.log(e);
@@ -211,6 +215,7 @@ export class Profile extends Component {
                                 <label type="pass">New Password</label>
                                 <input type='pass' placeholder="Enter Your New Password" onChange={this.enterNewPsswd}/>
                                 <div className="button-wrapper">
+                                    
                                     <input type="submit" value="Update"/>
                                 </div>
                                 </div>
@@ -223,6 +228,7 @@ export class Profile extends Component {
                                     <label type="pass">New Phone Number</label>
                                     <input type='pass' 
                                     onChange={this.changePhoneNumber} 
+                                    // value={this.state.phoneNumber} 
                                     placeholder="Enter Your New Phone Number"
                                     />
                                     <div className="button-wrapper">
@@ -239,6 +245,7 @@ export class Profile extends Component {
                                     <input type='pass' 
                                     placeholder="Enter Your New Notes"
                                     onChange={this.changeNotes}
+                                    // value={this.state.notes}
                                     />
                                     <div className="button-wrapper">                         
                                         <input type="submit" value="Update"/>
@@ -250,6 +257,7 @@ export class Profile extends Component {
                     </form>
                 </div>
             </div>
+            
         );
     }
 }

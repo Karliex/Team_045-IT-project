@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
-import "./navigation.css";
-import { NavLink } from 'react-router-dom';
-import Logout from './logout';
+import React, { Component } from 'react'
+import "./navigation.css"
+import { NavLink } from 'react-router-dom'
+import Logout from './logout'
 
-// show the navigation in result page
 export class ResultNav extends Component {
     render() {
         return (
@@ -20,4 +19,4 @@ export class ResultNav extends Component {
     }
 }
 
-export default ResultNav;
+export default ResultNav

@@ -7,6 +7,7 @@ import Result from "./result";
 
 class Search extends React.Component  {
 
+
     // Constructor method
     constructor(props) {
         super(props);
@@ -42,7 +43,7 @@ class Search extends React.Component  {
 
     }
 
-    // Update user's input in search bar
+    // Update's user input in search bar
     handleChange(event){
         this.setState({query: event.target.value});
     }
@@ -95,8 +96,8 @@ class Search extends React.Component  {
                     </div>
                     </div>
                 </div>  
-            );
-        }       
+                );
+            }       
     }
 }
 

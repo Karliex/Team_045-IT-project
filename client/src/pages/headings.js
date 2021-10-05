@@ -1,15 +1,18 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { FormGroup } from '@material-ui/core'
+import { Button } from 'bootstrap'
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import {
     Navbar,
     Nav,
     NavItem,
     NavbarBrand,
     Container
-} from 'reactstrap';
+} from 'reactstrap'
 
-// show the heading in the edit page of administrator
 export class Heading extends Component {
+
+
     render() {
         return (
             <Navbar color="dark" dark>
@@ -26,4 +29,4 @@ export class Heading extends Component {
     }
 }
 
-export default Heading;
+export default Heading

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css"
 import axios from '../common/axios'
-import loginImg from "./closing-image.png";
+import loginImg from "./team.png";
 import './style.css'
 import Cookies from 'js-cookie'
 
-export class Login extends Component {
+export class adminLogin extends Component {
     constructor(props){
         super(props)
         this.state = {
@@ -27,16 +27,6 @@ export class Login extends Component {
         })
     }
 
-    // componentWillMount() {
-    //     this.state =  { token: cookie.load('token') }
-    // }
-
-    // onLogin(token) {
-    //     this.setState({token})
-    //     cookie.save('token', token)
-    // }
-
-
     onSubmit(event){
         event.preventDefault()
         const loged = {
@@ -46,24 +36,22 @@ export class Login extends Component {
 
         // axios.post('http://localhost:4000/user/login', loged)
         //     .then(response => console.log(response.data))
-        axios.post('/user/login', loged)
+        axios.post('/user/adminlogin', loged)
         .then(function (response) {
             let token = response.data.token;
             console.log(token);
 
-            //this.onLogin(token)
-            // cookie.setItem("SavedToken", 'Bearer ' + token);
             Cookies.set("SavedToken", 'Bearer ' + token);
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
 
-            if (response.data.redirect === '/search') {
-                window.location = "/search"
-            } else if (response.data.redirect === '/login'){
-                window.location = "/login"
+            if (response.data.redirect === '/adminHome') {
+                window.location = "/adminHome"
+            } else if (response.data.redirect === '/adminlogin'){
+                window.location = "/adminlogin"
             }
         })
         .catch(function(error) {
-            window.location = "/login"
+            window.location = "/adminlogin"
         })
 
         // window.location = '/'
@@ -79,9 +67,9 @@ export class Login extends Component {
         return (
           <div className="base-container" ref={this.props.containerRef}>
             <div className="content">
-            <div className="header">Employee Login</div>
+            <div className="header">Administrator Login</div>
               <div className="image">
-                < img src={loginImg} alt="employee login"/>
+                < img src={loginImg}  alt="administrator login"/>
               </div>
               <div className="form">
                 <div className="form-group">
@@ -97,7 +85,9 @@ export class Login extends Component {
                     value={this.state.password}
                     />
                     <div className="footer">
+                      {/* <Link to='/search'> */}
                         <input type='submit' value='Login'/>
+                      {/* </Link> */}
                     </div>
                   </form>
                 </div>
@@ -108,4 +98,4 @@ export class Login extends Component {
     }
 }
 
-export default Login;
+export default adminLogin;

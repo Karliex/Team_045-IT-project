@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css"
 import axios from '../common/axios'
-import loginImg from "./closing-image.png";
-import './style.css'
-import Cookies from 'js-cookie'
+import loginImg from "./team.png";
+import "./style.css";
+import { GlobalContext } from './globalStates'
 
-export class Login extends Component {
-    constructor(props){
-        super(props)
+export class Register extends Component {
+    constructor(){
+        super()
         this.state = {
             email:'',
             password:''
@@ -16,6 +16,7 @@ export class Login extends Component {
         this.changePassword = this.changePassword.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
     }
+
     changeEmail(event){
         this.setState({
             email:event.target.value
@@ -27,77 +28,55 @@ export class Login extends Component {
         })
     }
 
-    // componentWillMount() {
-    //     this.state =  { token: cookie.load('token') }
-    // }
-
-    // onLogin(token) {
-    //     this.setState({token})
-    //     cookie.save('token', token)
-    // }
-
-
     onSubmit(event){
         event.preventDefault()
-        const loged = {
+        const registered = {
             email: this.state.email,
             password: this.state.password
         }
 
-        // axios.post('http://localhost:4000/user/login', loged)
-        //     .then(response => console.log(response.data))
-        axios.post('/user/login', loged)
-        .then(function (response) {
-            let token = response.data.token;
-            console.log(token);
-
-            //this.onLogin(token)
-            // cookie.setItem("SavedToken", 'Bearer ' + token);
-            Cookies.set("SavedToken", 'Bearer ' + token);
-            axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
-
-            if (response.data.redirect === '/search') {
-                window.location = "/search"
-            } else if (response.data.redirect === '/login'){
-                window.location = "/login"
-            }
-        })
-        .catch(function(error) {
-            window.location = "/login"
-        })
-
-        // window.location = '/'
+        axios.post('/user/signup', registered).then(function (response) {
+          if (response.data.redirect === '/adminHome') {
+              window.location = "/adminHome"
+          } else if (response.data.redirect === '/signup'){
+              window.location = "/signup"
+          }
+      })
+      .catch(function(error) {
+          window.location = "/signup"
+      })
         this.setState({
-            // email:'',
+            email:'',
             password:''
         })
     }
 
-
-
     render() {
+      
         return (
           <div className="base-container" ref={this.props.containerRef}>
             <div className="content">
-            <div className="header">Employee Login</div>
+            <div className="header">Register</div>
               <div className="image">
-                < img src={loginImg} alt="employee login"/>
+                < img src={loginImg}  alt="register"/>
               </div>
               <div className="form">
                 <div className="form-group">
                   <form onSubmit={this.onSubmit}>
-                    <label htmlFor="email">Username</label>
+                    <label htmlFor="email">Email</label>
                     <input type='text'
+                    
                     onChange={this.changeEmail}
                     value={this.state.email}
                     />
+
                     <label htmlFor="password">Password</label>
                     <input type='password'
                     onChange={this.changePassword}
                     value={this.state.password}
                     />
                     <div className="footer">
-                        <input type='submit' value='Login'/>
+                        <input type='submit' value='Sign Up' />
                     </div>
                   </form>
                 </div>
@@ -107,5 +86,4 @@ export class Login extends Component {
         );
     }
 }
-
-export default Login;
+export default Register;
