@@ -50,6 +50,7 @@ app.use(
     saveUninitialized: true
 }));
 
+
 // Passport middleware
 app.use(passport.initialize());       // initialize usage of passport
 app.use(passport.session());          // invoked when using login session
