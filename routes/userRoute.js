@@ -123,20 +123,6 @@ router.post('/adminlogin', async (req, res, next) => {
   
 });
 
-/**
- * Admin delete user
- */
-router.route('/delete/:id').delete((req, res) => {
-  console.log('--------------------------------')
-  console.log(req.params.id)
-  User.findByIdAndDelete(req.params.id)
-  .then(res.json({success:true,
-    redirect: '/adminHome'
-    }))
-      .catch(err => res.status(400).json('Error ' + err));
-});
-
-
 // const maxAge = 3 * 24 * 60 * 60;
 router.get('/logout', async (req, res) => {
   res.cookie('SavedToken', '', { maxAge: 1 })

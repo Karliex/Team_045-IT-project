@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css"
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import Search from './pages/searchP'
-import Login from './pages/login'
-import Signup from './pages/registerAdmin'
+import './pages/Home.css'
+import Search from './pages/SearchPage'
+import Login from './pages/Login'
+import Signup from './pages/Register'
 import Navigation from './pages/navigation'
-import UpdateInfo from './pages/changeProfiles'
+import UpdateInfo from './pages/changeProfile'
 import Profile from './pages/profile'
-import Identify from './pages/identifyAdEm'
-import Admin from './pages/adminsLogin'
+import Identify from './pages/identify'
+import Admin from './pages/adminLogin'
 import Logout from './pages/logout'
-import DeleteUser from './pages/deleteUsers'
-import AdminHome from './pages/adminsHome'
-import EditUser from './pages/editUsers'
-import AddUser from './pages/addUsers'
-import { GlobalProvider } from './pages/globalStates'
-import UserProfile from './pages/usersProfile'
-import ResultNav from './pages/resultNavs'
+
+import AdminHome from './pages/adminHome'
+import EditUser from './pages/editUser'
+import AddUser from './pages/addUser'
+import { GlobalProvider } from './pages/GlobalState'
+import UserProfile from './pages/userProfile'
+import ResultNav from './pages/ResultNav'
 
 
 class App extends Component {
@@ -42,7 +43,7 @@ class App extends Component {
                         <Route path="/adminLogin" exact component={Admin}/>
 
                         <Route path="/adminHome" component={AdminHome} />
-                        <Route path="/delete/:id" component={DeleteUser} />
+                        
                         <Route path="/editUser/:id" component={EditUser} />
                         <Route path="/resultProfile" exact component={UserProfile}/>
                     </Switch>

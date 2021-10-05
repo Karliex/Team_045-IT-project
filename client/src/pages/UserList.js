@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { GlobalContext } from './globalStates'
+import { GlobalContext } from './GlobalState'
+import EditUser from './editUser'
 import { useHistory } from 'react-router-dom';
 
 import {
@@ -44,13 +45,15 @@ export const UserList = () => {
                         state: user._id,
                     })
                 }}>Edit</div>
+
                 <div onClick={() =>{ 
-                    let path = `./delete/${user._id}`; 
+                    let path = `./editUser/${user._id}`; 
                     history.push({
                         pathname: path,
                         state: user._id,
                     })
                 }}>Delete</div>
+
                 </ListGroupItem>
             ))}
         </ListGroup>
