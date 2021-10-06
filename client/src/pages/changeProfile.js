@@ -200,7 +200,7 @@ export class Profile extends Component {
                     <div className="leftBlock">
                         <div className="changeProfile">
                         </div>
-                        <textarea type="name" value="name"></textarea>
+                        <textarea type="name" value={this.state.givenname}></textarea>
                         <input type='img' 
                                value='Upload New Profile Photo'
                         />
