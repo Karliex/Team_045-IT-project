@@ -1,0 +1,83 @@
+.editUser{
+    background: rgb(243, 221, 174);
+    width: 100vw;
+    height: 140vh;
+    position: absolute;
+    text-align: center;
+    justify-content: center;
+}
+
+.editContainer{
+    background: rgba(255, 255, 255);
+    width: 55em;
+    height: 58em;
+    border-radius: 5%;
+    padding:50px;
+    margin-top: 100px;
+    margin-left:280px;
+    box-shadow: 5px 5px 5px rgb(0, 0, 0, 0.1);
+}
+
+.editheader{
+    font-family: Kannada MN;
+    font-size: 30px;
+    font-weight: bold;
+    color:rgb(66, 65, 65);
+
+}
+
+.editform{
+    display: flex;
+    margin-top: 2em;
+    flex-direction: column;
+    align-items: center;
+    color: #2b2828;
+    font-family: "Kannada MN";
+    font-weight: bold;
+
+}
+
+.editform input {
+    display: flex;
+    flex-direction: column;
+    min-width: 17em;
+    height: 37px;
+    padding: 0px 20px;
+    font-size: 16px;
+    font-family: "Kannada MN";
+    font-weight: bold;
+    color:#2b2828;
+    background-color: #f3eded;
+    border: 0;
+    letter-spacing: 0;
+    border-radius: 30px;
+    margin-bottom: 31px;
+}
+
+.editform input:hover {
+    background-color: #a2b9d8;
+    box-shadow: 0px 0px 14px 0.3px #5571ee63;
+}
+.editform input:focus {
+    outline: none;
+    background-color: #a2b9d8;
+}
+.editform input[type = 'submit'] {
+    padding-top: 5px;
+    min-width: 3em;
+    color: #2b2828;
+    text-align: center;
+    margin-left: 90px;
+    margin-top: 20px;
+}
+
+.deletecontainer{
+    background: rgba(255, 255, 255);
+    width: 40em;
+    height: 20em;
+    border-radius: 5%;
+    padding:50px;
+    margin-top: 100px;
+    margin-left:400px;
+    box-shadow: 5px 5px 5px rgb(0, 0, 0, 0.1);
+}

@@ -31,11 +31,12 @@
     padding-bottom: 10px;
     background-color: rgb(144, 176, 219);
     color: white;
-    width: 52em;
+    width: 52.5em;
     border-radius: 10px;
     margin-top: 12px;
     list-style-type: none;
     font-family: Kannada MN;
+    box-shadow: 5px 5px 5px rgb(0, 0, 0, 0.1);
 
 }
 
@@ -48,8 +49,15 @@
     font-weight: bold;
     margin-left: 740px;
 }
+
+.edit:hover{
+    box-shadow: 5px 5px 5px rgb(0, 0, 0, 0.1);
+    color: rgb(113, 131, 236);
+
+}
+
 .delete{
-    color:rgb(245, 193, 97);
+    color:rgb(243, 177, 55);
     margin-top: 10px;
     background: white;
     border-radius: 10px;
@@ -57,8 +65,16 @@
     text-align: center;
     font-weight: bold;
     margin-left: 740px;
+   
+
 }
+
+.delete:hover{
+    color:rgb(255, 124, 1);
+    box-shadow: 5px 5px 5px rgb(0, 0, 0, 0.1);
+}
+
 .page{
     margin-top: 50px;
-    margin-left: 300px;
+    margin-left: 310px;
 }

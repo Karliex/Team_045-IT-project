@@ -18,6 +18,10 @@ import axios from '../common/axios'
 export const UserList = () => {
     //const { users, removeUser } = useContext(GlobalContext);
     const [users, getUsers] = useState([]);
+    const [loading, setloading] = useState(false);
+    console.log(loading);
+
+
     const url = '/user/adminHome'
     const getAllUser = () => {
         axios.get(url)
@@ -25,6 +29,8 @@ export const UserList = () => {
             const allUser = response.data
             console.log(allUser)
             getUsers(allUser)
+            setloading(true);
+            console.log(loading);
         })
         .catch(error => console.error(`Error: ${error}`))
     }
@@ -43,48 +49,62 @@ export const UserList = () => {
         setCurrentPage(selectedPage);
     }
 
-    return (
-        <div className="userlist">
-            <div className="userblock">
-            <ul>
-                {users.slice(offset, offset + PER_PAGE).map(user => (
-                    
-                    <li className="admin">
-                        <strong>{user.email}</strong>
-                        <div className="edit" onClick={() =>{ 
-                            let path = `./editUser/${user._id}`; 
-                            history.push({
-                                pathname: path,
-                                state: user._id,
-                            })
-                        }}>Edit</div>
-                        <div className="delete" onClick={() =>{ 
-                            let path = `./delete/${user._id}`; 
-                            history.push({
-                                pathname: path,
-                                state: user._id,
-                            })
-                        }}>Delete</div>
-                    </li>
-                ))}
-            </ul>
-            <div className="page">
-                <ReactPaginate
-                        previousLabel={"Previous"}
-                        nextLabel={"Next"}
-                        pageCount={pageCount}
-                        onPageChange={handlePageClick}
-                        containerClassName={"pagination"}
-                        previousLinkClassName={"pagination__link"}
-                        nextLinkClassName={"pagination__link"}
-                        disabledClassName={"pagination__link--disabled"}
-                        activeClassName={"pagination__link--active"}
-                    /> 
+
+
+    if(!loading){
+        return(<div className="userlist">
+            <div className="loading-wrapper">
+            <div className="loading la-ball-scale-ripple-multiple la-3x">
+                <div></div>
+                <div></div>
+                <div></div>
             </div>
         </div>
-       </div> 
-    )
-    
+        </div>)
+    }
+    else{
+        return (
+            <div className="userlist">
+                <div className="userblock">
+                <ul>
+                    {users.slice(offset, offset + PER_PAGE).map(user => (
+                        
+                        <li className="admin">
+                            <strong>{user.email}</strong>
+                            <div className="edit" onClick={() =>{ 
+                                let path = `./editUser/${user._id}`; 
+                                history.push({
+                                    pathname: path,
+                                    state: user._id,
+                                })
+                            }}>Edit</div>
+                            <div className="delete" onClick={() =>{ 
+                                let path = `./delete/${user._id}`; 
+                                history.push({
+                                    pathname: path,
+                                    state: user._id,
+                                })
+                            }}>Delete</div>
+                        </li>
+                    ))}
+                </ul>
+                <div className="page">
+                    <ReactPaginate
+                            previousLabel={"Previous"}
+                            nextLabel={"Next"}
+                            pageCount={pageCount}
+                            onPageChange={handlePageClick}
+                            containerClassName={"pagination"}
+                            previousLinkClassName={"pagination__link"}
+                            nextLinkClassName={"pagination__link"}
+                            disabledClassName={"pagination__link--disabled"}
+                            activeClassName={"pagination__link--active"}
+                        /> 
+                </div>
+            </div>
+           </div> 
+        )
+    } 
 }
 
 export default UserList

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import "bootstrap/dist/css/bootstrap.min.css"
 import axios from '../common/axios';
 import Cookies from 'js-cookie';
+import './editUser.css'
 
 
 export class editUser extends Component {
@@ -110,11 +111,11 @@ export class editUser extends Component {
     render() {
         //console.log(this.props.location.state);
         return (
-          <div className="base-container" ref={this.props.containerRef}>
-            <div>
-            <div className="header">Edit user profile</div>
-              <div className="form">
-                <div className="form-group">
+          <div className="editUser">
+            <div className="editContainer">
+            <div className="editheader">Edit user profile</div>
+              <div className="editform">
+                <div className="editform-group">
                   <form onSubmit={this.onSubmit}>
                     <label htmlFor="givenname">Givenname</label>
                     <input type='text'
@@ -147,7 +148,7 @@ export class editUser extends Component {
                     onChange={this.changeTechnicalLead}
                     value={this.state.technicalLead}
                     />
-                    <label htmlFor="productOwner">ProductOwner</label>
+                    <label htmlFor="productOwner">Product Owner</label>
                     <input type='text'
                     onChange={this.changeProductOwner}
                     value={this.state.productOwner}
