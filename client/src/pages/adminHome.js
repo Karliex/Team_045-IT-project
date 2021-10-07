@@ -1,11 +1,8 @@
-import React, { Component } from 'react'
-import Heading from './Heading'
-import UserList from './UserList'
-import { Link } from 'react-router-dom'
+import React, { Component } from 'react';
+import UserList from './usersList';
 
-
+// for the home page of administrator
 export class adminHome extends Component {
-    
 
     render() {
         return (
@@ -14,6 +11,6 @@ export class adminHome extends Component {
             </div>
         )
     }
-}
+} 
 
-export default adminHome
+export default adminHome;

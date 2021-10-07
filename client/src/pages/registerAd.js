@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
-import axios from '../common/axios';
+import axios from '../common/axios'
 import loginImg from "./team.png";
-import './style.css';
-import Cookies from 'js-cookie';
+import "./style.css";
 
-// For the login page of administrator
-export class adminLogin extends Component {
+//show the register page (register by administrator)
+export class Register extends Component {
     // Constructor method
-    constructor(props){
-        super(props)
+    constructor(){
+        super()
         this.state = {
             email:'',
             password:''
@@ -18,8 +17,7 @@ export class adminLogin extends Component {
         this.changePassword = this.changePassword.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
     }
-
-    //change the state of data
+    //change state
     changeEmail(event){
         this.setState({
             email:event.target.value
@@ -31,34 +29,27 @@ export class adminLogin extends Component {
         })
     }
 
-    // the action when submit
+    // action when submit
     onSubmit(event){
         event.preventDefault()
-        const loged = {
+        const registered = {
             email: this.state.email,
             password: this.state.password
         }
-
-        // Send 'post' request
-        axios.post('/user/adminlogin', loged)
-        .then(function (response) {
-            let token = response.data.token;
-            console.log(token);
-
-            Cookies.set("SavedToken", 'Bearer ' + token);
-            axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
-
-             // Judge the redirection of data from response
-            if (response.data.redirect === '/adminHome') {
-                window.location = "/adminHome"
-            } else if (response.data.redirect === '/adminlogin'){
-                window.location = "/adminlogin"
-            }
-        })
-        .catch(function(error) {
-            window.location = "/adminlogin"
-        })
+        //send 'post' request and jump the interface
+        axios.post('/user/signup', registered).then(function (response) {
+          if (response.data.redirect === '/adminHome') {
+              window.location = "/adminHome"
+          } else if (response.data.redirect === '/signup'){
+              window.location = "/signup"
+          }
+      })
+      // when the error occurs
+      .catch(function(error) {
+          window.location = "/signup"
+      })
         this.setState({
+            email:'',
             password:''
         })
     }
@@ -67,25 +58,26 @@ export class adminLogin extends Component {
         return (
             <div className="base-container" ref={this.props.containerRef}>
                 <div className="content">
-                <div className="header">Administrator Login</div>
+                <div className="header">Register</div>
                     <div className="image">
-                        <img src={loginImg}  alt="administrator login"/>
+                        < img src={loginImg}  alt="register"/>
                     </div>
                     <div className="form">
                         <div className="form-group">
                             <form onSubmit={this.onSubmit}>
-                                <label htmlFor="email">Username</label>
+                                <label htmlFor="email">Email</label>
                                 <input type='text'
                                 onChange={this.changeEmail}
                                 value={this.state.email}
                                 />
+
                                 <label htmlFor="password">Password</label>
                                 <input type='password'
                                 onChange={this.changePassword}
                                 value={this.state.password}
                                 />
                                 <div className="footer">
-                                    <input type='submit' value='Login'/>
+                                    <input type='submit' value='Sign Up' />
                                 </div>
                             </form>
                         </div>
@@ -95,5 +87,4 @@ export class adminLogin extends Component {
         );
     }
 }
-
-export default adminLogin;
+export default Register;

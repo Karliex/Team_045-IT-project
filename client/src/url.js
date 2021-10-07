@@ -12,4 +12,4 @@ if(process.env.NODE_ENV === "production"){
     }
 }
 
-export default URLs
+export default URLs;

@@ -2,6 +2,7 @@
     background:transparent;
     margin-left: 670px;
 }
+
 .logout-wrapper input[value="Logout"]{
     width:100px;
     color: orange;

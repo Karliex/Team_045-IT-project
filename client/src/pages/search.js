@@ -7,7 +7,6 @@ import Result from "./result";
 
 class Search extends React.Component  {
 
-
     // Constructor method
     constructor(props) {
         super(props);
@@ -96,8 +95,8 @@ class Search extends React.Component  {
                     </div>
                     </div>
                 </div>  
-                );
-            }       
+            );
+        }       
     }
 }
 

@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
-import "./userProfile.css"
+import React, { Component } from 'react';
+import "./userProfile.css";
 
+//the page for the information of user from search result
 export class userProfile extends Component {
     render() {
         console.log(this.props.location.state);
@@ -42,4 +43,4 @@ export class userProfile extends Component {
     }
 }
 
-export default userProfile
+export default userProfile;

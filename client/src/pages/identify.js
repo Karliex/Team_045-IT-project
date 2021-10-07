@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
-import './identify.css'
+import React, { Component } from 'react';
+import './identify.css';
 import User from "./4.png";
-import Administrator from "./3.png"
-import { Link } from 'react-router-dom'
+import Administrator from "./3.png";
+import { Link } from 'react-router-dom';
 
+// show the standard employee entry and administrator entry
 export class identify extends Component {
-    
     render() {
         return (
             <div className="identify">
@@ -33,4 +33,4 @@ export class identify extends Component {
     }
 }
 
-export default identify
+export default identify;

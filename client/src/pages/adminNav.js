@@ -1,8 +1,9 @@
-import React, { Component } from 'react'
-import "./navigation.css"
-import { NavLink } from 'react-router-dom'
-import Logout from './logout'
+import React, { Component } from 'react';
+import "./navigation.css";
+import { NavLink } from 'react-router-dom';
+import Logout from './logout';
 
+//show the navigation(home and add users) in the page for administrator
 export class adminNav extends Component {
     render() {
         return (
@@ -17,4 +18,4 @@ export class adminNav extends Component {
     }
 }
 
-export default adminNav
+export default adminNav;

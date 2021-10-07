@@ -38,9 +38,11 @@
     margin-left: 80px;
     
 }
+
 .changeProfile:hover{
     box-shadow: 10px 10px 5px rgb(0, 0, 0, 0.1);
 }
+
 .leftBlock{
     background: #a2b9d8;
     width: 20em;
@@ -68,6 +70,7 @@
 .change input:hover{
     box-shadow: 10px 10px 5px rgb(0, 0, 0, 0.1);
 }
+
 .change input:focus{
     outline: none;
 }
@@ -184,7 +187,6 @@ button{
     margin-left: 400px;
     width:100px;
 }
-
 
 button:hover{
     box-shadow: 10px 10px 5px rgb(0, 0, 0, 0.1);
