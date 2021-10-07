@@ -248,7 +248,6 @@ exports.resetPsswd = asyncHandler(async (req, res) => {
     if (req.body.new_psswd.length > 5) {
         if (user) {
             if (user.isValidPassword(req.body.old_psswd)){
-                console.log("Im in!!!!!!!!!!!!")
                 bcrypt.genSalt(10,(err,salt) =>{
                     bcrypt.hash(req.body.new_psswd, salt, (err, hash) => {
                         if (err) throw err;
@@ -276,26 +275,33 @@ exports.resetPsswd = asyncHandler(async (req, res) => {
     }
 });
 
-exports.createCategory = (req, res)=>{
-    let name = req.body.name
-    let image = req.file.path
-    console.log(name, image)
-    const category = new Category({
-        name: name,
-        image: image
-    })
-    category.save((err, category) => {
-        if (err) {
-            console.log(err)
-            return res.status(400).json({
-                errors: err.meesage
+
+exports.createCategory = asyncHandler(async (req, res)=>{
+    const user = await User.findById(req.user._id);
+    const url = req.protocol + '://' + req.get('host')
+    
+    if (user) {
+        user.pic = url + '/public/' + req.file.filename
+        console.log(user.pic)
+    
+        user.save().then(updatedUser => {
+            res.status(201).json({
+                message: "image updated successfully!",
+                updatedUser: {
+                    _id: updatedUser._id,
+                    profileImg: updatedUser.pic
+                }
             })
-        }
-        return res.json({
-            message: "Created category successfully",
-            category: category
+        }).catch(err => {
+            console.log(err),
+                res.status(500).json({
+                    error: err
+                });
         })
-    })
-};
+    } else {
+        res.status(404);
+        throw new Error("User Not Found");
+    }
+});
 
 User.create;

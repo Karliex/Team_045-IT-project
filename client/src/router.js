@@ -16,6 +16,7 @@ import EditUser from './pages/editUser';
 import { GlobalProvider } from './pages/globalStates';
 import UserProfile from './pages/userProfile';
 import ResultNav from './pages/resultNavs';
+import UploadImage from './component/uploadImage';
 
 //give the route of each page
 class App extends Component {
@@ -38,6 +39,7 @@ class App extends Component {
                         <Route path="/profile" exact component={Profile} />
                         <Route path="/updateInfo" exact component={UpdateInfo} />
                         <Route path="/adminLogin" exact component={Admin}/>
+                        <Route path="/uploadImage" exact component={UploadImage} />
                         <Route path="/adminHome" component={AdminHome} />
                         <Route path="/delete/:id" component={DeleteUser} />
                         <Route path="/editUser/:id" component={EditUser} />

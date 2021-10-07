@@ -8,11 +8,9 @@ module.exports = (req, res, next) => {
             errors: 'problem with sending data'
         })
     }
-    console.log(req.body.name)
+
     let name = req.body.name
     let image = req.file.path
-
-    console.log(req.file)
 
     //If type of the image is not supported
     if (!(req.file.mimetype).includes('jpeg') && !(req.file.mimetype).includes('png') && !(req.file.mimetype).includes('jpg')) {
@@ -29,7 +27,6 @@ module.exports = (req, res, next) => {
             errors: "File is Too large"
         })
     }
-    console.log(req.file)
 
     // If the fields are empty
     if (!name || !image) {

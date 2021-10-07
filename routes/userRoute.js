@@ -219,7 +219,7 @@ router.post('/search', async (req, res) => {
 
 router.post('/reset-password', protect, userController.resetPsswd);
 
-router.post('/category', uploadMulter, validation, userController.createCategory)
+router.post('/uploadImage', protect, uploadMulter, validation, userController.createCategory)
 
 module.exports = router;
 
