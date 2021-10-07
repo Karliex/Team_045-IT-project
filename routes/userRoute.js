@@ -4,6 +4,8 @@ const passport = require('passport');
 require('../config/passport')(passport);
 const jwt = require('jsonwebtoken');
 const usermodel = require("../models/userModel");
+const uploadMulter = require('../config/upload.js');
+const validation = require('../config/validation.js');
 
 var userController = require("../controllers/userController");
 
@@ -217,4 +219,7 @@ router.post('/search', async (req, res) => {
 
 router.post('/reset-password', protect, userController.resetPsswd);
 
+router.post('/category', uploadMulter, validation, userController.createCategory)
+
 module.exports = router;
+

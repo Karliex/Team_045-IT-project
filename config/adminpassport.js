@@ -13,34 +13,33 @@ const JwtStrategy = passportJWT.Strategy;
 const ExtractJwt = passportJWT.ExtractJwt;
 
 module.exports = function (passport) {
-  passport.use('adminlogin', new LocalStrategy({
-    usernameField: 'email',
-    passwordField: 'password',
-    passReqToCallback: true
-  }, 
-  (req, email, password, done) => {
-    console.log("login strategy works!")
-      process.nextTick(function(){
-         // Match user
-         Admin.findOne({email: email}).then(user => {
-         if (!user) {
-             // res.status(200).json({success: false, error:"Email not registered"})
-             return done(null, false, { message: 'That email is not registered' });
-         }
+    passport.use('adminlogin', new LocalStrategy({
+        usernameField: 'email',
+        passwordField: 'password',
+        passReqToCallback: true
+    }, 
+    (req, email, password, done) => {
+        console.log("login strategy works!")
+        process.nextTick(function(){
+          // Match user
+            Admin.findOne({email: email}).then(user => {
+                if (!user) {
+                    // res.status(200).json({success: false, error:"Email not registered"})
+                    return done(null, false, { message: 'That email is not registered' });
+                }
 
-         const validate = user.isValidPassword(password);
+                const validate = user.isValidPassword(password);
 
-         // Match password
-          if (validate) {
-              return done(null, user);
-          } else {
-              // res.status(200).json({success:false, error:"Password doesn't match"})
-              return done(null, false, { message: 'Password incorrect' });
-          }
-
-     });
- })
- })
+                // Match password
+                if (validate) {
+                    return done(null, user);
+                } else {
+                    // res.status(200).json({success:false, error:"Password doesn't match"})
+                    return done(null, false, { message: 'Password incorrect' });
+                }
+            });
+        })
+    })
 );
 
 

@@ -1,11 +1,11 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const asyncHandler = require("express-async-handler") ;
+const asyncHandler = require("express-async-handler");
 
 
 var User = require("../models/userModel");
-var Admin = require("../models/adminModel")
-
+var Admin = require("../models/adminModel");
+var Category = require("../models/categoryModel");
 
 /**
  * check input is email type
@@ -276,5 +276,26 @@ exports.resetPsswd = asyncHandler(async (req, res) => {
     }
 });
 
+exports.createCategory = (req, res)=>{
+    let name = req.body.name
+    let image = req.file.path
+    console.log(name, image)
+    const category = new Category({
+        name: name,
+        image: image
+    })
+    category.save((err, category) => {
+        if (err) {
+            console.log(err)
+            return res.status(400).json({
+                errors: err.meesage
+            })
+        }
+        return res.json({
+            message: "Created category successfully",
+            category: category
+        })
+    })
+};
 
-User.create
+User.create;
