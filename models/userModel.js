@@ -57,11 +57,6 @@ const userSchema = new Schema({
     timestamps: true,
 });
 
-// method for generating a hash; used for password hashing
-userSchema.methods.generateHash = function(password) {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
-};
-
 // checks if password is valid
 userSchema.methods.isValidPassword = function(password) {
     console.log(this.password);

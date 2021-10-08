@@ -1,4 +1,3 @@
-// Food Buddy server, with prototype HTML in the route handlers
 const express = require('express')
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -10,36 +9,24 @@ const server = require('http').createServer(app);
 
 const dotenv = require('dotenv')
 
-const io = require('socket.io')(server);
-
-// important to receive data sent to API using POST, parses and makes available the 
-// request body
+// parses data received from POST and makes available the request body
 app.use(express.json())
-app.use(express.urlencoded({ extended: false })) // replaces body-parser
-
+app.use(express.urlencoded({ extended: false }))
 app.use(cors())
 
-
-io.of('/apt/socket').on("connection",(socket) =>{
-	console.log("socket.io: User connected: ",socket.id);
-	socket.on("disconnect",() =>{
-		console.log("socket.io: User disconnected: ",socket.id);
-	})
-});
-
-//MongoDB database configure
+// MongoDB database configure
 dotenv.config()
 mongoose.connect(process.env.DATABASE_ACCESS, () =>console.log("Database connected"))
 
 
-//modules for authentication
+// modules for authentication
 const passport = require('passport');
 
 const session = require('express-session');
 const flash = require('connect-flash');
 const jwt = require('jsonwebtoken');
 
-// Passport Config
+// passport config
 require('./config/passport')(passport);
 
 // setup session store signing the contents using the secret key
@@ -63,13 +50,11 @@ app.use(function (req, res, next) {
   next();
 });
 
-const userRoute = require('./routes/userRoute')
-
 // Use the routers with path
+const userRoute = require('./routes/userRoute')
 app.use('/user', userRoute);
 
-
-
+// for heroku deployment
 if (process.env.NODE_ENV === 'production') {
 
 	app.use(express.static('client/build'));

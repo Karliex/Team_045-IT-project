@@ -1,18 +1,14 @@
 const LocalStrategy = require('passport-local').Strategy;
-const bcrypt = require("bcryptjs");
-
 require('dotenv').config()    // for JWT password key
-
-// Load User model
-
 const Admin = require('../models/adminModel')
-// the following is required if you wanted to use passport-jwt
-// JSON Web Tokens
+
+// must for using passport-jwt
 const passportJWT = require("passport-jwt");
 const JwtStrategy = passportJWT.Strategy;
 const ExtractJwt = passportJWT.ExtractJwt;
 
 module.exports = function (passport) {
+    //define passport strategy called 'adminlogin' 
     passport.use('adminlogin', new LocalStrategy({
         usernameField: 'email',
         passwordField: 'password',
@@ -24,7 +20,6 @@ module.exports = function (passport) {
           // Match user
             Admin.findOne({email: email}).then(user => {
                 if (!user) {
-                    // res.status(200).json({success: false, error:"Email not registered"})
                     return done(null, false, { message: 'That email is not registered' });
                 }
 
@@ -34,7 +29,6 @@ module.exports = function (passport) {
                 if (validate) {
                     return done(null, user);
                 } else {
-                    // res.status(200).json({success:false, error:"Password doesn't match"})
                     return done(null, false, { message: 'Password incorrect' });
                 }
             });
@@ -57,20 +51,14 @@ module.exports = function (passport) {
     });
   });
 
-    // depending on what data you store in your token, setup a strategy
-    // to verify that the token is valid. This strategy is used to check
-    // that the client has a valid token
+    // setup a strategy called 'jwt' verify that the token is valid. 
     passport.use('jwt', new JwtStrategy({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(), // clien puts token in request header
-      secretOrKey   : process.env.PASSPORT_KEY, // the key that was used to sign the token
+      secretOrKey   : process.env.PASSPORT_KEY, 
       passReqToCallback: true
-  }, (req, jwt_payload, done) => { // passport will but the decrypted token in jwt_payload variable
-      console.log("hello?")
-      // here I'm simply searching for a user with the email addr
-      // that was added to the token. _id was added to the token
-      // body that was signed earlier in the userRouter.js file
-      // when logging in the user
-      console.log(jwt_payload._id)
+  }, (req, jwt_payload, done) => { // decrypted token in jwt_payload variable
+
+      // search for a user with the id that was added to the token. 
       Admin.findOne({'_id':jwt_payload.body._id}, (err, user) => {
           if(err){
               return done(err, false);

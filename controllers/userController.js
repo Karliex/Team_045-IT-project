@@ -1,203 +1,22 @@
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
 const asyncHandler = require("express-async-handler");
-
-
 var User = require("../models/userModel");
-var Admin = require("../models/adminModel");
-var Category = require("../models/categoryModel");
 
-/**
- * check input is email type
- */
-var emailRegex = /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
-
-/**
- * user signup (only admin takes) 
- * (POST) http://localhost:4000/user/signup
- */
-exports.userSignup = function(req,res){
-    const{email, password} = req.body;
-    var valid = emailRegex.test(email);
-    if (!valid) {
-        res.status(200).json({ status: 'error', error:  'Should enter email type'})
-    }
-    User.findOne({email: email}). then((user) => {
-        if(user){
-            res.status(200).json({success:false,error: "Email has been registered!"})
-        }
-        
-        if (password.length < 5) {
-            res.status(200).json({ status: 'error', error:  'Password length is too small. Should be at least 6 characters'})
-        }
-        else{
-            const newUser = new User({
-                email,
-                password,
-            })
-            encryptPsswd(res,newUser)           
-        }
-    })
-}
-
-// Register for admin account
-exports.adminSignup = function(req,res){
-    const{email, password} = req.body;
-    var valid = emailRegex.test(email);
-    if (!valid) {
-        res.status(200).json({ status: 'error', error:  'Should enter email type'})
-    }
-    Admin.findOne({email: email}). then((user) => {
-        if(user){
-            res.status(200).json({success:false,error: "Email has been registered!"})
-        }
-        
-        if (password.length < 5) {
-            res.status(200).json({ status: 'error', error:  'Password length is too small. Should be at least 6 characters'})
-        }
-        else{
-            const newUser = new Admin({
-                email,
-                password,
-            })
-            encryptPsswd(res,newUser)           
-        }
-    })
-}
-
-
-
-/**
- * encrypt the password of a account and store information in hash format
- * @param {*} res 
- * @param {*} newUser 
- */
-function encryptPsswd(res,newUser) {
-    bcrypt.genSalt(10,(err,salt)=>{
-        bcrypt.hash(newUser.password,salt, (err,hash) => {
-            if(err) throw err;
-            newUser.password = hash;
-            newUser.save().then((user) => {
-                res.json({success:true,
-                    user:{
-                        _id: user._id,
-                        email:user.email,
-                        password:user.password,
-                        isAdmin: user.isAdmin,
-                        pic: user.pic,
-                    }, redirect: '/adminHome'
-                })
-               req.session.email = email;
-            }).catch((err) => {
-                res.redirect('/signup')
-            })
-        })
-    })
-}
-
-
-//Edit user profile info (POST)
-//http://localhost:4000/user/updateInfo (可加具体人，待研究)
-exports.updatePersonal = function(req,res){
-    bcrypt.genSalt(16,(err,salt) =>{
-        bcrypt.hash(req.body.password, salt, (err, hash) => {
-            if (err) throw err;
-            User.findOneAndUpdate({email:req.body.email},{
-                givenname : req.body.givenname,
-                familyname : req.body.familyname,     //需要修改：会更新的参数
-                phoneNumber: req.body.phoneNumber,
-                valueStream: req.body.valueStream,
-                scrumTeam: req.body.scrumTeam,
-                role: req.body.role,
-                technicalLead: req.body.technicalLead,
-                productOwner: req.body.productOwner,
-                notes: req.body.productOwner,
-                password: hash   //可以用作修改密码的功能，这里不需要用到
-            },
-            {new: true},
-            function(err, updateUser){
-                if(err){
-                    res.status(200).json({success:false,message: "Email doesn't exist"})
-                }else{
-                    res.status(200).json({success:true,updateUser:updateUser})
-                }
-            })
-        })
-    })
-}
-
-//View one spefic user's public profile (GET)
-//http://localhost:4000/:id
+// get specific user's profile (after standard user search)
+// GET --> http://localhost:4000/user/updateInfo
  exports.getUserProfile = function(req,res){
     console.log(req.user)
     User.findById(req.user.id,function(err,user){
         if(err){
             res.status(400).json({success:false,err:err})
         }else{
-            // res.status(200).json({success:true,user:user})   //json
             res.json(user)
         }
     })
 }
 
-
-//View one spefic user's public profile (GET)
-//http://localhost:4000/:id
-exports.getAllUserProfile = function(req,res){
-    User.find({}, function (err, users) {
-        if (err) {
-            res.send('something wrong')
-            next();
-        }
-        res.json(users)
-    })
-}
-
-
-
-
-exports.editUser = asyncHandler(async (req, res) => {
-    console.log(req.user);
-    const user = await User.findByEmail(req.user.email);
-
-    if (user) {
-        user.pic = req.body.pic || user.pic,
-        user.givenname = req.body.givenname || user.givenname,
-        user.familyname = req.body.familyname || user.familyname,     
-        user.phoneNumber = req.body.phoneNumber || user.phoneNumber,
-        user.valueStream = req.body.valueStream || user.valueStream,
-        user.scrumTeam = req.body.scrumTeam || user.scrumTeam,
-        user.role = req.body.role || user.role,
-        user.technicalLead = req.body.technicalLead || user.technicalLead,
-        user.productOwner = req.body.productOwner || user.productOwner,
-        user.notes = req.body.notes || user.notes
-  
-        const updatedUser = await user.save();
-  
-        res.json({
-            _id: updatedUser._id,
-            pic: updatedUser.pic,
-            givenname : updatedUser.givenname,
-            familyname : updatedUser.familyname,     
-            phoneNumber: updatedUser.phoneNumber,
-            valueStream: updatedUser.valueStream,
-            scrumTeam: updatedUser.scrumTeam,
-            role: updatedUser.role,
-            technicalLead: updatedUser.technicalLead,
-            productOwner: updatedUser.productOwner,
-            notes: updatedUser.notes,
-        });
-    } else {
-        res.status(404);
-        throw new Error("User Not Found");
-    }
-});
-
-
-
-
-
-
+// update Info (for standard user)
+// POST --> http://localhost:4000/user/updateInfo
 exports.updateInfo = asyncHandler(async (req, res) => {
     // console.log(req.user);
     const user = await User.findById(req.user._id);
@@ -235,12 +54,8 @@ exports.updateInfo = asyncHandler(async (req, res) => {
     }
 });
 
-
-/**
- * Reset password, old and new password required
- * (GET) http://localhost:4000/user/reset-password
- */
-// Update personal profile functionality
+// reset password (for standard user)
+// POST --> http://localhost:4000/user/reset-password
 exports.resetPsswd = asyncHandler(async (req, res) => {
     // console.log(req.user);
     // const{password} = req.body.new_psswd;
@@ -275,8 +90,9 @@ exports.resetPsswd = asyncHandler(async (req, res) => {
     }
 });
 
-
-exports.createCategory = asyncHandler(async (req, res)=>{
+// upload profile image from local (for standard user)
+// POST --> http://localhost:4000/user/uploadImage
+exports.uploadImage = asyncHandler(async (req, res)=>{
     const user = await User.findById(req.user._id);
     const url = req.protocol + '://' + req.get('host')
     
