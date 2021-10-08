@@ -10,7 +10,7 @@ export class adminNav extends Component {
             <nav>
                 <ul className="nav-links">
                     <NavLink to='/adminHome' style={{color: 'rgb(164, 179, 219)', textDecoration: 'none'}} activeStyle={{color: 'orange', textDecoration: 'none'}}>Home</NavLink>
-                    <NavLink to='/signup' style={{color: 'rgb(164, 179, 219)', textDecoration: 'none'}} activeStyle={{color: 'orange', textDecoration: 'none'}}>Add User</NavLink>
+                    <NavLink to='/userSignup' style={{color: 'rgb(164, 179, 219)', textDecoration: 'none'}} activeStyle={{color: 'orange', textDecoration: 'none'}}>Add User</NavLink>
                 </ul>
                 <Logout/>
             </nav>

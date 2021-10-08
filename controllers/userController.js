@@ -10,7 +10,7 @@ var User = require("../models/userModel");
 
  
 // user signup (only admin takes) 
-// (POST) http://localhost:4000/user/signup
+// (POST) http://localhost:4000/user/userSignup
  exports.userSignup = function(req,res){
      const{email, password} = req.body;
      var valid = emailRegex.test(email);
@@ -35,7 +35,34 @@ var User = require("../models/userModel");
      })
  }
 
- 
+ /**
+ * encrypt the password of a account and store information in hash format
+ * @param {*} res 
+ * @param {*} newUser 
+ */
+function encryptPsswd(res,newUser) {
+    bcrypt.genSalt(10,(err,salt)=>{
+        bcrypt.hash(newUser.password,salt, (err,hash) => {
+            if(err) throw err;
+            newUser.password = hash;
+            newUser.save().then((user) => {
+                res.json({success:true,
+                    user:{
+                        _id: user._id,
+                        email:user.email,
+                        password:user.password,
+                        isAdmin: user.isAdmin,
+                        pic: user.pic,
+                    }, redirect: '/adminHome'
+                })
+               req.session.email = email;
+            }).catch((err) => {
+                res.redirect('/signup')
+            })
+        })
+    })
+}
+
 // get specific user's profile (after standard user search)
 // GET --> http://localhost:4000/user/updateInfo
  exports.getUserProfile = function(req,res){

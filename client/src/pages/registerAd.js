@@ -37,16 +37,16 @@ export class Register extends Component {
             password: this.state.password
         }
         //send 'post' request and jump the interface
-        axios.post('/user/signup', registered).then(function (response) {
+        axios.post('http://localhost:4000/user/userSignup', registered).then(function (response) {
           if (response.data.redirect === '/adminHome') {
               window.location = "/adminHome"
-          } else if (response.data.redirect === '/signup'){
-              window.location = "/signup"
+          } else if (response.data.redirect === '/userSignup'){
+              window.location = "/userSignup"
           }
       })
       // when the error occurs
       .catch(function(error) {
-          window.location = "/signup"
+          window.location = "/userSignup"
       })
         this.setState({
             email:'',

@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Search from './pages/searchPages';
 import Login from './pages/loginAdEm';
-import Signup from './pages/registerAd';
+import UserSignup from './pages/registerAd';
 import Navigation from './pages/navigation';
 import UpdateInfo from './pages/changeProfile';
 import Profile from './pages/profile';
@@ -34,7 +34,7 @@ class App extends Component {
                     <Switch>
                         <Route exact path="/" component={Identify}/>
                         <Route path="/login" exact component={Login} />
-                        <Route path="/signup" exact component={Signup} />
+                        <Route path="/userSignup" exact component={UserSignup} />
                         <Route path="/search" exact component={Search} />
                         <Route path="/profile" exact component={Profile} />
                         <Route path="/updateInfo" exact component={UpdateInfo} />

@@ -25,6 +25,21 @@ export const AddUser = () => {
         }
         addUser(newUser);
         history.push("/adminHome");
+
+        axios.post('http://localhost:4000/user/signup', registered).then(function (response) {
+            if (response.data.redirect === '/adminHome') {
+                window.location = "/adminHome"
+            } else if (response.data.redirect === '/signup'){
+                window.location = "/signup"
+            }
+        })
+        .catch(function(error) {
+            window.location = "/signup"
+        })
+          this.setState({
+              email:'',
+              password:''
+          })
     }
 
     const onChange = (e) => {

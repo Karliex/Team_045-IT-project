@@ -18,7 +18,7 @@ const protect = require('../config/auth');
 var User = require("../models/userModel");
 
 // add new user (for admin)
-router.post('/signup',userController.userSignup);
+router.post('/userSignup',userController.userSignup);
 
 // standard user login -- we are using JWT
 // POST --> http://localhost:4000/user/login
@@ -94,7 +94,7 @@ router.post('/reset-password', protect, userController.resetPsswd);
 router.post('/uploadImage', protect, uploadMulter, validation, userController.uploadImage)
 
 
-// add new user (for admin)
+// add new admin (for admin)
 router.post('/adminSignup',adminController.adminSignup);
 
 // add new user (for admin)
