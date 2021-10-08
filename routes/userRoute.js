@@ -17,6 +17,8 @@ const protect = require('../config/auth');
 
 var User = require("../models/userModel");
 
+// add new user (for admin)
+router.post('/signup',userController.userSignup);
 
 // standard user login -- we are using JWT
 // POST --> http://localhost:4000/user/login
@@ -93,14 +95,14 @@ router.post('/uploadImage', protect, uploadMulter, validation, userController.up
 
 
 // add new user (for admin)
-router.post('/adminsignup',adminController.adminSignup);
+router.post('/adminSignup',adminController.adminSignup);
 
 // add new user (for admin)
 router.get('/adminHome', adminController.getAllUserProfile);
 
 // admin login -- we are using JWT
 // POST --> http://localhost:4000/user/adminLogin
-router.post('/adminlogin', async (req, res, next) => {
+router.post('/adminLogin', async (req, res, next) => {
     // authenticate based on strategy called 'login'
     passport.authenticate('adminlogin', async (err, user, info) => {
         try {

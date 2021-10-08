@@ -2,6 +2,40 @@ const bcrypt = require("bcryptjs");
 const asyncHandler = require("express-async-handler");
 var User = require("../models/userModel");
 
+
+/**
+ * check input is email type
+ */
+ var emailRegex = /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
+
+ 
+// user signup (only admin takes) 
+// (POST) http://localhost:4000/user/signup
+ exports.userSignup = function(req,res){
+     const{email, password} = req.body;
+     var valid = emailRegex.test(email);
+     if (!valid) {
+         res.status(200).json({ status: 'error', error:  'Should enter email type'})
+     }
+     User.findOne({email: email}). then((user) => {
+         if(user){
+             res.status(200).json({success:false,error: "Email has been registered!"})
+         }
+         
+         if (password.length < 5) {
+             res.status(200).json({ status: 'error', error:  'Password length is too small. Should be at least 6 characters'})
+         }
+         else{
+             const newUser = new User({
+                 email,
+                 password,
+             })
+             encryptPsswd(res,newUser)           
+         }
+     })
+ }
+
+ 
 // get specific user's profile (after standard user search)
 // GET --> http://localhost:4000/user/updateInfo
  exports.getUserProfile = function(req,res){
