@@ -43,7 +43,7 @@ export class adminLogin extends Component {
         axios.post('/user/adminLogin', loged)
         .then(function (response) {
             console.log(response);
-            let token = response.data.SavedToken;
+            let token = response.data.token;
             console.log(token);
 
             Cookies.set("SavedToken", 'Bearer ' + token);
