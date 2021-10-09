@@ -38,7 +38,7 @@ export class Register extends Component {
             password: this.state.password
         }
         //send 'post' request and jump the interface
-        axios.post('http://localhost:4000/user/userSignup', registered, { headers: { Authorization:Cookies.get('SavedToken') }}).then(function (response) {
+        axios.post('user/userSignup', registered, { headers: { Authorization:Cookies.get('SavedToken') }}).then(function (response) {
           if (response.data.redirect === '/adminHome') {
               window.location = "/adminHome"
           } else if (response.data.redirect === '/userSignup'){

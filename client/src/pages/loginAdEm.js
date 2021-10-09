@@ -40,6 +40,7 @@ export class Login extends Component {
         //send 'post' request
         axios.post('/user/login', loged)
         .then(function (response) {
+            console.log(response);
             let token = response.data.token;
             console.log(token);
 

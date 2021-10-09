@@ -40,6 +40,7 @@ router.post('/login', async (req, res, next) => {
 
                 //Sign the JWT token and populate the payload with the user id 
                 const token = jwt.sign({ body }, process.env.PASSPORT_KEY, { expiresIn: "1h" });
+                
                 res.cookie("token", token, {
                   httpOnly: true,
                 })
@@ -96,7 +97,7 @@ router.post('/uploadImage', protect, uploadMulter, validation, userController.up
 
 
 // add new admin (for admin)
-router.post('/adminSignup', adminController.adminSignup);
+router.post('/adminSignup', adminProtect, adminController.adminSignup);
 
 // add new user (for admin)
 router.get('/adminHome', adminProtect, adminController.getAllUserProfile);
@@ -116,18 +117,19 @@ router.post('/adminLogin', async (req, res, next) => {
             // session: false: asking the admin to give us the token with each request
             req.login(user, { session : false }, async (error) => {
                 
-            if( error ) return next(error)
+                if( error ) return next(error)
 
-            // We don't want to store sensitive information such as the
-            // user password in the token so we pick only the user's email 
-            const body = { _id : user._id};
+                // We don't want to store sensitive information such as the
+                // user password in the token so we pick only the user's email 
+                const body = { _id : user._id};
 
-            //Sign the JWT token and populate the payload with the user email 
-            const token = jwt.sign({ body }, process.env.PASSPORT_KEY, { expiresIn: "1h" });
-            res.cookie("SavedToken", token, {
-                httpOnly: true,
-            })
-            return res.json({'SavedToken':token, redirect: '/adminHome'});
+                //Sign the JWT token and populate the payload with the user email 
+                var token = jwt.sign({ body }, process.env.PASSPORT_KEY, { expiresIn: "1h" });
+                //token = 'Bearer ' + token
+                res.cookie("SavedToken", token, {
+                    httpOnly: true,
+                })
+                return res.json({'SavedToken':token, redirect: '/adminHome'});
             
             });
         } catch (error) {
