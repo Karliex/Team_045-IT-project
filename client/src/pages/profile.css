@@ -80,7 +80,8 @@
     color: #ffffff;
     font-size: 18px;
     width: 100%;
-    margin-top: 2px;
+    height: 100%;
+    margin-top: 1px;
     background: transparent;
     border: none;
     pointer-events:none;

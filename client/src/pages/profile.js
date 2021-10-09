@@ -72,6 +72,7 @@ export class profile extends Component {
               </div>
           )
       }else{
+          const role = this.state.role
           //show the information on the personal profile 
           return (
               <div className="profile">
@@ -81,11 +82,13 @@ export class profile extends Component {
                       <div className="streamBlock">
                           <label for="valueStream">Value Stream</label>
                           <textarea rows="4" id="valueStream" name="valueStream" value={(
-                            this.state.productOwner,
-                            this.state.role,
-                            this.state.scrumTeam,
-                            this.state.technicalLead,
                             this.state.valueStream
+                          )}></textarea>
+                          <textarea rows="4" id="valueStream" name="valueStream" value={(
+                            this.state.scrumTeam
+                          )}></textarea>
+                          <textarea rows="4" id="valueStream" name="valueStream" value={(
+                            role
                           )}></textarea>
                       </div>
                       

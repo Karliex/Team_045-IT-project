@@ -65,7 +65,7 @@ export class Register extends Component {
         console.log(this.state.success);
         if(LoginSuccess === false){
             button = <div class="alert">
-                       Account is already registered!
+                       This account is already registered in the system!
                     </div>;
         }
         return (
