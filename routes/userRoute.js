@@ -126,10 +126,10 @@ router.post('/adminLogin', async (req, res, next) => {
                 //Sign the JWT token and populate the payload with the user email 
                 var token = jwt.sign({ body }, process.env.PASSPORT_KEY, { expiresIn: "1h" });
                 //token = 'Bearer ' + token
-                res.cookie("SavedToken", token, {
+                res.cookie("token", token, {
                     httpOnly: true,
                 })
-                return res.json({'SavedToken':token, redirect: '/adminHome'});
+                return res.json({'token':token, redirect: '/adminHome'});
             
             });
         } catch (error) {
