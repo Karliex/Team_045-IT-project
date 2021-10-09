@@ -15,15 +15,15 @@ var User = require("../models/userModel");
      const{email, password} = req.body;
      var valid = emailRegex.test(email);
      if (!valid) {
-         res.status(200).json({ status: 'error', error:  'Should enter email type'})
+         res.status(200).json({ status: 'error', error:  'Should enter email type', redirect: '/userSignup'})
      }
      User.findOne({email: email}). then((user) => {
          if(user){
-             res.status(200).json({success:false,error: "Email has been registered!"})
+             res.status(200).json({success: false, error: "Email has been registered!", redirect: '/userSignup'})
          }
          
          if (password.length < 5) {
-             res.status(200).json({ status: 'error', error:  'Password length is too small. Should be at least 6 characters'})
+             res.status(200).json({ status: 'error', error:  'Password length is too small. Should be at least 6 characters', redirect: '/userSignup'})
          }
          else{
              const newUser = new User({
@@ -56,8 +56,8 @@ function encryptPsswd(res,newUser) {
                     }, redirect: '/adminHome'
                 })
                req.session.email = email;
-            }).catch((err) => {
-                res.redirect('/signup')
+            }).catch(() => {
+                res.redirect('/userSignup')
             })
         })
     })

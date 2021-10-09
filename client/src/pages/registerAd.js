@@ -12,10 +12,12 @@ export class Register extends Component {
         super()
         this.state = {
             email:'',
-            password:''
+            password:'',
+            success:true
         }
         this.changeEmail = this.changeEmail.bind(this)
         this.changePassword = this.changePassword.bind(this)
+        this.changeSuccess= this.changeSuccess.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
     }
     //change state
@@ -30,35 +32,46 @@ export class Register extends Component {
         })
     }
 
+    changeSuccess(){
+        console.log("hello")
+        this.setState({
+            success:false
+        })
+    }
+
     // action when submit
     onSubmit(event){
+        var self = this;
         event.preventDefault()
         const registered = {
             email: this.state.email,
-            password: this.state.password
+            password: this.state.password,
         }
         //send 'post' request and jump the interface
         axios.post('user/userSignup', registered, { headers: { Authorization:Cookies.get('SavedToken') }}).then(function (response) {
           if (response.data.redirect === '/adminHome') {
               window.location = "/adminHome"
-          } else if (response.data.redirect === '/userSignup'){
-              window.location = "/userSignup"
-          }
-      })
-        .catch(() => {
-            alert('Error retrieving data!!!');
-            window.location = "/"
-        });
-        this.setState({
-            email:'',
-            password:''
-        })
-    }
+          }else{
+              self.changeSuccess();
+          } 
+        } 
+
+    )
+}
 
     render() {
+        const LoginSuccess = this.state.success;
+        let button = null;
+        console.log(this.state.success);
+        if(LoginSuccess === false){
+            button = <div class="alert">
+                       Account is already registered!
+                    </div>;
+        }
         return (
             <div className="base-container" ref={this.props.containerRef}>
                 <div className="content">
+                {button}
                 <div className="header">Register</div>
                     <div className="image">
                         < img src={loginImg}  alt="register"/>

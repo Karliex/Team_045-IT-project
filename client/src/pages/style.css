@@ -16,11 +16,30 @@
     height: 100%;
 }
 
+/* The alert message box */
+.alert {
+    padding: 10px;
+    background-color: #eb2b1e; /* Red */
+    color: white;
+    height:50px;
+  }
+  
+
+.notify{
+    padding: 10px;
+    background-color: #1eff00; /* Red */
+    color: white;
+    height:50px;
+}
+  
+.empty{
+    height:30px
+}
 .content {
-    margin-top: 80px;
+    margin-top: 50px;
     box-sizing: border-box;
     width: 42em;
-    height: 43em;
+    height: 45em;
     background-color: rgb(255, 255, 255);
     box-shadow: 0px 0px 12px 2px rgb(147, 198, 245);
     flex-direction: column;
@@ -59,7 +78,7 @@
     font-weight: bolder;
     color:#2b2828;
     opacity: 0.8;
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
 .image {

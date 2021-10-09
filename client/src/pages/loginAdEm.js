@@ -12,7 +12,8 @@ export class Login extends Component {
         super(props)
         this.state = {
             email:'',
-            password:''
+            password:'',
+            success:''
         }
         this.changeEmail = this.changeEmail.bind(this)
         this.changePassword = this.changePassword.bind(this)
@@ -43,7 +44,6 @@ export class Login extends Component {
             console.log(response);
             let token = response.data.token;
             console.log(token);
-
             Cookies.set("SavedToken", 'Bearer ' + token);
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
             //judge the data to jump interface
@@ -54,10 +54,11 @@ export class Login extends Component {
             }
         })
         // if the error occurs, jump to login page
-        .catch(function(error) {
-            window.location = "/login"
-        })
-
+        .catch(() => {
+            this.setState({
+                success: false
+            });
+        });
         this.setState({
             password:''
         })
@@ -65,9 +66,23 @@ export class Login extends Component {
 
 
     render() {
+        const LoginSuccess = this.state.success;
+
+        let button = null;
+        if(LoginSuccess === false){
+            button = <div class="alert">
+                        Invalid username or password. Please try again!
+                    </div>;
+        }
+        else{
+            button = <div class="empty">
+            </div>;;
+        }
+
         return (
             <div className="base-container" ref={this.props.containerRef}>
                 <div className="content">
+                {button}
                 <div className="header">Employee Login</div>
                 <div className="image">
                     < img src={loginImg} alt="employee login"/>

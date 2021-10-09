@@ -24,7 +24,6 @@
 }
 
 .circle {
-    background: rgb(255, 255, 255);
     width: 135px;
     height: 135px;
     border-radius: 50%;
@@ -32,10 +31,11 @@
     margin: 0 auto;
     position: absolute;
     margin-top: -55px;
-    margin-left: 368px;
+    margin-left: 285px;
     align-items: center;
     z-index: 99;
-    
+    object-fit: cover; 
+    object-position: center;
 }
 
 .profileBlock input[id="name"]{
@@ -388,6 +388,5 @@ textarea{
     left: 0;
     width: 100%;
     height: 100%;
-    background:url("3.jpg");
     z-index: 9999;
 }

@@ -36,7 +36,8 @@
     position: absolute;
     margin-top: 70px;
     margin-left: 80px;
-    
+    object-fit: cover; 
+    object-position: center;
 }
 
 .changeProfile:hover{

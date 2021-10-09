@@ -6,6 +6,8 @@ import Cookies from 'js-cookie';
 // show the personal information in profile page
 export class profile extends Component {
     state = {
+        image: 'https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg',
+        email:'',
         givenname:'',
         familyname:'',
         phoneNumber:'',
@@ -30,6 +32,7 @@ export class profile extends Component {
                   const user = response.data;
                   //set state of profile information
                   this.setState({
+                      image: user.pic,
                       email: user.email,
                       givenname: user.givenname,
                       familyname: user.familyname,
@@ -73,8 +76,7 @@ export class profile extends Component {
           return (
               <div className="profile">
                   <div className="profileBlock">
-                      <div className="circle">
-                      </div>
+                      <img className="circle" src={this.state.image}/>
                       <input id="name" name="name" value={this.state.givenname}></input>
                       <div className="streamBlock">
                           <label for="valueStream">Value Stream</label>

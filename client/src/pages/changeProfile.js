@@ -4,6 +4,7 @@ import axios from '../common/axios';
 import { Tabs, Tab } from 'react-bootstrap';
 import './change.css';
 import Cookies from 'js-cookie';
+import {Link} from 'react-router-dom'; 
 
 // change personal profile
 export class Profile extends Component {
@@ -25,7 +26,8 @@ export class Profile extends Component {
             oldnotes:'',
             old_psswd: '',
             new_psswd: '',
-            password:''
+            password:'',
+            isLoaded:false
         }
         this.changeImage = this.changeImage.bind(this)
         this.changeGivenname = this.changeGivenname.bind(this)
@@ -118,6 +120,7 @@ export class Profile extends Component {
         const user = response.data;
 
         this.setState({
+            image: user.pic,
             email: user.email,
             givenname: user.givenname,
             familyname: user.familyname,
@@ -190,67 +193,80 @@ export class Profile extends Component {
     }
 
     render(){
-        return (
-            <div className="change">
-                <div className="changeBlock">
-                    <div className="leftBlock">
-                        <div className="changeProfile">
-                        </div>
-                        <textarea type="name" value={this.state.givenname}></textarea>
-                        <input type='img' 
-                               value='Upload New Profile Photo'
-                        />
+        if(!this.state.isLoaded){
+            return (
+                <div className="profile">
+                    <div className="loading-wrapper">
+                    <div className="loading la-ball-scale-ripple-multiple la-3x">
+                        <div></div>
+                        <div></div>
+                        <div></div>
                     </div>
-                    <form onSubmit={this.onSubmit}>
-                        <div className="tab">
-                        <Tabs defaultActiveKey="password" onSelect={this.callback} transition={false}>
-                            <Tab eventKey="password" title="Reset Password">
-                                <div className="tab-item-wrapper">
-                                <label type="pass">Current Password</label>
-                                <input type='pass' placeholder="Enter Your current Password" onChange={this.enterOldPsswd}/>
-                                <label type="pass">New Password</label>
-                                <input type='pass' placeholder="Enter Your New Password" onChange={this.enterNewPsswd}/>
-                                <div className="button-wrapper">
-                                    <input type="submit" value="Update"/>
-                                </div>
-                                </div>
-                            </Tab>
-
-                            <Tab eventKey="contact" title="Reset Phone Number">
-                                <div className="tab-item-wrapper">
-                                    <label type="pass">Current Phone Number</label>
-                                    <input type="prepass" value={this.state.oldphone}/>
-                                    <label type="pass">New Phone Number</label>
-                                    <input type='pass' 
-                                    onChange={this.changePhoneNumber} 
-                                    placeholder="Enter Your New Phone Number"
-                                    />
+                    </div>
+                </div>
+            )
+        }else{
+            return (
+                <div className="change">
+                    <div className="changeBlock">
+                        <div className="leftBlock">
+                            <img className="changeProfile" src={this.state.image}/>
+                            <textarea type="name" value={this.state.givenname}></textarea>
+                            <Link to="uploadImage"><input type='img' 
+                                value='Upload New Profile Photo'
+                            /></Link>
+                        </div>
+                        <form onSubmit={this.onSubmit}>
+                            <div className="tab">
+                            <Tabs defaultActiveKey="password" onSelect={this.callback} transition={false}>
+                                <Tab eventKey="password" title="Reset Password">
+                                    <div className="tab-item-wrapper">
+                                    <label type="pass">Current Password</label>
+                                    <input type='pass' placeholder="Enter Your current Password" onChange={this.enterOldPsswd}/>
+                                    <label type="pass">New Password</label>
+                                    <input type='pass' placeholder="Enter Your New Password" onChange={this.enterNewPsswd}/>
                                     <div className="button-wrapper">
                                         <input type="submit" value="Update"/>
                                     </div>
-                                </div>
-                            </Tab>
-
-                            <Tab eventKey="notes" title="Change Notes">
-                                <div className="tab-item-wrapper">
-                                    <label type="pass">Current Notes</label>
-                                    <input type="prepass" value={this.state.oldnotes}/>
-                                    <label type="pass">New Notes</label>
-                                    <input type='pass' 
-                                    placeholder="Enter Your New Notes"
-                                    onChange={this.changeNotes}
-                                    />
-                                    <div className="button-wrapper">                         
-                                        <input type="submit" value="Update"/>
                                     </div>
-                                </div>
-                            </Tab>
-                        </Tabs>
+                                </Tab>
+
+                                <Tab eventKey="contact" title="Reset Phone Number">
+                                    <div className="tab-item-wrapper">
+                                        <label type="pass">Current Phone Number</label>
+                                        <input type="prepass" value={this.state.oldphone}/>
+                                        <label type="pass">New Phone Number</label>
+                                        <input type='pass' 
+                                        onChange={this.changePhoneNumber} 
+                                        placeholder="Enter Your New Phone Number"
+                                        />
+                                        <div className="button-wrapper">
+                                            <input type="submit" value="Update"/>
+                                        </div>
+                                    </div>
+                                </Tab>
+
+                                <Tab eventKey="notes" title="Change Notes">
+                                    <div className="tab-item-wrapper">
+                                        <label type="pass">Current Notes</label>
+                                        <input type="prepass" value={this.state.oldnotes}/>
+                                        <label type="pass">New Notes</label>
+                                        <input type='pass' 
+                                        placeholder="Enter Your New Notes"
+                                        onChange={this.changeNotes}
+                                        />
+                                        <div className="button-wrapper">                         
+                                            <input type="submit" value="Update"/>
+                                        </div>
+                                    </div>
+                                </Tab>
+                            </Tabs>
+                        </div>
+                        </form>
                     </div>
-                    </form>
                 </div>
-            </div>
-        );
+            );
+        }
     }
 }
 
