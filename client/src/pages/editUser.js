@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from '../common/axios';
 import './editUser.css';
+import Cookies from 'js-cookie';
 
 // edit the information of user
 export class editUser extends Component {
@@ -88,6 +89,7 @@ export class editUser extends Component {
                     window.location = "/signup"
                 }
             })
+            
             console.log(currentUserId)
             this.setState({
                 givenname:'',

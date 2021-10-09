@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from '../common/axios';
+import Cookies from 'js-cookie';
 
 //delete the information of user (by administrator)
 export class deleteUser extends Component {

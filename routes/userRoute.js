@@ -14,11 +14,12 @@ var userController = require("../controllers/userController");
 var adminController = require("../controllers/adminController")
 
 const protect = require('../config/auth');
+const adminProtect = require('../config/adminAuth');
 
 var User = require("../models/userModel");
 
 // add new user (for admin)
-router.post('/userSignup',userController.userSignup);
+router.post('/userSignup', adminProtect, userController.userSignup);
 
 // standard user login -- we are using JWT
 // POST --> http://localhost:4000/user/login
@@ -95,10 +96,10 @@ router.post('/uploadImage', protect, uploadMulter, validation, userController.up
 
 
 // add new admin (for admin)
-router.post('/adminSignup',adminController.adminSignup);
+router.post('/adminSignup', adminController.adminSignup);
 
 // add new user (for admin)
-router.get('/adminHome', adminController.getAllUserProfile);
+router.get('/adminHome', adminProtect, adminController.getAllUserProfile);
 
 // admin login -- we are using JWT
 // POST --> http://localhost:4000/user/adminLogin
@@ -156,9 +157,9 @@ router.route('/delete/:id').delete((req, res) => {
 // update specific user's Info (for admin)
 // POST --> http://localhost:4000/user/editUser/:id
 router.route('/editUser/:id').post((req, res) => {
-  console.log('--------------------------------')
-  console.log(req.params.id)
-  User.findById(req.params.id)
+    console.log('--------------------------------')
+    console.log(req.params.id)
+    User.findById(req.params.id)
     .then(user => {
       user.givenname = req.body.givenname;
       user.familyname = req.body.familyname;    

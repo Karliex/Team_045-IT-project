@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import axios from '../common/axios'
 import loginImg from "./team.png";
 import "./style.css";
+import Cookies from 'js-cookie';
 
 //show the register page (register by administrator)
 export class Register extends Component {
@@ -37,17 +38,17 @@ export class Register extends Component {
             password: this.state.password
         }
         //send 'post' request and jump the interface
-        axios.post('http://localhost:4000/user/userSignup', registered).then(function (response) {
+        axios.post('http://localhost:4000/user/userSignup', registered, { headers: { Authorization:Cookies.get('SavedToken') }}).then(function (response) {
           if (response.data.redirect === '/adminHome') {
               window.location = "/adminHome"
           } else if (response.data.redirect === '/userSignup'){
               window.location = "/userSignup"
           }
       })
-      // when the error occurs
-      .catch(function(error) {
-          window.location = "/userSignup"
-      })
+        .catch(() => {
+            alert('Error retrieving data!!!');
+            window.location = "/"
+        });
         this.setState({
             email:'',
             password:''

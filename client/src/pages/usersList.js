@@ -3,19 +3,23 @@ import { useHistory } from 'react-router-dom';
 import "./usersList.css";
 import ReactPaginate from 'react-paginate';
 import axios from '../common/axios';
+import Cookies from 'js-cookie';
 
 // get the list of all users
 export const UserList = () => {
     const [users, getUsers] = useState([]);
     const url = '/user/adminHome'
     const getAllUser = () => {
-        axios.get(url)
+        axios.get(url, { headers: { Authorization:Cookies.get('SavedToken') }})
         .then((response) => {
             const allUser = response.data
             console.log(allUser)
             getUsers(allUser)
         })
-        .catch(error => console.error(`Error: ${error}`))
+        .catch(() => {
+            alert('Error retrieving data!!!');
+            window.location = "/"
+        });
     }
     //get all the users
     useEffect(() => {
