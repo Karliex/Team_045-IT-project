@@ -12,6 +12,7 @@ const storage = multer.diskStorage({
     }
 });
 
+
 // accept any file and will do validation later
 const fileFilter = (req, file, cb) => {
     cb(null, true);
@@ -19,7 +20,6 @@ const fileFilter = (req, file, cb) => {
 
 let upload = multer({
     storage: storage,
-
     fileFilter: fileFilter,
 });
 

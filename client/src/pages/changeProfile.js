@@ -12,7 +12,7 @@ export class Profile extends Component {
     constructor(props){
         super(props)
         this.state = {
-            image: 'https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg',
+            image: '',
             givenname:'',
             familyname:'',
             phoneNumber:'',
@@ -30,14 +30,7 @@ export class Profile extends Component {
             isLoaded:false
         }
         this.changeImage = this.changeImage.bind(this)
-        this.changeGivenname = this.changeGivenname.bind(this)
-        this.changeFamilyname = this.changeFamilyname.bind(this)
         this.changePhoneNumber = this.changePhoneNumber.bind(this)
-        this.changeValueStream = this.changeValueStream.bind(this)
-        this.changeScrumTeam = this.changeScrumTeam.bind(this)
-        this.changeRole = this.changeRole.bind(this)
-        this.changeTechnicalLead = this.changeTechnicalLead.bind(this)
-        this.changeProductOwner = this.changeProductOwner.bind(this)
         this.changeNotes = this.changeNotes.bind(this)
         this.enterOldPsswd = this.enterOldPsswd.bind(this)
         this.enterNewPsswd = this.enterNewPsswd.bind(this)
@@ -51,46 +44,13 @@ export class Profile extends Component {
             image:event.target.value
         })
     }
-    changeGivenname(event){
-        this.setState({
-            givenname:event.target.value
-        })
-    }
-    changeFamilyname(event){
-        this.setState({
-            familyname:event.target.value
-        })
-    }
+
     changePhoneNumber(event){
         this.setState({
             phoneNumber:event.target.value
         })
     }
-    changeValueStream(event){
-        this.setState({
-            valueStream:event.target.value
-        })
-    }
-    changeScrumTeam(event){
-        this.setState({
-            scrumTeam:event.target.value
-        })
-    }
-    changeRole(event){
-        this.setState({
-            role:event.target.value
-        })
-    }
-    changeTechnicalLead(event){
-        this.setState({
-            technicalLead:event.target.value
-        })
-    }
-    changeProductOwner(event){
-        this.setState({
-            productOwner:event.target.value
-        })
-    }
+   
     changeNotes(event){
         this.setState({
             notes:event.target.value
@@ -151,7 +111,6 @@ export class Profile extends Component {
     onSubmit(event){
         event.preventDefault()
         const profiled = {
-            image: this.state.image,
             givenname: this.state.givenname,
             familyname: this.state.familyname,
             phoneNumber: this.state.phoneNumber,

@@ -23,16 +23,13 @@ export default class UploadImage extends Component {
         e.preventDefault()
         const formData = new FormData()
         formData.append('categoryImage', this.state.pic)
-        axios.post('/user/uploadImage', formData, { headers: { Authorization:Cookies.get('SavedToken') }})
-        .then((response) => {
+        axios.post("http://localhost:4000/user/uploadImage", formData, { headers: { Authorization:Cookies.get('SavedToken') }})
+        .then(res => {
             console.log("hello")
-            console.log(response)
+            console.log(res)
         }).catch(() => {
-            alert('Error retrieving data!!!');
-            window.location = "/"
         });
     }
-
 
     render() {
         return (

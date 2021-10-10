@@ -37,6 +37,9 @@ app.use(
     saveUninitialized: true
 }));
 
+
+app.use(express.static('/client'));
+
 // Passport middleware
 app.use(passport.initialize());       // initialize usage of passport
 app.use(passport.session());          // invoked when using login session

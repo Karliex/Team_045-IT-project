@@ -65,6 +65,8 @@ export class editUser extends Component {
         })
     }
 
+
+
     onSubmit(event){
         event.preventDefault()
         const profiled = {
@@ -77,7 +79,7 @@ export class editUser extends Component {
             productOwner: this.state.productOwner,
         }
         
-        const currentUserId = this.props.location.state;
+        const currentUserId = this.props.location.state._id;
         console.log(currentUserId)
         console.log('++++++++++++++++++++++++++++++++')
         //send 'post' request and jump interfact
@@ -113,38 +115,38 @@ export class editUser extends Component {
                         <label htmlFor="givenname">Givenname</label>
                         <input type='text'
                         onChange={this.changeGivenname}
-                        value={this.state.givenname}
+                        placeholder={this.props.location.state.givenname}
                         />
                         <label htmlFor="familyname">Familyname</label>
                         <input type='text'
                         onChange={this.changeFamilyname}
-                        value={this.state.familyname}
+                        placeholder={this.props.location.state.familyname}
                         />
                         
                         <label htmlFor="valueStream">Value Stream</label>
                         <input type='text'
                         onChange={this.changeValueStream}
-                        value={this.state.valueStream}
+                        placeholder={this.props.location.state.valueStream}
                         />
                         <label htmlFor="scrumTeam">Scrum Team</label>
                         <input type='text'
                         onChange={this.changeScrumTeam}
-                        value={this.state.scrumTeam}
+                        placeholder={this.props.location.state.scrumTeam}
                         />
                         <label htmlFor="role">Role</label>
                         <input type='text'
                         onChange={this.changeRole}
-                        value={this.state.role}
+                        placeholder={this.props.location.state.role}
                         />
                         <label htmlFor="technicalLead">Who is your Technical Lead</label>
                         <input type='text'
                         onChange={this.changeTechnicalLead}
-                        value={this.state.technicalLead}
+                        placeholder={this.props.location.state.technicalLead}
                         />
                         <label htmlFor="productOwner">Product Owner</label>
                         <input type='text'
                         onChange={this.changeProductOwner}
-                        value={this.state.productOwner}
+                        placeholder={this.props.location.state.productOwner}
                         />
                         <div className="footer">
                             <input type='submit' value='Submit' />

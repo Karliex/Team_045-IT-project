@@ -62,6 +62,7 @@
     outline: none;
     background-color: #a2b9d8;
 }
+
 .editform input[type = 'submit'] {
     padding-top: 5px;
     min-width: 3em;
@@ -69,6 +70,10 @@
     text-align: center;
     margin-left: 90px;
     margin-top: 20px;
+}
+
+.editform input[type = 'text']::placeholder {
+    color:rgb(99, 99, 104);
 }
 
 .deletecontainer{

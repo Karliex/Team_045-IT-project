@@ -64,7 +64,7 @@ export const UserList = () => {
                                 let path = `./editUser/${user._id}`; 
                                 history.push({
                                     pathname: path,
-                                    state: user._id,
+                                    state: user,
                                 })
                             }}>Edit</div>
                             <div className="delete" onClick={() =>{ 
