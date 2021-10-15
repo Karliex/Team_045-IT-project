@@ -16,23 +16,22 @@ var User = require("../models/userModel");
      var valid = emailRegex.test(email);
      if (!valid) {
          res.status(200).json({ status: 'error', error:  'Should enter email type', redirect: '/userSignup'})
+     } else {
+         User.findOne({email: email}). then((user) => {
+             if(user){
+                 res.status(200).json({success: false, error: "Email has been registered!", redirect: '/userSignup'})
+             }
+             if (password.length < 5) {
+                 res.status(200).json({ status: 'error', error:  'Password length is too small. Should be at least 6 characters', redirect: '/userSignup'})
+             } else {
+                 const newUser = new User({
+                     email,
+                     password,
+                 })
+                 encryptPsswd(res,newUser)           
+             }
+         })
      }
-     User.findOne({email: email}). then((user) => {
-         if(user){
-             res.status(200).json({success: false, error: "Email has been registered!", redirect: '/userSignup'})
-         }
-         
-         if (password.length < 5) {
-             res.status(200).json({ status: 'error', error:  'Password length is too small. Should be at least 6 characters', redirect: '/userSignup'})
-         }
-         else{
-             const newUser = new User({
-                 email,
-                 password,
-             })
-             encryptPsswd(res,newUser)           
-         }
-     })
  }
 
  /**
