@@ -16,7 +16,7 @@ export class deleteUser extends Component {
     onSubmit(event){
         event.preventDefault()
         const currentUserId = this.props.location.state;
-        axios.delete(`/user/delete/${currentUserId}`)
+        axios.delete(`/user/delete/${currentUserId}`, { headers: { Authorization:Cookies.get('SavedToken') }})
             .then(function (response) {
                 console.log(currentUserId)
                 if (response.data.redirect === '/adminHome') {
