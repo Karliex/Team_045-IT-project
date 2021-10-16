@@ -174,7 +174,7 @@ router.route('/editUser/:id').post((req, res) => {
               productOwner: user.productOwner,
           }, redirect: '/adminHome'
         }))
-        .catch(err =>res.status(400).json('Error: ' + err));
+        .catch(err =>res.status(500).json('Error: ' + err));
     })
     
 })
