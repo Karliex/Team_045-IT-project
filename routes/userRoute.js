@@ -120,7 +120,7 @@ router.post('/adminLogin', async (req, res, next) => {
 
                 //Sign the JWT token and populate the payload with the user email 
                 const token = jwt.sign({ body }, process.env.PASSPORT_KEY, { expiresIn: "1h" });
-                res.cookie("SavedToken", token, {
+                res.cookie("token", token, {
                     httpOnly: true,
                 })
                 return res.json({'token':token, redirect: '/adminHome'});
