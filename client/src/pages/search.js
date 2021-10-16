@@ -27,7 +27,7 @@ class Search extends React.Component  {
         event.preventDefault()
         const queryData = {query: this.state.query}
     
-        axios.post("/user/search", queryData, { headers: { Authorization:Cookies.get('SavedToken') }})
+        axios.post("/user/search", queryData)
             .then(res => {
                 this.setState({
                     results:res.data,
