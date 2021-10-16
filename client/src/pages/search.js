@@ -37,10 +37,8 @@ class Search extends React.Component  {
                 console.log("token", Cookies.get('SavedToken'))
                 console.log(this.state.results);
             }).catch(res => {
-                // console.log("Search did not go through!")
-                // console.log(res);
-                alert('Error retrieving data!!!');
-                window.location = "/"
+                console.log("Search did not go through!")
+                console.log(res)
             });
 
     }
