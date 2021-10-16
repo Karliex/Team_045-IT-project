@@ -123,7 +123,7 @@ router.post('/adminLogin', async (req, res, next) => {
                 res.cookie("SavedToken", token, {
                     httpOnly: true,
                 })
-                return res.json({'SavedToken':token, redirect: '/adminHome'});
+                return res.json({'token':token, redirect: '/adminHome'});
             })
         } catch (error) {
             res.json({redirect: '/adminLogin'})
