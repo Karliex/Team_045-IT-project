@@ -81,7 +81,7 @@ export class editUser extends Component {
         console.log(currentUserId)
         console.log('++++++++++++++++++++++++++++++++')
         //send 'post' request and jump interfact
-        axios.post(`/user/editUser/${currentUserId}`, profiled, { headers: { Authorization:Cookies.get('SavedToken') }})
+        axios.post(`/user/editUser/${currentUserId}`, profiled)
             .then(function (response) {
                 if (response.data.redirect === '/adminHome') {
                     window.location = "/adminHome"
