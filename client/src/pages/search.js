@@ -4,7 +4,6 @@ import "./search.css";
 import SearchIcon from "@material-ui/icons/Search";
 import CloseIcon from "@material-ui/icons/Close";
 import Result from "./result";
-import Cookies from 'js-cookie';
 
 class Search extends React.Component  {
 
@@ -25,21 +24,21 @@ class Search extends React.Component  {
     // Get search results
     fetchResults(event){
         event.preventDefault()
+        const searchURL = "/user/search"
         const queryData = {query: this.state.query}
     
-        axios.post("/user/search", queryData)
-            .then(res => {
-                this.setState({
-                    results:res.data,
-                    display:true
-                })
-                console.log("Search complete");
-                console.log("token", Cookies.get('SavedToken'))
-                console.log(this.state.results);
-            }).catch(res => {
-                console.log("Search did not go through!")
-                console.log(res)
-            });
+        axios.post(searchURL, queryData)
+        .then(res => {
+            this.setState({
+                results:res.data,
+                display:true
+            })
+            console.log("Search complete");
+            console.log(this.state.results);
+        }).catch(res => {
+            console.log("Search did not go through!")
+            console.log(res);
+        });
 
     }
 

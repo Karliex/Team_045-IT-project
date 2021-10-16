@@ -141,7 +141,7 @@ router.post('/adminLogin', async (req, res, next) => {
 
 // admin delete user
 // DELETE --> http://localhost:4000/user/delete/:id
-router.delete('/delete/:id', (req, res) => {
+router.route('/delete/:id').delete((req, res) => {
     console.log('--------------------------------')
     console.log(req.params.id)
     User.findByIdAndDelete(req.params.id).then(
@@ -149,17 +149,16 @@ router.delete('/delete/:id', (req, res) => {
         redirect: '/adminHome'
     }))
     .catch(err => res.status(400).json('Error ' + err));
-    });
-    // const maxAge = 3 * 24 * 60 * 60;
-    router.get('/logout', async (req, res) => {
+  });
+  // const maxAge = 3 * 24 * 60 * 60;
+  router.get('/logout', async (req, res) => {
     res.cookie('SavedToken', '', { maxAge: 1 })
     res.redirect('/')
 })
 
-
 // update specific user's Info (for admin)
 // POST --> http://localhost:4000/user/editUser/:id
-router.delete('/editUser/:id', (req, res) => {
+router.route('/editUser/:id').post((req, res) => {
     console.log('--------------------------------')
     console.log(req.params.id)
     User.findById(req.params.id)
@@ -186,7 +185,8 @@ router.delete('/editUser/:id', (req, res) => {
         }))
         .catch(err =>res.status(400).json('Error: ' + err));
     })
+    
 })
 
-
 module.exports = router;
+
