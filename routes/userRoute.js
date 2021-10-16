@@ -28,8 +28,7 @@ router.post('/login', async (req, res, next) => {
     passport.authenticate('login', async (err, user, info) => {
         try {
             if(err ||!user){
-                const error = new Error('An Error occurred')
-                return next(error);
+                return res.json({redirect: '/login'})
             }
               
             // If no error, use the req.login to store the user details in the session
