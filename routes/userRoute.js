@@ -68,24 +68,21 @@ router.post('/search', async (req, res) => {
             {familyname: regex},
             {email: regex}
         ]}]}
-    ).exec();    
+    ).exec()
 
-    // Limit results to 10
-    results = results.slice(0, 10);
-
-    console.log("_______________________________");
-    console.log(query);
-    console.log("------>");
-    console.log(results);
-    console.log("_______________________________");
+    console.log("_______________________________")
+    console.log(query)
+    console.log("------>")
+    console.log(results)
+    console.log("_______________________________")
     
     // Sends results if results are found
     
     if (results != null) {
-      res.status(200);
-      res.json(results);
+      res.status(200)
+      res.json(results)
     } else {
-        res.end();
+        res.end()
     }
 });
 
@@ -109,14 +106,12 @@ router.post('/adminLogin', async (req, res, next) => {
     passport.authenticate('adminlogin', async (err, user, info) => {
         try {
             if(err ||!user){
-                const error = new Error('An Error occurred')
-                return next(error);
+                return res.json({redirect: '/adminLogin'})
             }
         
             // If no error, use the req.login to store the user details in the session
             // session: false: asking the admin to give us the token with each request
             req.login(user, { session : false }, async (error) => {
-                
                 if( error ) return next(error)
 
                 // We don't want to store sensitive information such as the
@@ -124,17 +119,14 @@ router.post('/adminLogin', async (req, res, next) => {
                 const body = { _id : user._id};
 
                 //Sign the JWT token and populate the payload with the user email 
-                var token = jwt.sign({ body }, process.env.PASSPORT_KEY, { expiresIn: "1h" });
-                //token = 'Bearer ' + token
-                res.cookie("token", token, {
+                const token = jwt.sign({ body }, process.env.PASSPORT_KEY, { expiresIn: "1h" });
+                res.cookie("SavedToken", token, {
                     httpOnly: true,
                 })
-                return res.json({'token':token, redirect: '/adminHome'});
-            
-            });
+                return res.json({'SavedToken':token, redirect: '/adminHome'});
+            })
         } catch (error) {
-            return res.redirect('/adminlogin')
-        //   return next(error);
+            res.json({redirect: '/adminLogin'})
         }
     })(req, res, next);
 });
