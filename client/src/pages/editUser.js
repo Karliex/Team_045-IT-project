@@ -65,8 +65,6 @@ export class editUser extends Component {
         })
     }
 
-
-
     onSubmit(event){
         event.preventDefault()
         const profiled = {
@@ -79,11 +77,11 @@ export class editUser extends Component {
             productOwner: this.state.productOwner,
         }
         
-        const currentUserId = this.props.location.state._id;
+        const currentUserId = this.props.location.state;
         console.log(currentUserId)
         console.log('++++++++++++++++++++++++++++++++')
         //send 'post' request and jump interfact
-        axios.post(`/user/editUser/${currentUserId}`, profiled)
+        axios.post(`/user/editUser/${currentUserId}`, profiled, { headers: { Authorization:Cookies.get('SavedToken') }})
             .then(function (response) {
                 if (response.data.redirect === '/adminHome') {
                     window.location = "/adminHome"
@@ -115,38 +113,38 @@ export class editUser extends Component {
                         <label htmlFor="givenname">Givenname</label>
                         <input type='text'
                         onChange={this.changeGivenname}
-                        placeholder={this.props.location.state.givenname}
+                        value={this.state.givenname}
                         />
                         <label htmlFor="familyname">Familyname</label>
                         <input type='text'
                         onChange={this.changeFamilyname}
-                        placeholder={this.props.location.state.familyname}
+                        value={this.state.familyname}
                         />
                         
                         <label htmlFor="valueStream">Value Stream</label>
                         <input type='text'
                         onChange={this.changeValueStream}
-                        placeholder={this.props.location.state.valueStream}
+                        value={this.state.valueStream}
                         />
                         <label htmlFor="scrumTeam">Scrum Team</label>
                         <input type='text'
                         onChange={this.changeScrumTeam}
-                        placeholder={this.props.location.state.scrumTeam}
+                        value={this.state.scrumTeam}
                         />
                         <label htmlFor="role">Role</label>
                         <input type='text'
                         onChange={this.changeRole}
-                        placeholder={this.props.location.state.role}
+                        value={this.state.role}
                         />
                         <label htmlFor="technicalLead">Who is your Technical Lead</label>
                         <input type='text'
                         onChange={this.changeTechnicalLead}
-                        placeholder={this.props.location.state.technicalLead}
+                        value={this.state.technicalLead}
                         />
                         <label htmlFor="productOwner">Product Owner</label>
                         <input type='text'
                         onChange={this.changeProductOwner}
-                        placeholder={this.props.location.state.productOwner}
+                        value={this.state.productOwner}
                         />
                         <div className="footer">
                             <input type='submit' value='Submit' />
