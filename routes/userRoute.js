@@ -66,7 +66,10 @@ router.post('/search', async (req, res) => {
         {$and: [{$or: [
             {givenname: regex},
             {familyname: regex},
-            {email: regex}
+            {email: regex},
+            {role: regex},
+            {valueStream: regex},
+            {scrumTeam: regex}
         ]}]}
     ).exec();    
 
