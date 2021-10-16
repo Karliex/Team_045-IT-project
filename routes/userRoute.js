@@ -57,7 +57,7 @@ router.post("/updateInfo", protect, userController.updateInfo);
 router.get('/profile', protect, userController.getUserProfile);
 
 // search (for standard user)
-router.post('/search', protect, async (req, res) => {
+router.post('/search', async (req, res) => {
     const query = req.body.query;
 
     // Use regex to search for results
