@@ -141,7 +141,7 @@ router.post('/adminLogin', async (req, res, next) => {
 
 // admin delete user
 // DELETE --> http://localhost:4000/user/delete/:id
-router.delete('/delete/:id', adminProtect, (req, res) => {
+router.delete('/delete/:id', (req, res) => {
     console.log('--------------------------------')
     console.log(req.params.id)
     User.findByIdAndDelete(req.params.id).then(
@@ -159,7 +159,7 @@ router.delete('/delete/:id', adminProtect, (req, res) => {
 
 // update specific user's Info (for admin)
 // POST --> http://localhost:4000/user/editUser/:id
-router.delete('/editUser/:id', adminProtect, (req, res) => {
+router.delete('/editUser/:id', (req, res) => {
     console.log('--------------------------------')
     console.log(req.params.id)
     User.findById(req.params.id)
