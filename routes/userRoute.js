@@ -28,7 +28,8 @@ router.post('/login', async (req, res, next) => {
     passport.authenticate('login', async (err, user, info) => {
         try {
             if(err ||!user){
-                return res.json({redirect: '/login'})
+                const error = new Error('An Error occurred')
+                return next(error);
             }
               
             // If no error, use the req.login to store the user details in the session
@@ -56,7 +57,7 @@ router.post("/updateInfo", protect, userController.updateInfo);
 router.get('/profile', protect, userController.getUserProfile);
 
 // search (for standard user)
-router.post('/search', async (req, res) => {
+router.post('/search', protect, async (req, res) => {
     const query = req.body.query;
 
     // Use regex to search for results
@@ -67,21 +68,24 @@ router.post('/search', async (req, res) => {
             {familyname: regex},
             {email: regex}
         ]}]}
-    ).exec()
+    ).exec();    
 
-    console.log("_______________________________")
-    console.log(query)
-    console.log("------>")
-    console.log(results)
-    console.log("_______________________________")
+    // Limit results to 10
+    results = results.slice(0, 10);
+
+    console.log("_______________________________");
+    console.log(query);
+    console.log("------>");
+    console.log(results);
+    console.log("_______________________________");
     
     // Sends results if results are found
     
     if (results != null) {
-      res.status(200)
-      res.json(results)
+      res.status(200);
+      res.json(results);
     } else {
-        res.end()
+        res.end();
     }
 });
 
@@ -105,12 +109,14 @@ router.post('/adminLogin', async (req, res, next) => {
     passport.authenticate('adminlogin', async (err, user, info) => {
         try {
             if(err ||!user){
-                return res.json({redirect: '/adminLogin'})
+                const error = new Error('An Error occurred')
+                return next(error);
             }
         
             // If no error, use the req.login to store the user details in the session
             // session: false: asking the admin to give us the token with each request
             req.login(user, { session : false }, async (error) => {
+                
                 if( error ) return next(error)
 
                 // We don't want to store sensitive information such as the
@@ -118,21 +124,24 @@ router.post('/adminLogin', async (req, res, next) => {
                 const body = { _id : user._id};
 
                 //Sign the JWT token and populate the payload with the user email 
-                const token = jwt.sign({ body }, process.env.PASSPORT_KEY, { expiresIn: "1h" });
+                var token = jwt.sign({ body }, process.env.PASSPORT_KEY, { expiresIn: "1h" });
+                //token = 'Bearer ' + token
                 res.cookie("token", token, {
                     httpOnly: true,
                 })
                 return res.json({'token':token, redirect: '/adminHome'});
-            })
+            
+            });
         } catch (error) {
-            res.json({redirect: '/adminLogin'})
+            return res.redirect('/adminlogin')
+        //   return next(error);
         }
     })(req, res, next);
 });
 
 // admin delete user
 // DELETE --> http://localhost:4000/user/delete/:id
-router.route('/delete/:id').delete((req, res) => {
+router.delete('/delete/:id', adminProtect, (req, res) => {
     console.log('--------------------------------')
     console.log(req.params.id)
     User.findByIdAndDelete(req.params.id).then(
@@ -140,16 +149,17 @@ router.route('/delete/:id').delete((req, res) => {
         redirect: '/adminHome'
     }))
     .catch(err => res.status(400).json('Error ' + err));
-  });
-  // const maxAge = 3 * 24 * 60 * 60;
-  router.get('/logout', async (req, res) => {
+    });
+    // const maxAge = 3 * 24 * 60 * 60;
+    router.get('/logout', async (req, res) => {
     res.cookie('SavedToken', '', { maxAge: 1 })
     res.redirect('/')
 })
 
+
 // update specific user's Info (for admin)
 // POST --> http://localhost:4000/user/editUser/:id
-router.route('/editUser/:id').post((req, res) => {
+router.delete('/editUser/:id', adminProtect, (req, res) => {
     console.log('--------------------------------')
     console.log(req.params.id)
     User.findById(req.params.id)
@@ -174,10 +184,9 @@ router.route('/editUser/:id').post((req, res) => {
               productOwner: user.productOwner,
           }, redirect: '/adminHome'
         }))
-        .catch(err =>res.status(500).json('Error: ' + err));
+        .catch(err =>res.status(400).json('Error: ' + err));
     })
-    
 })
 
-module.exports = router;
 
+module.exports = router;
