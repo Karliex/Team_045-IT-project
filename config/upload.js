@@ -7,7 +7,6 @@ const storage = multer.diskStorage({
         cb(null, './client/public/');
     },
     filename: function (req, file, cb) {
-        console.log(file)
         cb(null, 'congar' + '-' + Date.now() + path.extname(file.originalname));
     }
 });

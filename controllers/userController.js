@@ -1,38 +1,35 @@
 const bcrypt = require("bcryptjs");
 const asyncHandler = require("express-async-handler");
 var User = require("../models/userModel");
-
-
 /**
  * check input is email type
  */
- var emailRegex = /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
+var emailRegex = /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
 
- 
 // user signup (only admin takes) 
 // (POST) http://localhost:4000/user/userSignup
- exports.userSignup = function(req,res){
-     const{email, password} = req.body;
-     var valid = emailRegex.test(email);
-     if (!valid) {
-         res.status(200).json({ status: 'error', error:  'Should enter email type', redirect: '/userSignup'})
-     }
-     User.findOne({email: email}). then((user) => {
-         if(user){
-             res.status(200).json({success: false, error: "Email has been registered!", redirect: '/userSignup'})
-         }
-         
-         if (password.length < 5) {
-             res.status(200).json({ status: 'error', error:  'Password length is too small. Should be at least 6 characters', redirect: '/userSignup'})
-         }
-         else{
-             const newUser = new User({
-                 email,
-                 password,
-             })
-             encryptPsswd(res,newUser)           
-         }
-     })
+exports.userSignup = function(req,res){
+    const{email, password} = req.body;
+    var valid = emailRegex.test(email);
+    if (!valid) {
+        res.status(200).json({ status: 'error', error: 'Should enter email type', redirect: '/userSignup'})
+    }
+    User.findOne({email: email}). then((user) => {
+        if(user){
+            res.status(200).json({success: false, error: 'Email has been registered!', redirect: '/userSignup'})
+        }
+        
+        if (password.length < 5) {
+            res.status(200).json({ status: 'error', error: 'Password length is too small. Should be at least 6 characters', redirect: '/userSignup'})
+        }
+        else{
+            const newUser = new User({
+                email,
+                password,
+            })
+            encryptPsswd(res,newUser)           
+        }
+    })
  }
 
  /**
@@ -65,8 +62,7 @@ function encryptPsswd(res,newUser) {
 
 // get specific user's profile (after standard user search)
 // GET --> http://localhost:4000/user/updateInfo
- exports.getUserProfile = function(req,res){
-    console.log(req.user)
+exports.getUserProfile = function(req,res){
     User.findById(req.user.id,function(err,user){
         if(err){
             res.status(400).json({success:false,err:err})
@@ -79,7 +75,6 @@ function encryptPsswd(res,newUser) {
 // update Info (for standard user)
 // POST --> http://localhost:4000/user/updateInfo
 exports.updateInfo = asyncHandler(async (req, res) => {
-    // console.log(req.user);
     const user = await User.findById(req.user._id);
 
     if (user) {
@@ -118,8 +113,6 @@ exports.updateInfo = asyncHandler(async (req, res) => {
 // reset password (for standard user)
 // POST --> http://localhost:4000/user/reset-password
 exports.resetPsswd = asyncHandler(async (req, res) => {
-    // console.log(req.user);
-    // const{password} = req.body.new_psswd;
     const user = await User.findById(req.user._id);
     if (req.body.new_psswd.length > 5) {
         if (user) {
@@ -128,9 +121,7 @@ exports.resetPsswd = asyncHandler(async (req, res) => {
                     bcrypt.hash(req.body.new_psswd, salt, (err, hash) => {
                         if (err) throw err;
                         user.password = hash
-                        console.log('输入的password(plain text为）:' + req.body.new_psswd)
                         user.save().then((user)=> {
-                            console.log('hash过后的password为：' + user.password)
                             res.json({success:true,
                                 user:{
                                     password:user.password,
@@ -159,8 +150,6 @@ exports.uploadImage = asyncHandler(async (req, res)=>{
     
     if (user) {
         user.pic = url + '/public/' + req.file.filename
-        console.log(user.pic)
-    
         user.save().then(updatedUser => {
             res.status(201).json({
                 message: "image updated successfully!",
@@ -170,10 +159,9 @@ exports.uploadImage = asyncHandler(async (req, res)=>{
                 }
             })
         }).catch(err => {
-            console.log(err),
-                res.status(500).json({
-                    error: err
-                });
+            res.status(500).json({
+                error: err
+            });
         })
     } else {
         res.status(404);

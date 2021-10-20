@@ -14,7 +14,6 @@ export const UserList = () => {
         axios.get(url, { headers: { Authorization:Cookies.get('SavedToken') }})
         .then((response) => {
             const allUser = response.data
-            console.log(allUser)
             setloading(true)
             getUsers(allUser)
         })
@@ -27,7 +26,6 @@ export const UserList = () => {
     useEffect(() => {
         getAllUser();
     }, []);
-    console.log(users)
     const history = useHistory();
     
     //do the pagination

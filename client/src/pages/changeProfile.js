@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import "bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap/dist/css/bootstrap.min.css";
 import axios from '../common/axios';
 import { Tabs, Tab } from 'react-bootstrap';
 import './change.css';
@@ -95,9 +95,8 @@ export class Profile extends Component {
             oldnotes: user.notes,
             isLoaded: true
         });
-        //judge the data received or not
-        console.log('Data has been received!!');
         })
+        //judge the data received or not
         .catch(() => {
             this.setState({
                 isLoaded: false

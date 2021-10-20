@@ -37,7 +37,6 @@ function Result({results}){
               })
         }}>{result.email}</div>
     );
-    console.log(currentPageData);
     //count the page number
     const pageCount = Math.ceil(results.length / PER_PAGE);
 

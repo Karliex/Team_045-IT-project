@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from '../common/axios';
-import Cookies from 'js-cookie';
 
 //delete the information of user (by administrator)
 export class deleteUser extends Component {
@@ -18,7 +17,6 @@ export class deleteUser extends Component {
         const currentUserId = this.props.location.state;
         axios.delete(`/user/delete/${currentUserId}`)
             .then(function (response) {
-                console.log(currentUserId)
                 if (response.data.redirect === '/adminHome') {
                     window.location = "/adminHome"
                 }

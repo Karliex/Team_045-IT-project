@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from '../common/axios';
 import './editUser.css';
-import Cookies from 'js-cookie';
 
 // edit the information of user
 export class editUser extends Component {
@@ -65,8 +64,6 @@ export class editUser extends Component {
         })
     }
 
-
-
     onSubmit(event){
         event.preventDefault()
         const profiled = {
@@ -80,8 +77,6 @@ export class editUser extends Component {
         }
         
         const currentUserId = this.props.location.state._id;
-        console.log(currentUserId)
-        console.log('++++++++++++++++++++++++++++++++')
         //send 'post' request and jump interfact
         axios.post(`/user/editUser/${currentUserId}`, profiled)
             .then(function (response) {
@@ -92,7 +87,6 @@ export class editUser extends Component {
                 }
             })
             
-            console.log(currentUserId)
             this.setState({
                 givenname:'',
                 familyname:'',

@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import axios from '../common/axios';
 import Cookies from 'js-cookie';
 
+// upload image on profile
 export default class UploadImage extends Component {
-
+    // Constructor method
     constructor(props) {
         super(props);
 
@@ -19,13 +20,14 @@ export default class UploadImage extends Component {
         this.setState({ pic: e.target.files[0] })
     }
 
+    // add picture in the formData
     onSubmit(e) {
         e.preventDefault()
         const formData = new FormData()
         formData.append('categoryImage', this.state.pic)
+        //send 'post' request
         axios.post("http://localhost:4000/user/uploadImage", formData, { headers: { Authorization:Cookies.get('SavedToken') }})
         .then(res => {
-            console.log("hello")
             console.log(res)
         }).catch(() => {
         });

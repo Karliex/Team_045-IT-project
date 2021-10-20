@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Search from './pages/searchPages';
-import Login from './pages/loginAdEm';
+import Login from './pages/employLogin';
 import UserSignup from './pages/registerAd';
 import Navigation from './pages/navigation';
 import UpdateInfo from './pages/changeProfile';

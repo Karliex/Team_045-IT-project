@@ -33,10 +33,7 @@ class Search extends React.Component  {
                 results:res.data,
                 display:true
             })
-            console.log("Search complete");
-            console.log(this.state.results);
         }).catch(res => {
-            console.log("Search did not go through!")
             console.log(res);
         });
 

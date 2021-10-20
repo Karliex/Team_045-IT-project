@@ -28,7 +28,6 @@ export class profile extends Component {
           //send 'get'request
           axios.get('/user/profile', { headers: { Authorization:Cookies.get('SavedToken') }})
               .then((response) => {
-                  console.log(response)
                   const user = response.data;
                   //set state of profile information
                   this.setState({
@@ -45,8 +44,6 @@ export class profile extends Component {
                       notes:user.notes,
                       isLoaded: true
                   });
-                  // data recieved
-                  console.log('Data has been received!!');
               })
               .catch(() => {
                   this.setState({

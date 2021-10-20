@@ -14,7 +14,8 @@ module.exports = (req, res, next) => {
 
     //If type of the image is not supported
     if (!(req.file.mimetype).includes('jpeg') && !(req.file.mimetype).includes('png') && !(req.file.mimetype).includes('jpg')) {
-        fs.unlinkSync(req.file.path)      //remove the file
+        //remove the file
+        fs.unlinkSync(req.file.path)      
         return res.status(500).json({
             errors: "file not support"
         })
@@ -36,5 +37,5 @@ module.exports = (req, res, next) => {
         })
     }
 
-    next()
+    next();
 }

@@ -33,7 +33,6 @@ export class Register extends Component {
     }
 
     changeSuccess(){
-        console.log("hello")
         this.setState({
             success:false
         })
@@ -55,14 +54,13 @@ export class Register extends Component {
               self.changeSuccess();
           } 
         } 
-
     )
 }
 
     render() {
         const LoginSuccess = this.state.success;
         let button = null;
-        console.log(this.state.success);
+        // when the account is already registeres, show the alert message
         if(LoginSuccess === false){
             button = <div class="alert">
                        This account is already registered in the system!

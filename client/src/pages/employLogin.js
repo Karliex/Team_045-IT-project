@@ -41,9 +41,7 @@ export class Login extends Component {
         //send 'post' request
         axios.post('/user/login', loged)
         .then(function (response) {
-            console.log(response);
             let token = response.data.token;
-            console.log(token);
             Cookies.set("SavedToken", 'Bearer ' + token);
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
             //judge the data to jump interface
@@ -63,7 +61,6 @@ export class Login extends Component {
             password:''
         })
     }
-
 
     render() {
         const LoginSuccess = this.state.success;

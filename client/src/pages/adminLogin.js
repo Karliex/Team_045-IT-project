@@ -43,9 +43,7 @@ export class adminLogin extends Component {
         // Send 'post' request
         axios.post('/user/adminLogin', loged)
         .then(function (response) {
-            console.log(response);
             let token = response.data.token;
-            console.log(token);
 
             Cookies.set("SavedToken", 'Bearer ' + token);
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
@@ -67,7 +65,7 @@ export class adminLogin extends Component {
 
     render() {
         const LoginSuccess = this.state.success;
-
+        // when the username or password is incorrect, show the alert message
         let button = null;
         if(LoginSuccess === false){
             button = <div class="alert">

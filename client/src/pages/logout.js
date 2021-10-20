@@ -18,7 +18,6 @@ export class logout extends Component {
         axios.get('/user/logout')
         .then(function (response) {
             let token = response.data.token;
-            console.log(token);
             Cookies.set("SavedToken", 'Bearer ' + token);
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
             window.location = '/'
