@@ -10,13 +10,13 @@ const server = require('http').createServer(app);
 const dotenv = require('dotenv');
 
 // parses data received from POST and makes available the request body
-app.use(express.json())
-app.use(express.urlencoded({ extended: false }))
-app.use(cors())
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cors());
 
 // MongoDB database configure
-dotenv.config()
-mongoose.connect(process.env.DATABASE_ACCESS, () =>console.log("Database connected"))
+dotenv.config();
+mongoose.connect(process.env.DATABASE_ACCESS, () =>console.log("Database connected"));
 
 // modules for authentication
 const passport = require('passport');
@@ -54,7 +54,7 @@ app.use(function (req, res, next) {
 });
 
 // Use the routers with path
-const userRoute = require('./routes/userRoute')
+const userRoute = require('./routes/userRoute');
 app.use('/user', userRoute);
 
 // for heroku deployment
