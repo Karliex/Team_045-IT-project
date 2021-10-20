@@ -49,25 +49,5 @@ module.exports = function (passport) {
             done(err, user);                              
         });
     });
-
-    // verification strategy called 'jwt'
-    passport.use('jwt', new JwtStrategy({
-        // client puts token in request header
-        jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(), 
-        secretOrKey: process.env.PASSPORT_KEY, 
-        passReqToCallback: true
-    }, (req, jwt_payload, done) => { 
-        User.findOne({'_id':jwt_payload.body._id}, (err, user) => {
-            if(err){
-                return done(err, false);
-            }
-            // if we found user, provide the user instance to passport    
-            if(user){
-                return done(null, user);
-            } else { 
-                return done(null, false);
-            }
-        });
-    }));
 };
 

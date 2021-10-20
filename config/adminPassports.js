@@ -48,27 +48,5 @@ module.exports = function (passport) {
             done(err, user);                              
         });
     });
-
-    // setup a strategy called 'jwt' verify that the token is valid. 
-    passport.use('jwt', new JwtStrategy({
-        // client puts token in request header
-        jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(), 
-        secretOrKey   : process.env.PASSPORT_KEY, 
-        passReqToCallback: true
-        // decrypted token in jwt_payload variable
-    }, (req, jwt_payload, done) => { 
-        // search for a user with the id that was added to the token. 
-        Admin.findOne({'_id':jwt_payload.body._id}, (err, user) => {
-            if(err){
-                return done(err, false);
-            }
-            // if we found user, provide the user instance to passport    
-            if(user){
-                return done(null, user);
-            } else { // otherwise assign false to indicate that authentication failed
-                return done(null, false);
-            }
-        });
-    }));
 };
 
