@@ -29,15 +29,15 @@ Remember that _"this document"_ can use `different formats` to **highlight** imp
 
 | Name           | Student ID |             Task             | Status  |
 | :------------- | :--------: | :--------------------------: | :-----: |
-| Jiaqi Xu       |  1078417   |     Front End,UI Design      | Working |
-| Shengzhao Yuan |   907760   |     Front End,UI Design      | Working |
-| Yiwen Zhang    |  1002781   | Back End,Front End,UI Design | Working |
-| Zening Zhang   |  1078374   |     Front End,UI Design      | Working |
-| Haocheng Zhao  |  1029315   | Back End,Front End,UI Design | Working |
+| Yunqing Yu     |  1081785   |     Front End,UI Design      | Working |
+| Huazhen Huang  |  1078256   |     Front End,UI Design      | Working |
+| Bowei Huang    |  1078266   |           Back End           | Working |
+| Xuan Zheng     |  1078374   |           Back End           | Working |
+| Jiaqi Xu       |  1078417   |           Back End           | Working |
 
 ## General info
 
-This is project is about designing and building web apps for Snacks in a Van, a new startup company operating in Melbourne. Snacks in a Van runs a fleet of food trucks that work as popup cafes.
+This is project is about designing and building web apps for Customer Relationship Management in a company.
 
 ## Technologies
 
@@ -87,34 +87,34 @@ Client side:
 
 **Test account for the website**
 
-**Email**: test@qq.com
+**Email**: hbw@qq.com
 
-**Password**: 123456
+**Password**: davidehuang
 
 P.S: You can create your own account
 
-**The HerokuURL**:  https://info3005arabica.herokuapp.com/
+**The HerokuURL**:  https://it-project-team045.herokuapp.com/
 
 **The MongoURL**:
 
-"mongodb+srv://haoczhao:1234@info3005project.hnql6.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+DATABASE_ACCESS = mongodb+srv://boweih:boweih@cluster0.4fcgf.mongodb.net/IT_staff?retryWrites=true&w=majority
 
-**Username**: haoczhao
+**Username**: 
 
-**Password**: 1234
+**Password**: 
 
-After accessing the database, there is a database called ***"myFirstDatabase"*** for storing all the collections data for this project. 
+After accessing the database, there is a database called ***"users"*** and ***"admins"*** for storing all the collections data for this project. 
 
-*The snacks on the menu are added manually to the database
+*The users information are added manually to the database when users and administartors edit their personal information
 
 **For extra dependency:** 
-npm install bcryptjs (this is for encrypt the password for user and vendor)
+npm install (this will install all the extends you need)
 
 
 
 # API Testing
 
-We split the app server mockup into four parts, Snacks, Order, Vendor and User. The description on how to test is listed below. The test can be taken in the Postman.
+The description on how to test is listed below. The test can be taken in the Postman.
 
 ### Snacks:
 
